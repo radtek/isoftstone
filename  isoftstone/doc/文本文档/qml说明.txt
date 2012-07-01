@@ -1,0 +1,10 @@
+
+1.对于插件和qml文件，必须有qmldir文件来指定插件位置和名称
+
+Clock 1.0 Clock.qml
+plugin qmlitem
+
+2.在应用文件中，需要加入import 来引入qmldir所在路径 ，必须为路径 例如"bin" 或者 "com/nokia" 等。
+
+3.Rectangle可以引入id和背景色。
+

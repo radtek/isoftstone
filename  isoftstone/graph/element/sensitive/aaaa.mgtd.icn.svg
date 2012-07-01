@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg name="Sensitive" id="aaaa" viewBox="0 0 80 80">
+     <g id="Head_Layer">
+            <rect x="0" y="0" width="80" height="80" fill="rgb(0,0,0)"/>
+     </g>
+     <g id="rect_Layer">
+            <rect x="3" y="3" width="74" height="74" fill="none" stroke="rgb(0,0,255)" lineStyle="0" stroke-width="1"/>
+     </g>
+</svg>

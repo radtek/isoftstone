@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="GBK"?>
+<sgd state="2" >
+    <Protect id="hk_test" >
+        <Layer w="50" x="0" h="50" y="0" id="0" >
+            <circle cx="24" cy="25" rg="0" fm="0" ls="1" lc="0,0,255" lw="1" sta="0" r="10" fc="0,255,0" />
+            <circle cx="23" cy="24" rg="0" fm="1" ls="1" lc="0,0,255" lw="1" sta="1" r="10" fc="0,0,255" />
+        </Layer>
+    </Protect>
+</sgd>

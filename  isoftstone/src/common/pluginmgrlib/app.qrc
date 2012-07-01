@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res/enable.png</file>
+        <file>res/banned.png</file>
+        <file>res/config.png</file>
+    </qresource>
+</RCC>

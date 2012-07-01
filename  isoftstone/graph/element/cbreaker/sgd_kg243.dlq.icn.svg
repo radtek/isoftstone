@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg name="CBreaker" id="sgd_kg243" viewBox="0 0 24 24">
+     <g id="Head_Layer">
+            <rect x="0" y="0" width="24" height="24" fill="rgb(0,0,0)"/>
+     </g>
+     <g id="rect_Layer">
+            <rect x="1" y="1" width="22" height="22" fill="none" stroke="rgb(170,0,0)" lineStyle="0" stroke-width="1"/>
+            <rect x="1" y="1" width="22" height="22" fill="rgb(170,85,127)" stroke="rgb(170,0,0)" lineStyle="0" stroke-width="1"/>
+     </g>
+</svg>

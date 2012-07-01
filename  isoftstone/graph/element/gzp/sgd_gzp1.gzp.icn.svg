@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg name="Gzp" id="sgd_gzp1" viewBox="0 0 30 30">
+     <g id="Head_Layer">
+            <rect x="0" y="0" width="30" height="30" fill="rgb(0,0,0)"/>
+     </g>
+     <g id="circle_Layer">
+            <circle cx="15" cy="15" r="12" fill="rgb(0,255,0)" stroke="rgb(0,255,0)" stroke-width="1"/>
+            <circle cx="15" cy="15" r="12" fill="rgb(255,0,0)" stroke="rgb(255,0,0)" stroke-width="1"/>
+     </g>
+</svg>

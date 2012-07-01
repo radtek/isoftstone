@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg name="Disconnector" id="sgd_dz242" viewBox="0 0 94 192">
+     <g id="Head_Layer">
+            <rect x="0" y="0" width="94" height="192" fill="rgb(0,0,0)"/>
+     </g>
+     <g id="circle_Layer">
+            <circle cx="35" cy="166" r="22" fill="none" stroke="rgb(93,92,88)" stroke-width="1"/>
+            <circle cx="35" cy="168" r="22" fill="none" stroke="rgb(93,92,88)" stroke-width="1"/>
+     </g>
+     <g id="line_Layer">
+            <line x1="1" y1="1" x2="67" y2="1" fill="rgb(93,92,88)" stroke="rgb(93,92,88)" stroke-width="1"/>
+            <line x1="92" y1="25" x2="33" y2="147" fill="rgb(93,92,88)" stroke="rgb(93,92,88)" stroke-width="1"/>
+            <line x1="33" y1="147" x2="33" y2="146" fill="rgb(93,92,88)" stroke="rgb(93,92,88)" stroke-width="1"/>
+            <line x1="1" y1="4" x2="67" y2="4" fill="rgb(93,92,88)" stroke="rgb(93,92,88)" stroke-width="1"/>
+            <line x1="34" y1="147" x2="34" y2="1" fill="rgb(93,92,88)" stroke="rgb(93,92,88)" stroke-width="1"/>
+     </g>
+</svg>

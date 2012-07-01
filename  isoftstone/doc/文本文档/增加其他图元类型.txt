@@ -1,0 +1,5 @@
+1.修改multhread = true生成info.h
+2.修改info.ini 中属性类型，如果没有添加
+3.修改multhread = false，生成auto文件
+4.修改itemlib中pro，增加其他头文件和实现
+5.拷贝factory.h 和cpp 中图元相关头文件

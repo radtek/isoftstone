@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg name="Sensitive" id="sgd_mgtd3" viewBox="0 0 20 20">
+     <g id="Head_Layer">
+            <rect x="0" y="0" width="20" height="20" fill="rgb(0,0,0)"/>
+     </g>
+     <g id="circle_Layer">
+            <circle cx="10" cy="10" r="8" fill="none" stroke="rgb(255,0,0)" stroke-width="4"/>
+     </g>
+     <g id="line_Layer">
+            <line x1="22" y1="19" x2="22" y2="19" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+     </g>
+</svg>

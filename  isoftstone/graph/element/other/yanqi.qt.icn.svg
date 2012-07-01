@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg name="Other" id="yanqi" viewBox="0 0 148 128">
+     <g id="Head_Layer">
+            <rect x="0" y="0" width="148" height="128" fill="rgb(0,0,0)"/>
+     </g>
+     <g id="image_Layer">
+            <image x="5" y="-14" width="148" height="128" xlink:href="../../image/T_1V_1Q_out.gif"/>
+            <image x="29" y="4" width="16" height="11" xlink:href="../../image/T_1V_1Q_low.gif"/>
+            <image x="25" y="9" width="26" height="19" xlink:href="../../image/T_1V_1Q_middling.gif"/>
+            <image x="37" y="17" width="20" height="17" xlink:href="../../image/T_1V_1Q_baddly.gif"/>
+     </g>
+</svg>

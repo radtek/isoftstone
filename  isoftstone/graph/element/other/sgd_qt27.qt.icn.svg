@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg name="Other" id="sgd_qt27" viewBox="0 0 16 36">
+     <g id="Head_Layer">
+            <rect x="0" y="0" width="16" height="36" fill="rgb(0,0,0)"/>
+     </g>
+     <g id="circle_Layer">
+            <circle cx="7" cy="10" r="4" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <circle cx="7" cy="23" r="4" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+     </g>
+     <g id="line_Layer">
+            <line x1="7" y1="15" x2="7" y2="18" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="7" y1="6" x2="7" y2="2" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="7" y1="28" x2="7" y2="31" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="2" y1="32" x2="12" y2="32" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+     </g>
+</svg>

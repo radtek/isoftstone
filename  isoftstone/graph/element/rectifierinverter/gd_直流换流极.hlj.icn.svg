@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg name="RectifierInverter" id="gd_直流换流极" viewBox="0 0 70 50">
+     <g id="Head_Layer">
+            <rect x="0" y="0" width="70" height="50" fill="rgb(0,0,0)"/>
+     </g>
+     <g id="rect_Layer">
+            <rect x="16" y="13" width="40" height="24" fill="none" stroke="rgb(0,0,255)" lineStyle="0" stroke-width="1"/>
+            <rect x="16" y="13" width="40" height="24" fill="none" stroke="rgb(0,0,255)" lineStyle="0" stroke-width="1"/>
+            <rect x="16" y="13" width="40" height="24" fill="none" stroke="rgb(0,0,255)" lineStyle="0" stroke-width="1"/>
+     </g>
+     <g id="pin_Layer">
+            <circle cx="36" cy="8" r="2" fill="none" stroke="rgb(128,128,128)" stroke-width="1"/>
+            <circle cx="11" cy="25" r="2" fill="none" stroke="rgb(255,0,0)" stroke-width="1"/>
+            <circle cx="61" cy="25" r="2" fill="none" stroke="rgb(128,128,128)" stroke-width="1"/>
+     </g>
+     <g id="triangle_Layer">
+            <polygon points="29.5,19 23,31 36,31" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <polygon points="29.5,19 23,31 36,31" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <polygon points="29.5,19 23,31 36,31" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+     </g>
+     <g id="line_Layer">
+            <line x1="23" y1="25" x2="20" y2="25" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="35" y1="25" x2="52" y2="25" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="43" y1="17" x2="43" y2="33" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="43" y1="25" x2="50" y2="32" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="36" y1="13" x2="36" y2="10" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="23" y1="25" x2="20" y2="25" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="35" y1="25" x2="52" y2="25" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="43" y1="17" x2="43" y2="33" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="43" y1="25" x2="50" y2="32" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="16" y1="25" x2="13" y2="25" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="23" y1="25" x2="20" y2="25" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="35" y1="25" x2="52" y2="25" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="43" y1="17" x2="43" y2="33" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="43" y1="25" x2="50" y2="32" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="56" y1="25" x2="59" y2="25" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+     </g>
+</svg>

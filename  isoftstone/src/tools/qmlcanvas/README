@@ -1,0 +1,42 @@
+INSTALLATION:
+
+To try out the examples just do 'qmake' and 'make' in
+the root directory and run each example using the qmlviewer.
+
+
+USAGE:
+
+
+The canvas itself supports a large subset of the html5 canvas.
+To get a feel for what is possible, just look at the examples.
+
+Known differences at the moment:
+
+Images needs to be created by a factory function so you cannot do
+  var myImage = new Image(..)
+
+Instead you create it like this:
+  var myImage = context.createImage("file.png);
+
+
+PAINT UPDATES:
+
+
+You can get the context by calling 
+   var context = canvas.getContext();
+
+Note that drawing outside a paint event can be highly suboptimal in many cases. This is a deficiency in the html standard, since you will often end up doing a lot of painting that never gets shown on screen. To amend this, I have introduced the paint signal and a requestPaint() function. You can use it like this:
+
+Canvas {
+  onPaint: { myCustomDrawFunction(); }   
+  Timer { interval:50; running:true; repeat:true; onTriggered:draw(); }
+}
+
+This is usually more optimal than simply calling myCustomDrawFunction directly in the timer, because we allow the system to drop frames when the draw function is too expensive, instead of drowning the event loop in tasks to process. 
+
+
+FEEDBACK
+
+For comments or suggestions, feel free to contact the author at
+jens.bache-wiig { at } nokia.com.
+

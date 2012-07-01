@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg name="Other" id="sgd_qt658" viewBox="0 0 42 44">
+     <g id="Head_Layer">
+            <rect x="0" y="0" width="42" height="44" fill="rgb(0,0,0)"/>
+     </g>
+     <g id="line_Layer">
+            <line x1="38" y1="4" x2="4" y2="4" fill="rgb(93,92,88)" stroke="rgb(93,92,88)" stroke-width="4"/>
+            <line x1="5" y1="5" x2="31" y2="21" fill="rgb(93,92,88)" stroke="rgb(93,92,88)" stroke-width="4"/>
+            <line x1="31" y1="22" x2="5" y2="38" fill="rgb(93,92,88)" stroke="rgb(93,92,88)" stroke-width="4"/>
+            <line x1="38" y1="39" x2="4" y2="39" fill="rgb(93,92,88)" stroke="rgb(93,92,88)" stroke-width="4"/>
+     </g>
+</svg>

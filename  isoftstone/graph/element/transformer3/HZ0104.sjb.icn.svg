@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg name="Transformer3" id="HZ0104" viewBox="0 0 90 46">
+     <g id="Head_Layer">
+            <rect x="0" y="0" width="90" height="46" fill="rgb(0,0,0)"/>
+     </g>
+     <g id="circle_Layer">
+            <circle cx="55" cy="23" r="19" fill="none" stroke="rgb(255,0,0)" stroke-width="3"/>
+            <circle cx="35" cy="23" r="19" fill="none" stroke="rgb(255,0,0)" stroke-width="3"/>
+     </g>
+     <g id="line_Layer">
+            <line x1="75" y1="24" x2="90" y2="24" fill="none" stroke="rgb(255,0,0)" stroke-width="3"/>
+            <line x1="0" y1="24" x2="15" y2="24" fill="none" stroke="rgb(255,0,0)" stroke-width="3"/>
+     </g>
+</svg>

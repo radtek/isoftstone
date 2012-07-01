@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg name="Other" id="sgd_qt139" viewBox="0 0 114 30">
+     <g id="Head_Layer">
+            <rect x="0" y="0" width="114" height="30" fill="rgb(0,0,0)"/>
+     </g>
+     <g id="Text_Layer">
+            <text x="2" y="2" stroke="rgb(0,0,255)" fill="rgb(0,0,255)" font-weight="bolder">off</text>
+            <text x="35" y="2" stroke="rgb(0,0,255)" fill="rgb(0,0,255)" font-weight="bolder">Manual</text>
+            <text x="2" y="2" stroke="rgb(0,0,255)" fill="rgb(0,0,255)" font-weight="bolder">Auto</text>
+     </g>
+</svg>

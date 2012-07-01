@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg name="Other" id="sgd_qt28" viewBox="0 0 40 30">
+     <g id="Head_Layer">
+            <rect x="0" y="0" width="40" height="30" fill="rgb(0,0,0)"/>
+     </g>
+     <g id="Text_Layer">
+            <text x="2" y="1" stroke="rgb(0,0,255)" fill="rgb(0,0,255)" font-weight="bolder">.</text>
+            <text x="2" y="2" stroke="rgb(0,0,255)" fill="rgb(0,0,255)" font-weight="bolder">Yes</text>
+            <text x="2" y="2" stroke="rgb(0,0,255)" fill="rgb(0,0,255)" font-weight="bolder">No</text>
+     </g>
+</svg>

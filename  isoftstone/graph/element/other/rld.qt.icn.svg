@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg name="Other" id="rld" viewBox="0 0 16 16">
+     <g id="Head_Layer">
+            <rect x="0" y="0" width="16" height="16" fill="rgb(0,0,0)"/>
+     </g>
+     <g id="circle_Layer">
+            <circle cx="7" cy="7" r="5" fill="rgb(255,0,0)" stroke="rgb(196,190,202)" stroke-width="1"/>
+            <circle cx="13" cy="13" r="0" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <circle cx="13" cy="13" r="0" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <circle cx="7" cy="7" r="5" fill="rgb(0,255,0)" stroke="rgb(175,182,186)" stroke-width="1"/>
+            <circle cx="8" cy="14" r="0" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <circle cx="7" cy="7" r="5" fill="rgb(255,255,0)" stroke="rgb(175,182,186)" stroke-width="1"/>
+     </g>
+</svg>

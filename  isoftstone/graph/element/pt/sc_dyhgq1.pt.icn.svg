@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg name="PT" id="sc_dyhgq1" viewBox="0 0 50 50">
+     <g id="Head_Layer">
+            <rect x="0" y="0" width="50" height="50" fill="rgb(0,0,0)"/>
+     </g>
+     <g id="circle_Layer">
+            <circle cx="24" cy="13" r="7" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <circle cx="24" cy="24" r="7" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+     </g>
+     <g id="pin_Layer">
+            <circle cx="24" cy="6" r="2" fill="none" stroke="rgb(255,0,0)" stroke-width="1"/>
+     </g>
+</svg>

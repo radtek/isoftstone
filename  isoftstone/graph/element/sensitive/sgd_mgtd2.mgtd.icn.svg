@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg name="Sensitive" id="sgd_mgtd2" viewBox="0 0 20 20">
+     <g id="Head_Layer">
+            <rect x="0" y="0" width="20" height="20" fill="rgb(0,0,0)"/>
+     </g>
+     <g id="circle_Layer">
+            <circle cx="10" cy="10" r="8" fill="none" stroke="rgb(255,0,0)" stroke-width="4"/>
+     </g>
+     <g id="circlearc_Layer">
+            <path d="M 4 10 A 3 3 0 1 1 10 10" fill="none" stroke="rgb(255,0,0)" stroke-width="2"/>
+            <path d="M 16 10 A 3 3 0 1 1 10 10" fill="none" stroke="rgb(255,0,0)" stroke-width="2"/>
+     </g>
+</svg>

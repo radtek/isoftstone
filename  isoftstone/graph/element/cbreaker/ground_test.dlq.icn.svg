@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg name="CBreaker" id="ground_test" viewBox="0 0 50 50">
+     <g id="Head_Layer">
+            <rect x="0" y="0" width="50" height="50" fill="rgb(0,0,0)"/>
+     </g>
+     <g id="pin_Layer">
+            <circle cx="15" cy="9" r="2" fill="none" stroke="rgb(255,0,0)" stroke-width="1"/>
+     </g>
+</svg>

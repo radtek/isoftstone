@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg name="Other" id="jinkou" viewBox="0 0 148 32">
+     <g id="Head_Layer">
+            <rect x="0" y="0" width="148" height="32" fill="rgb(0,0,0)"/>
+     </g>
+     <g id="image_Layer">
+            <image x="18" y="-2" width="15" height="12" xlink:href="../../image/L_1V_1Q_low.gif"/>
+            <image x="36" y="-9" width="25" height="14" xlink:href="../../image/L_2V_1Q_low.gif"/>
+            <image x="21" y="-1" width="24" height="10" xlink:href="../../image/L_3V_1Q_low.gif"/>
+            <image x="87" y="2" width="16" height="10" xlink:href="../../image/L_4V_1Q_low.gif"/>
+     </g>
+</svg>

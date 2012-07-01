@@ -1,0 +1,197 @@
+[app_family]
+af_num   = 9 
+
+af_no1   = 1
+af_name1 = SCADA
+
+af_no2   = 2
+af_name2 = PAS
+
+af_no3   = 3
+af_name3 = DTS
+
+af_no4   = 4
+af_name4 = FES
+
+af_no5   = 5
+af_name5 = AGC
+
+af_no6   = 16
+af_name6 = PUBLIC
+
+af_no7	 = 13
+af_name7 = DSA
+
+af_no8	= 7
+af_name8 = WAMS
+
+af_no9  = 12
+af_name9 = SCHEDULE
+
+[AF_SCADA]
+switch_in_graph  = 1
+switch_in_search = 1
+app_num    = 3
+
+app_no1    = 100000
+app_name1  = SCADA
+app_disp1  = SCADA
+
+app_no2    = 110000
+app_name2  = SCADA_SIM
+app_research_mode2 = 2
+app_disp2  = 模拟操作
+
+app_no3	   = 102000
+app_name3  = SCADA_RELAY
+app_disp3   = SCADA保护
+
+[AF_PAS]
+switch_in_graph  = 1
+switch_in_search = 1
+app_num    = 14 
+
+app_no1    = 200000
+app_name1  = PAS_MODEL
+app_disp1  = 网络模型
+
+app_no2    = 201100
+app_name2  = PAS_RTNET
+app_disp2  = 状态估计
+
+app_no3    = 201200
+app_name3  = PAS_DPF
+app_disp3  = 调度员潮流
+
+app_no4    = 201300
+app_name4  = PAS_LF
+app_disp4  = 负荷预报
+
+app_no5   = 202500
+app_name5 = PAS_AVC
+app_disp5 = 自动电压控制
+
+app_no6   = 202700
+app_name6 = PAS_AVCDF
+app_disp6 = 无功优化 
+
+app_no7   = 202600
+app_name7 = PAS_PLAN
+app_disp7 = 规划研究 
+
+app_no8   = 250100
+app_name8 = PAS_PSASPFLOW
+app_disp8 = 实时潮流 
+
+app_no9   = 201400
+app_name9 = PAS_NETCA
+app_disp9 = 静态安全分析
+
+app_no10 = 201700
+app_name10 = PAS_SENS
+app_disp10 = 灵敏度分析
+
+app_no11 = 201500
+app_name11 = PAS_FAULT
+app_disp11 = 短路电流
+
+app_no12 = 260100
+app_name12 = PAS_SAOSA
+app_disp12 =停电范围分析 
+
+app_no13 = 260200
+app_name13 = PAS_RAPS
+app_disp13 =供电风险分析
+
+app_no14 = 260300
+app_name14 = PAS_CLORA
+app_disp14 =合环操作风险分析
+
+[AF_DTS]
+switch_in_graph  = 0
+switch_in_search = 1
+app_num    = 1
+
+app_no1    = 300000
+app_name1  = DTS
+app_disp1  = DTS
+
+[AF_FES]
+switch_in_graph  = 0
+switch_in_search = 1
+app_num    = 1
+
+app_no1    = 400000
+app_name1  = FES
+app_disp1  = FES 
+
+[AF_AGC]
+switch_in_graph  = 0
+switch_in_search = 1
+app_num    = 1
+
+app_no1    = 500000
+app_name1  = AGC
+app_disp1  = AGC
+
+[AF_PUBLIC]
+switch_in_graph  = 0
+switch_in_search = 1
+app_num    = 1
+
+app_no1    = 1600000
+app_name1  = PUBLIC
+app_disp1  = PUBLIC
+
+[AF_DSA]
+switch_in_graph  = 0
+switch_in_search = 1
+app_num    = 1
+
+app_no1    = 1300000
+app_name1  = DSA
+app_disp1  = DSA
+
+[AF_WAMS]
+switch_in_graph = 0
+switch_in_search = 1
+app_num = 2 
+
+app_no1  = 700000
+app_name1 = WAMS
+app_disp1 = WAMS
+
+app_no2   = 702100
+app_name2  = WAMS_FES
+app_disp2  = WAMS_FES
+
+[AF_SCHEDULE]
+switch_in_graph = 0
+switch_in_search = 1
+app_num = 1
+
+app_no1    = 1200000
+app_name1  = SCHEDULE
+app_disp1  = SCHEDULE
+
+[context_define]
+context_num= 6
+
+context_no1	= 1
+context_name1	= 实时态
+
+context_no2	= 2
+context_name2	= 研究态
+context_domain2 = 1/2
+
+context_no3	= 3
+context_name3	= 规划态
+
+context_no4	= 4
+context_name4	= 测试态
+
+context_no5	= 5
+context_name5	= 反演态
+
+context_no6	= 6
+context_name6	= 培训态

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg name="RcBreaker" id="sgd_rkkg2" viewBox="0 0 32 122">
+     <g id="Head_Layer">
+            <rect x="0" y="0" width="32" height="122" fill="rgb(0,0,0)"/>
+     </g>
+     <g id="rect_Layer">
+            <rect x="9" y="17" width="15" height="32" fill="none" stroke="rgb(0,0,255)" lineStyle="0" stroke-width="1"/>
+            <rect x="9" y="16" width="15" height="32" fill="rgb(0,0,255)" stroke="rgb(0,0,255)" lineStyle="0" stroke-width="1"/>
+     </g>
+     <g id="circlearc_Layer">
+            <path d="M 16 70 A 14 14 0 1 1 2 84" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <path d="M 17 98 A 13 13 0 1 1 30 85" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+     </g>
+     <g id="pin_Layer">
+            <circle cx="17" cy="3" r="2" fill="none" stroke="rgb(255,0,0)" stroke-width="1"/>
+     </g>
+     <g id="line_Layer">
+            <line x1="17" y1="7" x2="17" y2="7" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="17" y1="7" x2="17" y2="7" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="17" y1="50" x2="17" y2="50" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="17" y1="5" x2="17" y2="16" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="17" y1="6" x2="17" y2="6" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="17" y1="6" x2="17" y2="6" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="3" y1="84" x2="17" y2="84" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="17" y1="84" x2="17" y2="113" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="17" y1="91" x2="17" y2="118" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="5" y1="118" x2="30" y2="118" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="30" y1="113" x2="30" y2="118" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="5" y1="113" x2="5" y2="118" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="17" y1="49" x2="17" y2="71" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="17" y1="49" x2="17" y2="49" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="17" y1="50" x2="17" y2="48" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="17" y1="6" x2="17" y2="6" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="3" y1="85" x2="17" y2="85" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="17" y1="85" x2="17" y2="119" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="5" y1="114" x2="5" y2="119" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="5" y1="119" x2="30" y2="119" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="30" y1="114" x2="30" y2="119" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="17" y1="50" x2="17" y2="72" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <line x1="17" y1="5" x2="17" y2="17" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+     </g>
+</svg>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg name="CBreaker" id="fat_test_kg" viewBox="0 0 22 38">
+     <g id="Head_Layer">
+            <rect x="0" y="0" width="22" height="38" fill="rgb(0,0,0)"/>
+     </g>
+     <g id="pin_Layer">
+            <circle cx="11" cy="4" r="2" fill="none" stroke="rgb(255,0,0)" stroke-width="1"/>
+            <circle cx="11" cy="33" r="2" fill="none" stroke="rgb(255,0,0)" stroke-width="1"/>
+     </g>
+     <g id="diamond_Layer">
+            <polygon points="11,4 20,18.5 11,33 2,18.5" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <polygon points="11,4 20,18.5 11,33 2,18.5" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+     </g>
+</svg>

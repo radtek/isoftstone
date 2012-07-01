@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg name="PowerFlow" id="gd_zdtxfx" viewBox="0 0 44 20">
+     <g id="Head_Layer">
+            <rect x="0" y="0" width="44" height="20" fill="rgb(0,0,0)"/>
+     </g>
+     <g id="rect_Layer">
+            <rect x="41" y="6" width="-22" height="6" fill="rgb(255,0,0)" stroke="rgb(255,0,0)" lineStyle="0" stroke-width="1"/>
+            <rect x="2" y="6" width="22" height="6" fill="rgb(255,0,0)" stroke="rgb(255,0,0)" lineStyle="0" stroke-width="1"/>
+     </g>
+     <g id="triangle_Layer">
+            <polygon points="10,0 17,17 3,17" fill="rgb(255,0,0)" stroke="rgb(255,0,0)" stroke-width="1"/>
+            <polygon points="33,0 26,17 40,17" fill="rgb(255,0,0)" stroke="rgb(255,0,0)" stroke-width="1"/>
+     </g>
+</svg>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg name="Terminal" id="sgd_zdsb1" viewBox="0 0 20 36">
+     <g id="Head_Layer">
+            <rect x="0" y="0" width="20" height="36" fill="rgb(0,0,0)"/>
+     </g>
+     <g id="circle_Layer">
+            <circle cx="2" cy="18" r="0" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+     </g>
+     <g id="pin_Layer">
+            <circle cx="10" cy="4" r="2" fill="none" stroke="rgb(255,0,0)" stroke-width="1"/>
+     </g>
+     <g id="line_Layer">
+            <line x1="10" y1="4" x2="10" y2="11" fill="none" stroke="rgb(255,255,255)" stroke-width="1"/>
+            <line x1="10" y1="24" x2="10" y2="30" fill="none" stroke="rgb(255,255,255)" stroke-width="1"/>
+            <line x1="6" y1="30" x2="14" y2="30" fill="none" stroke="rgb(255,255,255)" stroke-width="1"/>
+            <line x1="7" y1="32" x2="12" y2="32" fill="none" stroke="rgb(255,255,255)" stroke-width="1"/>
+            <line x1="9" y1="34" x2="11" y2="34" fill="none" stroke="rgb(255,255,255)" stroke-width="1"/>
+     </g>
+     <g id="ellipsearc_Layer">
+            <path d="M 6.46447 20.5355 A 5 5 0 1 1 6.46447 20.5355" fill="none" stroke="rgb(0,0,255)" stroke-width="1"/>
+            <path d="M 11 17 A 7 3 0 1 1 11 11" fill="none" stroke="rgb(255,255,255)" stroke-width="1"/>
+            <path d="M 11 24 A 7 3 0 1 1 11 18" fill="none" stroke="rgb(255,255,255)" stroke-width="1"/>
+     </g>
+</svg>

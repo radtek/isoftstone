@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg name="Transformer3" id="sgd_sjb3" viewBox="0 0 54 56">
+     <g id="Head_Layer">
+            <rect x="0" y="0" width="54" height="56" fill="rgb(0,0,0)"/>
+     </g>
+     <g id="circle_Layer">
+            <circle cx="16" cy="28" r="14" fill="none" stroke="rgb(215,0,0)" stroke-width="4"/>
+            <circle cx="28" cy="19" r="14" fill="none" stroke="rgb(0,113,0)" stroke-width="4"/>
+            <circle cx="28" cy="37" r="14" fill="none" stroke="rgb(191,38,152)" stroke-width="4"/>
+     </g>
+     <g id="pin_Layer">
+            <circle cx="4" cy="28" r="2" fill="none" stroke="rgb(128,128,128)" stroke-width="1"/>
+            <circle cx="28" cy="7" r="2" fill="none" stroke="rgb(128,128,128)" stroke-width="1"/>
+            <circle cx="28" cy="49" r="2" fill="none" stroke="rgb(255,0,0)" stroke-width="1"/>
+     </g>
+</svg>

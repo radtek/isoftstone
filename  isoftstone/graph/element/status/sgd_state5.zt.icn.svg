@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg name="Status" id="sgd_state5" viewBox="0 0 8 40">
+     <g id="Head_Layer">
+            <rect x="0" y="0" width="8" height="40" fill="rgb(0,0,0)"/>
+     </g>
+     <g id="line_Layer">
+            <line x1="4" y1="3" x2="4" y2="37" fill="none" stroke="rgb(170,170,255)" stroke-width="4"/>
+            <line x1="4" y1="3" x2="4" y2="37" fill="none" stroke="rgb(0,255,0)" stroke-width="4"/>
+            <line x1="4" y1="3" x2="4" y2="37" fill="none" stroke="rgb(255,0,0)" stroke-width="4"/>
+     </g>
+</svg>

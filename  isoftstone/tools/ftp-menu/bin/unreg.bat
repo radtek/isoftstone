@@ -1,0 +1,1 @@
+regasm /unregister MyContextMenu.dll /CodeBase

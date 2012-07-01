@@ -1,0 +1,1 @@
+regasm MyContextMenu.dll /CodeBase

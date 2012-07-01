@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg name="State" id="sgd_gk1" viewBox="0 0 28 28">
+     <g id="Head_Layer">
+            <rect x="0" y="0" width="28" height="28" fill="rgb(0,0,0)"/>
+     </g>
+     <g id="circle_Layer">
+            <circle cx="14" cy="14" r="10" fill="rgb(0,255,0)" stroke="rgb(0,255,0)" stroke-width="6"/>
+            <circle cx="14" cy="14" r="10" fill="rgb(0,255,0)" stroke="rgb(0,255,0)" stroke-width="6"/>
+            <circle cx="15" cy="15" r="10" fill="rgb(0,255,0)" stroke="rgb(0,255,0)" stroke-width="6"/>
+            <circle cx="14" cy="14" r="10" fill="rgb(170,170,255)" stroke="rgb(170,170,255)" stroke-width="6"/>
+            <circle cx="14" cy="14" r="10" fill="rgb(0,255,0)" stroke="rgb(0,255,0)" stroke-width="6"/>
+     </g>
+     <g id="circlearc_Layer">
+            <path d="M 14 24 A 10 10 0 1 1 4 14" fill="rgb(255,0,0)" stroke="rgb(255,0,0)" stroke-width="6"/>
+            <path d="M 4 14 A 10 10 0 1 1 14 4" fill="none" stroke="rgb(0,0,255)" stroke-width="6"/>
+            <path d="M 14 4 A 10 10 0 1 1 24 14" fill="none" stroke="rgb(255,255,0)" stroke-width="6"/>
+            <path d="M 24 14 A 10 10 0 1 1 14 24" fill="none" stroke="rgb(0,255,127)" stroke-width="6"/>
+            <path d="M 15 5 A 10 10 0 1 1 25 15" fill="none" stroke="rgb(0,255,127)" stroke-width="6"/>
+            <path d="M 4 14 A 10 10 0 1 1 14 4" fill="none" stroke="rgb(255,255,0)" stroke-width="6"/>
+            <path d="M 15 25 A 10 10 0 1 1 5 15" fill="none" stroke="rgb(0,0,255)" stroke-width="6"/>
+            <path d="M 25 15 A 10 10 0 1 1 15 25" fill="rgb(255,0,0)" stroke="rgb(255,0,0)" stroke-width="6"/>
+            <path d="M 14 4 A 10 10 0 1 1 24 14" fill="rgb(255,0,0)" stroke="rgb(255,0,0)" stroke-width="6"/>
+            <path d="M 24 14 A 10 10 0 1 1 14 24" fill="none" stroke="rgb(0,0,255)" stroke-width="6"/>
+            <path d="M 14 24 A 10 10 0 1 1 4 14" fill="none" stroke="rgb(255,255,0)" stroke-width="6"/>
+            <path d="M 4 14 A 10 10 0 1 1 14 4" fill="none" stroke="rgb(0,255,127)" stroke-width="6"/>
+            <path d="M 4 14 A 10 10 0 1 1 14 4" fill="rgb(255,0,0)" stroke="rgb(255,0,0)" stroke-width="6"/>
+            <path d="M 14 4 A 10 10 0 1 1 24 14" fill="none" stroke="rgb(0,0,255)" stroke-width="6"/>
+            <path d="M 24 14 A 10 10 0 1 1 14 24" fill="none" stroke="rgb(255,255,0)" stroke-width="6"/>
+            <path d="M 14 24 A 10 10 0 1 1 4 14" fill="none" stroke="rgb(0,255,127)" stroke-width="6"/>
+     </g>
+</svg>

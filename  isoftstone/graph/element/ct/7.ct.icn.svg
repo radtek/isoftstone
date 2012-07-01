@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg name="CT" id="7" viewBox="0 0 70 48">
+     <g id="Head_Layer">
+            <rect x="0" y="0" width="70" height="48" fill="rgb(0,0,0)"/>
+     </g>
+     <g id="circle_Layer">
+            <circle cx="45" cy="23" r="22" fill="none" stroke="rgb(255,0,0)" stroke-width="2"/>
+            <circle cx="23" cy="23" r="21" fill="none" stroke="rgb(255,0,0)" stroke-width="2"/>
+     </g>
+     <g id="pin_Layer">
+            <circle cx="24" cy="24" r="2" fill="none" stroke="rgb(255,0,0)" stroke-width="1"/>
+     </g>
+</svg>

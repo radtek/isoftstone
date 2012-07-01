@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg name="Status" id="dsa_label" viewBox="0 0 60 38">
+     <g id="Head_Layer">
+            <rect x="0" y="0" width="60" height="38" fill="rgb(0,0,0)"/>
+     </g>
+     <g id="roundrect_Layer">
+            <rect x="2" y="2" width="56" height="34" rx="1" ry="1" fill="rgb(255,170,0)" stroke="rgb(0,170,0)" lineStyle="0" stroke-width="1"/>
+            <rect x="2" y="2" width="56" height="34" rx="1" ry="1" fill="rgb(0,170,0)" stroke="rgb(0,170,0)" lineStyle="0" stroke-width="1"/>
+     </g>
+</svg>

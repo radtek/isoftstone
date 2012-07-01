@@ -1,0 +1,14 @@
+
+1.获得环境变量	
+QByteArray br = qgetenv("VISDIR");
+char* str = br.data();
+
+2. 语言设置
+QTextCodec::setCodecForTr(QTextCodec::codecForLocale());
+   QTextCodec* codec = QTextCodec::codecForName("GB2312");
+   QTextCodec::setCodecForTr(codec); // tr() 会使用此 codec
+   QTextCodec::setCodecForLocale(codec); // QString::fromLocal8Bit() 会使用此 codec
+   QTextCodec::setCodecForCStrings(codec); // QString::ascii() 会使用此 codec
+#ifdef WIN32
+setlocale(LC_ALL,"");
+#endif

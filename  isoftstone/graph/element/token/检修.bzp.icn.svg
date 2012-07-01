@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg name="Token" id="检修" viewBox="0 0 36 36">
+     <g id="Head_Layer">
+            <rect x="0" y="0" width="36" height="36" fill="rgb(0,0,0)"/>
+     </g>
+     <g id="rect_Layer">
+            <rect x="3" y="3" width="30" height="30" fill="rgb(255,0,0)" stroke="rgb(255,255,255)" lineStyle="0" stroke-width="1"/>
+     </g>
+     <g id="Text_Layer">
+            <text x="5" y="7" stroke="rgb(255,255,255)" fill="rgb(255,255,255)" id="8000002" font-size="12" font-weight="bolder">检修</text>
+     </g>
+</svg>

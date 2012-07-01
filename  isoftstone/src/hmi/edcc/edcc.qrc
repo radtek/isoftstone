@@ -1,0 +1,81 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource prefix="/" > 
+    <file>images/1.bmp</file>
+    <file>images/2.bmp</file>
+    <file>images/3.bmp</file>
+    <file>images/4.bmp</file>
+    <file>images/5.bmp</file>
+    <file>images/6.bmp</file>
+    <file>images/7.bmp</file>
+    <file>images/alarm.png</file>
+    <file>images/dirclosed.png</file>
+    <file>images/diropen.png</file>
+    <file>images/down.png</file>
+    <file>images/error.png</file>
+    <file>images/exit.png</file>
+    <file>images/green.png</file>
+    <file>images/greybubble.png</file>
+    <file>images/huilv.png</file>
+    <file>images/icon_0.png</file>
+    <file>images/icon_1.png</file>
+    <file>images/icon_2.png</file>
+    <file>images/icon_3.png</file>
+    <file>images/icon_4.png</file>
+    <file>images/icon_charging.png</file>
+    <file>images/icon_plugged.png</file>
+    <file>images/left.png</file>
+    <file>images/logo.png</file>
+    <file>images/MiniBatteryLogger.png</file>
+    <file>images/newdir.png</file>
+    <file>images/orangebuble.png</file>
+    <file>images/parentdir.png</file>
+    <file>images/pink.png</file>
+    <file>images/purple.png</file>
+    <file>images/save.png</file>
+    <file>images/timelineHollowPillBlue.png</file>
+    <file>images/timelineHollowPillGray.png</file>
+    <file>images/timelineHollowPillGreen.png</file>
+    <file>images/timelineHollowPillOrange.png</file>
+    <file>images/timelineHollowPillPurple.png</file>
+    <file>images/timelineHollowPillRed.png</file>
+    <file>images/timelineHollowPillYellow.png</file>
+    <file>images/timelinePillBlue.png</file>
+    <file>images/timelinePillGray.png</file>
+    <file>images/timelinePillGreen.png</file>
+    <file>images/timelinePillOrange.png</file>
+    <file>images/timelinePillPurple.png</file>
+    <file>images/timelinePillRed.png</file>
+    <file>images/timelinePillYellow.png</file>
+    <file>images/trash.png</file>
+    <file>images/up.png</file>
+    <file>images/yellow.png</file>
+    <file>images/zongse.png</file>
+    <file>images/zoomin.png</file>
+    <file>images/zoomout.png</file>
+    
+    <file>images/mainmenu.png</file>
+    <file>images/dingzi.png</file>
+    <file>images/app.png</file>
+    <file>images/camera.png</file>
+    <file>images/close.png</file>
+    <file>images/currentfile.png</file>
+    <file>images/exit2.png</file>
+    <file>images/fullscreen2.png</file>
+    <file>images/home.png</file>
+    <file>images/light.png</file>
+    <file>images/manageActive.png</file>
+    <file>images/MB_0012_info2.png</file>
+    <file>images/MB_0015_sound.png</file>
+    <file>images/MB_0045_3D.png</file>
+    <file>images/navigation.png</file>
+    <file>images/next.png</file>
+    <file>images/openfile.png</file>
+    <file>images/options2D.png</file>
+    <file>images/options3D.png</file>
+    <file>images/plus.png</file>
+    <file>images/prior.png</file>
+    <file>images/state.png</file>
+    
+</qresource>
+</RCC>
+

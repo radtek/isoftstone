@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg name="Other" id="quyuzt" viewBox="0 0 50 50">
+     <g id="Head_Layer">
+            <rect x="0" y="0" width="50" height="50" fill="rgb(0,0,0)"/>
+     </g>
+     <g id="rect_Layer">
+            <rect x="1" y="15" width="8" height="1" fill="none" stroke="rgb(85,255,0)" lineStyle="0" stroke-width="1"/>
+            <rect x="10" y="16" width="9" height="-1" fill="none" stroke="rgb(85,255,0)" lineStyle="0" stroke-width="1"/>
+            <rect x="20" y="15" width="9" height="1" fill="rgb(85,255,0)" stroke="rgb(85,255,0)" lineStyle="0" stroke-width="1"/>
+     </g>
+</svg>

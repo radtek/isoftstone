@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg name="PowerFlow" id="sgd_clfx1" viewBox="0 0 14 16">
+     <g id="Head_Layer">
+            <rect x="0" y="0" width="14" height="16" fill="rgb(0,0,0)"/>
+     </g>
+     <g id="polygon_Layer">
+            <polygon points="10,13 2,13 6,2 6,2 6,2 6,2 6,2 6,2 6,2 6,2 6,2" fill="rgb(255,0,0)" stroke="rgb(255,0,0)" stroke-width="0"/>
+            <polygon points="10,2 2,2 6,13 6,13 6,13 6,13 6,13 6,13 6,13 6,13 6,13" fill="rgb(255,0,0)" stroke="rgb(255,0,0)" stroke-width="0"/>
+     </g>
+</svg>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg name="Other" id="82" viewBox="0 0 40 28">
+     <g id="Head_Layer">
+            <rect x="0" y="0" width="40" height="28" fill="rgb(0,0,0)"/>
+     </g>
+     <g id="line_Layer">
+            <line x1="25" y1="3" x2="36" y2="14" fill="rgb(93,92,88)" stroke="rgb(93,92,88)" stroke-width="2"/>
+            <line x1="36" y1="14" x2="25" y2="25" fill="rgb(93,92,88)" stroke="rgb(93,92,88)" stroke-width="2"/>
+            <line x1="25" y1="25" x2="25" y2="3" fill="rgb(93,92,88)" stroke="rgb(93,92,88)" stroke-width="2"/>
+            <line x1="3" y1="14" x2="25" y2="14" fill="rgb(93,92,88)" stroke="rgb(93,92,88)" stroke-width="2"/>
+     </g>
+</svg>
