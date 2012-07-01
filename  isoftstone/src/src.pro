@@ -2,10 +2,6 @@ TEMPLATE	=	subdirs
 
 SUBDIRS	= \
 			common \
-			commonwidget \
-                        itemlib \
-                        extitem \
-                        qtsolutions \
-                        contextmenu \
-                        pluginmgrlib \
-                        dcc
+			hmi \
+                        scada \
+                        plugin

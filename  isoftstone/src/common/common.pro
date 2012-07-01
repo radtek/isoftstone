@@ -8,5 +8,4 @@ SUBDIRS	= \
                         pluginmgrlib \
                         qtsolutions \
                         serialport \
-                        sqlwrapper \
                         zlib
