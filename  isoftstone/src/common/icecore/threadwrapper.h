@@ -23,7 +23,7 @@
 #include <IceUtil/Thread.h>
 #include <string>
 #include <map>
-#include "escore.h"
+#include "icecore.h"
 
 /** 
  * @class CThreadWrapper
@@ -36,7 +36,7 @@
 namespace HiRTDB
 {
 
-class  LIBCORE_EXPORT CThreadWrapper : public IceUtil::Thread
+class  LIB_ICECORE_EXPORT CThreadWrapper : public IceUtil::Thread
 {
 public:
 

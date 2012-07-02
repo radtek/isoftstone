@@ -9,12 +9,12 @@
 #include <IceUtil/Timer.h>
 #include "taskpool.h"
 #include "llogger.h"
-#include "escore.h"
+#include "icecore.h"
 
 namespace HiRTDB
 {
 
-class  LIBCORE_EXPORT CTimerReactor :public IceUtil::Shared
+class  LIB_ICECORE_EXPORT CTimerReactor :public IceUtil::Shared
 {
 public:
 

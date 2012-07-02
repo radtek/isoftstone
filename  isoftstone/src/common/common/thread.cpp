@@ -25,6 +25,17 @@ void CThread::exit(int returnCode )
 	QThread::exit(returnCode);
 }
 
+
+void CThread::setThreadName(const std::string& strName)
+{
+	m_threadName = strName;
+}
+
+std::string CThread::getThreadName()
+{
+	return m_threadName;
+}
+
 void CThread::clear()
 {
 	for (int i = 0 ; i < m_tasks.size() ; i++)

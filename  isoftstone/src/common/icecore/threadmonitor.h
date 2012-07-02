@@ -20,7 +20,7 @@
 
 #include <IceUtil/IceUtil.h>
 #include <string>
-#include "escore.h"
+#include "icecore.h"
 
 
 namespace HiRTDB
@@ -36,7 +36,7 @@ class CThreadWrapper;
  * 所有程序内得线程注册到线程管理容器中
  */
 
-class LIBCORE_EXPORT CThreadMonitor : virtual public IceUtil::Shared
+class LIB_ICECORE_EXPORT CThreadMonitor : virtual public IceUtil::Shared
 {
 public :
 

@@ -84,13 +84,6 @@ protected:
 
 };
 
-class QApplication
-{
-public:
-
-	static CPostTask* patchTask(CLObject* receiver,LCustomEvent* event);
-};
-
 template <class T>
 class CSigleton
 {

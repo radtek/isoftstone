@@ -10,7 +10,6 @@
 #ifndef __SLICE_MD5_H
 #define __SLICE_MD5_H
 
-#include <IceUtil/Config.h>
 #include "escore.h"
 
 extern "C"

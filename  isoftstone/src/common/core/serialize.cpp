@@ -1,6 +1,5 @@
 
 #include "serialize.h"
-#include "llogger.h"
 
 QDataStream& operator<<(QDataStream& dataStream, const SFileHeader& right)
 {
@@ -85,7 +84,7 @@ void CDataWriteSerialize::close()
 	{
 		return ;
 	}
-	IceUtil::WLockT<IceUtil::RWRecMutex>  guard( m_fileMutex );
+	QWriteLocker  guard( &m_fileMutex );
 	if ( m_file.isOpen() )
 	{
 		m_file_stream.unsetDevice();
@@ -113,7 +112,7 @@ void CDataWriteSerialize::writeData(CSerializeInterface* dataSerial)
 {
 	try
 	{
-		IceUtil::WLockT<IceUtil::RWRecMutex>  guard( m_fileMutex );
+		QWriteLocker  guard( &m_fileMutex );
 		dataSerial->init();
 		std::pair<bool,std::string> bTime;
 		do
@@ -135,13 +134,9 @@ void CDataWriteSerialize::writeData(CSerializeInterface* dataSerial)
 
 		}while(true);
 	}
-	catch ( const std::exception& e )
-	{
-		HI_LOG4CPLUS_DEBUG("事项写入文件时出现异常: " << e.what());
-	}
 	catch (...)
 	{
-		HI_LOG4CPLUS_DEBUG("事项写入文件时出现未知异常");
+		
 	}
 }
 
@@ -152,7 +147,7 @@ void CDataReadSerialize::open()
 	{
 		return;
 	}
-	IceUtil::RLockT<IceUtil::RWRecMutex>  guard( m_fileMutex );
+	QReadLocker  guard( &m_fileMutex );
 	m_file.open( QIODevice::ReadOnly );
 	if ( m_file.isOpen() )
 	{
@@ -173,7 +168,7 @@ void CDataReadSerialize::close()
 		return ;
 	}
 	 
-	IceUtil::RLockT<IceUtil::RWRecMutex>  guard( m_fileMutex );
+	QReadLocker  guard( &m_fileMutex );
 	if ( m_file.isOpen() )
 	{
 		m_file_stream.unsetDevice();
@@ -189,13 +184,9 @@ void CDataReadSerialize::readData(CSerializeInterface* dataSerial)
 		//序列化
 		dataSerial->read( m_file_stream );
 	}
-	catch ( const std::exception& e )
-	{
-		HI_LOG4CPLUS_DEBUG("事项写入文件时出现异常: " << e.what());
-	}
 	catch (...)
 	{
-		HI_LOG4CPLUS_DEBUG("事项写入文件时出现未知异常");
+		
 	}
 }
 
@@ -231,7 +222,7 @@ bool CDataReadSerialize::next()
 
 bool CDataReadSerialize::next(int size,CSerializeInterface* serialData)
 {
-	IceUtil::RLockT<IceUtil::RWRecMutex>  guard( m_fileMutex );
+	QReadLocker  guard( &m_fileMutex );
 	if ( m_file.isOpen() )
 	{
 		int i = 0;

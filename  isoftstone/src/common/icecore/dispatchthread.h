@@ -5,7 +5,7 @@
 #include <IceUtil/IceUtil.h>
 #include <list>
 #include "ThreadWrapper.h"
-#include "escore.h"
+#include "icecore.h"
 
 template < class AMD_Dispatch_Ptr,class CResult >
 struct CallbackEntry
@@ -22,7 +22,7 @@ struct CallbackEntry
 */
 
 template < class AMD_Dispatch_Ptr,class CResult >
-class LIBCORE_EXPORT CDataNotifyDispatchThread : public HiRTDB::CThreadWrapper
+class LIB_ICECORE_EXPORT CDataNotifyDispatchThread : public HiRTDB::CThreadWrapper
 {
 	typedef CallbackEntry<AMD_Dispatch_Ptr,CResult> CallbackEntry;
 
@@ -112,7 +112,7 @@ private:
 */
 
 template < class AMD_Dispatch_Ptr,class CResult >
-class LIBCORE_EXPORT CPollDispatchThread : public HiRTDB::CThreadWrapper
+class LIB_ICECORE_EXPORT CPollDispatchThread : public HiRTDB::CThreadWrapper
 {
 	typedef CallbackEntry<AMD_Dispatch_Ptr,CResult> CallbackEntry;
 

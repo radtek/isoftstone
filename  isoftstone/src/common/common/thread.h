@@ -3,6 +3,7 @@
 #define THREAD_H
 
 #include <vector>
+#include <string>
 #include <QObject>
 #include <QThread>
 #include <QRunnable>
@@ -21,6 +22,10 @@ public:
 
 	void exit(int returnCode = 0);
 
+	void setThreadName(const std::string& strName);
+	
+	std::string getThreadName();
+
 protected:
 
 	virtual void run();
@@ -36,6 +41,8 @@ private:
 	std::vector<QRunnable*> m_tasks;
 
 	int	m_internal;
+
+	std::string m_threadName;
 
 };
 

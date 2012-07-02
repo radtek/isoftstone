@@ -1,20 +1,15 @@
 
-#include <Ice/Ice.h>
 #include <list>
 #include <string.h>
 #include <cstring>
 #include <iostream>
 #include <fstream>
 #include <stdio.h>
-#include <Ice/Exception.h>
-#include <Ice/LocalException.h>
 #include "multitree.h"
 #include "general.h"
 #include "treeiterator.h"
 #include "container2stream.h"
 #include "stringlist.h"
-#include "histring.h"
-#include "activity.h"
 #include "properties.h"
 #include "enumfile.h"
 
@@ -42,7 +37,7 @@ void CRtMultiTree::init()
 
 void CRtMultiTree::listAllNode()
 {
-	IceUtil::Mutex::Lock lock(m_containerMutex);
+	QMutexLocker lock(&m_containerMutex);
 	for (CRtMultiTree::NodeIterator iter = m_NodeContainer.begin();iter != m_NodeContainer.end();iter++)
 	{
 		HiNode* node = iter->second;
@@ -54,7 +49,7 @@ void CRtMultiTree::createRootNode(HiNode* node)
 {
 	do
 	{
-		IceUtil::Mutex::Lock lock(m_nodeMutex);
+		QMutexLocker lock(&m_nodeMutex);
 		if (NULL == m_RootNode)
 		{
 			m_RootNode = node;
@@ -65,13 +60,13 @@ void CRtMultiTree::createRootNode(HiNode* node)
 		}
 	}while(0);
 
-	IceUtil::Mutex::Lock lock(m_containerMutex);
+	QMutexLocker lock(&m_containerMutex);
 	m_NodeContainer.insert(std::make_pair(m_RootNode->nodeValue.id,m_RootNode));
 }
 
 void CRtMultiTree::addNode(int& parentid,HiNode* node)
 {
-	IceUtil::Mutex::Lock lock(m_containerMutex);
+	QMutexLocker lock(&m_containerMutex);
 	CRtMultiTree::NodeIterator iter = m_NodeContainer.find(parentid);
 	if (iter != m_NodeContainer.end())
 	{
@@ -126,7 +121,7 @@ void CRtMultiTree::addNode(int& parentid,HiNode* node)
 
 void CRtMultiTree::deleteNode(int& id)
 {
-	IceUtil::Mutex::Lock lock(m_containerMutex);
+	QMutexLocker lock(&m_containerMutex);
 	CRtMultiTree::NodeIterator iter = m_NodeContainer.find(id);
 
 	if (iter != m_NodeContainer.end())
@@ -178,7 +173,7 @@ void CRtMultiTree::deleteNode(int& id)
 
 void CRtMultiTree::modifyNode(int& id,string& name,double& value)
 {
-	IceUtil::Mutex::Lock lock(m_containerMutex);
+	QMutexLocker lock(&m_containerMutex);
 	CRtMultiTree::NodeIterator iter = m_NodeContainer.find(id);
 	if (iter != m_NodeContainer.end())
 	{
@@ -221,7 +216,7 @@ void CRtMultiTree::modifyNode(int& id,string& name,double& value)
 
 void CRtMultiTree::getNode(int& id)
 {
-	IceUtil::Mutex::Lock lock(m_containerMutex);
+	QMutexLocker lock(&m_containerMutex);
 	CRtMultiTree::NodeIterator iter = m_NodeContainer.find(id);
 	if (iter != m_NodeContainer.end())
 	{
@@ -249,7 +244,7 @@ int CRtMultiTree::getRoot()
 
 void CRtMultiTree::getAllChild(int& id,std::vector<HiNode*>& retv)
 {
-	IceUtil::Mutex::Lock lock(m_containerMutex);
+	QMutexLocker lock(&m_containerMutex);
 	CRtMultiTree::NodeIterator iter = m_NodeContainer.find(id);
 	if (iter != m_NodeContainer.end())
 	{
@@ -274,7 +269,7 @@ void CRtMultiTree::getAllChild(int& id,std::vector<HiNode*>& retv)
 
 std::string CRtMultiTree::getPath(const int& id,const int& root)
 {
-	IceUtil::Mutex::Lock lock(m_containerMutex);
+	QMutexLocker lock(&m_containerMutex);
 	CRtMultiTree::NodeIterator iter = m_NodeContainer.find(id);
 	CRtMultiTree::NodeIterator iter_root = m_NodeContainer.find(root);
 	ostringstream ostr;
@@ -297,7 +292,7 @@ int CRtMultiTree::getNodeID(string& pathname)
 	std::vector<string> sname ;
 	HiStringList::split("/",pathname).toVector(sname);
 
-	IceUtil::Mutex::Lock lock(m_nodeMutex);
+	QMutexLocker lock(&m_nodeMutex);
 	HiNode* nodeptr = m_RootNode;
 	std::vector<string>::iterator iter = sname.begin();
 	bool find = false;
@@ -331,7 +326,7 @@ int CRtMultiTree::getNodeID(string& pathname)
 
 std::vector<HiNode*> CRtMultiTree::getFilterNode(string& filter)
 {
-	IceUtil::Mutex::Lock lock(m_containerMutex);
+	QMutexLocker lock(&m_containerMutex);
 	std::vector<HiNode*> ret;
 	for (CRtMultiTree::NodeIterator iter = m_NodeContainer.begin();iter != m_NodeContainer.end();iter++)
 	{
@@ -349,7 +344,7 @@ std::vector<HiNode*> CRtMultiTree::getFilterNode(string& filter)
 
 void CRtMultiTree::copyNode(int& id,int& pid)
 {
-	IceUtil::Mutex::Lock lock(m_containerMutex);
+	QMutexLocker lock(&m_containerMutex);
 	CRtMultiTree::NodeIterator it = m_NodeContainer.find(id);
 	if (it == m_NodeContainer.end())
 	{
@@ -373,7 +368,7 @@ void CRtMultiTree::copyNode(int& id,int& pid)
 
 void CRtMultiTree::moveNode(int& id,int& pid)
 {
-	IceUtil::Mutex::Lock lock(m_containerMutex);
+	QMutexLocker lock(&m_containerMutex);
 	CRtMultiTree::NodeIterator it = m_NodeContainer.find(id);
 	if (it == m_NodeContainer.end())
 	{

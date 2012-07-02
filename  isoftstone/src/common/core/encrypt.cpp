@@ -1,6 +1,5 @@
 #include "encrypt.h"
 #include "stringlist.h"
-#include "histring.h"
 #include "3des.h"
 #include "sbdes.h"
 
@@ -81,13 +80,13 @@ std::string HiRTDB::CEncrypt::md5Encrypt(const std::string& data)
 	bytes.resize(16);
 	md5.getDigest(reinterpret_cast<unsigned char*>(&bytes[0]));
 
-	HiStringList strlist;
+	std::string str;
 	for (int i = 0 ;i < (int)bytes.size() ;i++)
 	{
-		strlist.push_back(HiRTDB::HiString::toString<int>(bytes[i]));
+		str.push_back(bytes[i]);
 	}
 
-	return strlist.join("-");
+	return str;
 }
 
 char* HiRTDB::CEncrypt::encrypt (char* data, char key[8])

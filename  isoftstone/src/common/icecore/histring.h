@@ -1,7 +1,7 @@
 #ifndef _HiSTRING_H_
 #define _HiSTRING_H_
 
-#include "escore.h"
+#include "icecore.h"
 #include "iestypedef.h"
 #include <map>
 #include <functional>
@@ -13,7 +13,7 @@ class HiString;
 
 // 字符串内容只在构造函数传入
 // 线程安全，只在 ref()/deref() 线程保护
-class LIBCORE_EXPORT HiStringData
+class LIB_ICECORE_EXPORT HiStringData
 {
 	// 为了 HiString::makeSharedNull() 内部能够声明静态对象
 	friend class HiString;
@@ -60,7 +60,7 @@ private:
 // 字符串
 // 使用隐式共享
 // 多个线程访问同一个字符串对象，不是线程安全
-class LIBCORE_EXPORT HiString
+class LIB_ICECORE_EXPORT HiString
 {
 public:
 	HiString(void);
@@ -184,18 +184,18 @@ private:
 
 	HiStringData* m_pStringData;
 
-	friend LIBCORE_EXPORT HiString operator+(const HiString& left, const HiString& right);
-	friend LIBCORE_EXPORT HiString operator+(const HiString& left, const std::string& right);
-	friend LIBCORE_EXPORT HiString operator+(const std::string& left, const HiString& right);
-	friend LIBCORE_EXPORT HiString operator+(const HiString& left, const Jchar* szData);
-	friend LIBCORE_EXPORT HiString operator+(const Jchar* szData, const HiString& right);
+	friend LIB_ICECORE_EXPORT HiString operator+(const HiString& left, const HiString& right);
+	friend LIB_ICECORE_EXPORT HiString operator+(const HiString& left, const std::string& right);
+	friend LIB_ICECORE_EXPORT HiString operator+(const std::string& left, const HiString& right);
+	friend LIB_ICECORE_EXPORT HiString operator+(const HiString& left, const Jchar* szData);
+	friend LIB_ICECORE_EXPORT HiString operator+(const Jchar* szData, const HiString& right);
 };
 
-LIBCORE_EXPORT HiString operator+(const HiString& left, const HiString& right);
-LIBCORE_EXPORT HiString operator+(const HiString& left, const std::string& right);
-LIBCORE_EXPORT HiString operator+(const std::string& left, const HiString& right);
-LIBCORE_EXPORT HiString operator+(const HiString& left, const Jchar* szData);
-LIBCORE_EXPORT HiString operator+(const Jchar* szData, const HiString& right);
+LIB_ICECORE_EXPORT HiString operator+(const HiString& left, const HiString& right);
+LIB_ICECORE_EXPORT HiString operator+(const HiString& left, const std::string& right);
+LIB_ICECORE_EXPORT HiString operator+(const std::string& left, const HiString& right);
+LIB_ICECORE_EXPORT HiString operator+(const HiString& left, const Jchar* szData);
+LIB_ICECORE_EXPORT HiString operator+(const Jchar* szData, const HiString& right);
 
 
 

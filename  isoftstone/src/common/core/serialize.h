@@ -5,12 +5,14 @@
 #include <qfile.h>
 #include <qdatastream.h>
 #include <qdatetime.h>
+#include <QMutex>
+#include <QMutexLocker>
+#include <QWriteLocker>
+#include <QReadWriteLock>
+#include <QReadLocker>
+#include <QSharedDataPointer>
+#include <QSharedData>
 #include <algorithm>
-#include <IceUtil/Handle.h>
-#include <IceUtil/Shared.h>
-#include <IceUtil/Mutex.h>
-#include <IceUtil/RWRecMutex.h>
-#include "llogger.h"
 #include "container2stream.h"
 #include "escore.h"
 
@@ -46,7 +48,7 @@ public:
 
 class CFileSerialize;
 
-class CSerializeInterface : public IceUtil::Shared
+class CSerializeInterface : public QSharedData
 {
 public:
 
@@ -77,7 +79,7 @@ protected:
 
 };
 
-typedef IceUtil::Handle<CSerializeInterface> CSerializeInterfacePtr;
+typedef QSharedDataPointer<CSerializeInterface> CSerializeInterfacePtr;
 
 LIBCORE_EXPORT QDataStream& operator<<(QDataStream& dataStream, const SFileHeader& right);
 
@@ -146,7 +148,7 @@ public:
 
 protected:
 
-	IceUtil::RWRecMutex m_fileMutex;
+	QReadWriteLock m_fileMutex;
 
 	bool m_opened;
 

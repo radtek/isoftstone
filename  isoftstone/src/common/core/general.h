@@ -23,12 +23,6 @@ public:
 	static std::string getCurrentThreadID()
 	{
 		std::string threadID;
-#ifdef WIN32
-		char szHex[25];
-		DWORD dThreadId = GetCurrentThreadId();
-		sprintf_s(szHex,25,"线程ID-0x%x - %d ",dThreadId,dThreadId);
-		threadID = szHex;
-#endif // WIN32
 		return threadID;
 	}
 
@@ -254,7 +248,7 @@ public:
 		QStringList strIpList = strIpAddr.split('.');
 		if (strIpList.size() == 4)
 		{
-			for (Juint32 i=0; i<strIpList.size(); ++i)
+			for (int i=0; i < strIpList.size(); ++i)
 			{
 				// 判断数值是否合法
 				Jint32 tmpInt = strIpList[i].toInt();
@@ -365,7 +359,7 @@ public:
 		// 文件中使用的日期字符串的长度，如：20020113-22 的长度
 		Juint32 nTimeStringLength = dateTime2fileString(QDateTime(), hasHour, hasMinute, hasSecond).length();
 		// 日期字符串 + 文件类型名 的长度
-		Juint32 nTimeStringPlusTypeNameLength = nTimeStringLength + typeName.length() + 1;
+		int nTimeStringPlusTypeNameLength = nTimeStringLength + typeName.length() + 1;
 		if (strFileName.length() >= nTimeStringPlusTypeNameLength)
 		{
 			// 截取文件名中日期字符串，并转成日期

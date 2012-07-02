@@ -8,12 +8,17 @@
 #include "dcc-global.h"
 #include "qttoolbardialog.h"
 
-CMainWindow::CMainWindow(): QMainWindow()
+#include "server.h"
+
+CMainWindow::CMainWindow(CService* pServer): QMainWindow()
 {
 	setWindowTitle(WINDOW_TITLE);
 	QIcon icon;
 	icon.addFile(QString::fromUtf8(":/images/logo.png"), QSize(), QIcon::Normal, QIcon::Off);
 	setWindowIcon(icon);
+
+	m_Server = pServer;
+	m_Server->start();
 
 	CGraphicsItemProxy::instance();
 	CItemFactory::instance();

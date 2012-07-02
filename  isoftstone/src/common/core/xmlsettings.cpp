@@ -2,26 +2,26 @@
 #include <qtextstream.h> 
 #include <qtextcodec.h> 
 #include <qobject.h>
-#include "settings.h"
+#include "xmlsettings.h"
 #include <qstringlist.h>
 #include "exceptions.h"
 
 
-CSettings::CSettings(const QString& string, bool bFile, bool bThrowException)
+CXmlSettings::CXmlSettings(const QString& string, bool bFile, bool bThrowException)
 {
 	open(string,bFile,bThrowException);
 }
 
-CSettings::CSettings()
+CXmlSettings::CXmlSettings()
 {
 }
 
-CSettings::~CSettings()
+CXmlSettings::~CXmlSettings()
 {
 	flush();
 }
 
-void CSettings::open(const QString& string, bool bFile, bool bThrowException)
+void CXmlSettings::open(const QString& string, bool bFile, bool bThrowException)
 {
 	m_bFile = bFile;
 	m_bReady = JFALSE;
@@ -41,17 +41,17 @@ void CSettings::open(const QString& string, bool bFile, bool bThrowException)
 		if ( bFile )
 		{
 			// 加载配置文件失败
-			throw core::CFileException(QObject::tr("配置文件：%1 加载失败").arg(m_strFileName));
+			throw core::CFileException(QObject::tr("配置文件：%1 加载失败").arg(m_strFileName).toStdString());
 		}
 		else
 		{
 			// 加载 xml 片断失败
-			throw core::CCommonException(QObject::tr("xml 片断：%1 加载失败").arg(m_xmlString));
+			throw core::CCommonException(QObject::tr("xml 片断：%1 加载失败").arg(m_xmlString).toStdString());
 		}
 	}
 }
 
-bool CSettings::readSetting()
+bool CXmlSettings::readSetting()
 {
 	m_bReady = JFALSE;
 
@@ -60,7 +60,7 @@ bool CSettings::readSetting()
 		QFile f(m_strFileName);
 		if (f.exists())
 		{
-			if (f.open(IO_ReadOnly))
+			if (f.open(QIODevice::ReadOnly))
 			{
 				// 读入整个配置文件
 				m_bReady = m_domDocument.setContent(&f, false);
@@ -94,12 +94,12 @@ bool CSettings::readSetting()
 	return m_bReady;
 }
 
-bool CSettings::isReady() const
+bool CXmlSettings::isReady() const
 {
 	return m_bReady;
 }
 
-bool CSettings::flush()
+bool CXmlSettings::flush()
 {
 	bool bRet = JFALSE;
 
@@ -109,12 +109,11 @@ bool CSettings::flush()
 		{
 			// 把配置信息写入文件
 			QFile f(m_strFileName);
-			if (f.open(IO_WriteOnly | IO_Translate | IO_Truncate))
+			if (f.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate))
 			{
 				QTextStream s(&f);
 				QTextCodec *codec = QTextCodec::codecForName("utf8");
 				s.setCodec(codec);
-				s.setEncoding( QTextStream::UnicodeUTF8 );
 				m_domDocument.save(s, 4);
 				f.close();
 
@@ -125,7 +124,7 @@ bool CSettings::flush()
 		else
 		{
 			// 把配置信息写入文件
-			QTextStream s( &m_xmlString, IO_ReadWrite );
+			QTextStream s( &m_xmlString, QIODevice::ReadWrite );
 			m_domDocument.save( s, 4 );
 
 			m_bDirty = JFALSE;
@@ -135,7 +134,7 @@ bool CSettings::flush()
 	return bRet;
 }
 
-QDomNode CSettings::getRootKey(const QString& rootName)
+QDomNode CXmlSettings::getRootKey(const QString& rootName)
 {
 	QDomNode root = m_domDocument.firstChild();
 	if (root.nodeName() != rootName)
@@ -151,7 +150,7 @@ QDomNode CSettings::getRootKey(const QString& rootName)
 	return root;
 }
 
-QDomElement CSettings::getKeyElement(const QString& key)
+QDomElement CXmlSettings::getKeyElement(const QString& key)
 {
 	QDomElement domKey;
 	QDomNode root = getRootKey("root");
@@ -167,7 +166,7 @@ QDomElement CSettings::getKeyElement(const QString& key)
 	return domKey;
 }
 
-bool CSettings::writeEntry(const QString& key, const QString& attribute, const QString& value)
+bool CXmlSettings::writeEntry(const QString& key, const QString& attribute, const QString& value)
 {
 	bool bRet = JFALSE;
 
@@ -208,35 +207,35 @@ bool CSettings::writeEntry(const QString& key, const QString& attribute, const Q
 	return bRet;
 }
 
-QString CSettings::readEntryByPath(const QString& path)
+QString CXmlSettings::readEntryByPath(const QString& path)
 {
 	SNodeValueFactor factor;
 	locateEntryAndOper(path,&factor);
 	return factor.ret;
 }
 
-Juint32 CSettings::readIntByPath(const QString& path)
+Juint32 CXmlSettings::readIntByPath(const QString& path)
 {
 	return readEntryByPath(path).toInt();
 }
 
-Jdouble CSettings::readDoubleByPath(const QString& path)
+Jdouble CXmlSettings::readDoubleByPath(const QString& path)
 {
 	return readEntryByPath(path).toDouble();
 }
 
-bool CSettings::readBoolByPath(const QString& path)
+bool CXmlSettings::readBoolByPath(const QString& path)
 {
 	bool ret = false;
 	QString value = readEntryByPath(path);
-	if (value.upper() == "TRUE" || value.toInt() > 0)
+	if (value.toUpper() == "TRUE" || value.toInt() > 0)
 	{
 		ret = true;
 	}
 	return ret;
 }
 
-QStringList CSettings::readEntryByPath(const QString& path, const QStringList& attribute)
+QStringList CXmlSettings::readEntryByPath(const QString& path, const QStringList& attribute)
 {
 	SNodePropertyFactor factor;
 	factor.attribute = attribute;
@@ -244,9 +243,9 @@ QStringList CSettings::readEntryByPath(const QString& path, const QStringList& a
 	return factor.ret;
 }
 
-void CSettings::locateEntryAndOper(const QString& path,SXmlEntryFactor* factor)
+void CXmlSettings::locateEntryAndOper(const QString& path,SXmlEntryFactor* factor)
 {
-	QStringList keyNodes =  QStringList::split("/",path.stripWhiteSpace());
+	QStringList keyNodes = path.simplified().split("/");
 	QString ret = "";
 	int count = keyNodes.count();
 	if (count > 1)
@@ -282,7 +281,7 @@ void CSettings::locateEntryAndOper(const QString& path,SXmlEntryFactor* factor)
 	}
 }
 
-QString CSettings::readEntry(const QString& key, const QString& attribute, const QString& defaultValue, bool* ok)
+QString CXmlSettings::readEntry(const QString& key, const QString& attribute, const QString& defaultValue, bool* ok)
 {
 	QString value;
 	bool bRet = JFALSE;
@@ -317,7 +316,7 @@ QString CSettings::readEntry(const QString& key, const QString& attribute, const
 	return value;
 }
 
-bool CSettings::removeEntry(const QString& key)
+bool CXmlSettings::removeEntry(const QString& key)
 {
 	bool bRet = JFALSE;
 
@@ -337,7 +336,7 @@ bool CSettings::removeEntry(const QString& key)
 	return bRet;
 }
 
-bool CSettings::removeEntry(const QString& key, const QString& attribute)
+bool CXmlSettings::removeEntry(const QString& key, const QString& attribute)
 {
 	bool bRet = JFALSE;
 
@@ -360,22 +359,22 @@ bool CSettings::removeEntry(const QString& key, const QString& attribute)
 	return bRet;
 }
 
-bool CSettings::writeNumEntry(const QString& key, const QString& attribute, Jint32 value)
+bool CXmlSettings::writeNumEntry(const QString& key, const QString& attribute, Jint32 value)
 {
 	return writeEntry(key, attribute, QString::number(value));
 }
 
-bool CSettings::writeBoolEntry(const QString& key, const QString& attribute, bool value)
+bool CXmlSettings::writeBoolEntry(const QString& key, const QString& attribute, bool value)
 {
 	return writeEntry(key, attribute, value ? "true" : "false");
 }
 
-bool CSettings::writeDoubleEntry(const QString& key, const QString& attribute, Jdouble value)
+bool CXmlSettings::writeDoubleEntry(const QString& key, const QString& attribute, Jdouble value)
 {
 	return writeEntry(key, attribute, QString::number(value));
 }
 
-Jint32 CSettings::readNumEntry(const QString& key, const QString& attribute, Jint32 defaultValue, bool* ok)
+Jint32 CXmlSettings::readNumEntry(const QString& key, const QString& attribute, Jint32 defaultValue, bool* ok)
 {
 	QString value = readEntry(key, attribute, QString::number(defaultValue), ok);
 	// 判断取回的是否为数值
@@ -392,16 +391,16 @@ Jint32 CSettings::readNumEntry(const QString& key, const QString& attribute, Jin
 	return retval;
 }
 
-bool CSettings::readBoolEntry(const QString& key, const QString& attribute, bool defaultValue, bool* ok)
+bool CXmlSettings::readBoolEntry(const QString& key, const QString& attribute, bool defaultValue, bool* ok)
 {
 	QString value = readEntry(key, attribute, defaultValue ? "true" : "false", ok);
 	// 判断取回的是否为布尔量
 	bool retval;
-    if (value.lower() == "true" || value == "1")
+    if (value.toLower() == "true" || value == "1")
 	{
 		retval = JTRUE;
 	}
-    else if (value.lower() == "false" || value == "0")
+    else if (value.toLower() == "false" || value == "0")
 	{
 		retval = JFALSE;
 	}
@@ -416,7 +415,7 @@ bool CSettings::readBoolEntry(const QString& key, const QString& attribute, bool
 	return retval;
 }
 
-Jdouble CSettings::readDoubleEntry(const QString& key, const QString& attribute, Jdouble defaultValue, bool* ok)
+Jdouble CXmlSettings::readDoubleEntry(const QString& key, const QString& attribute, Jdouble defaultValue, bool* ok)
 {
 	QString value = readEntry(key, attribute, QString::number(defaultValue), ok);
 	// 判断取回的是否为数值
@@ -433,13 +432,13 @@ Jdouble CSettings::readDoubleEntry(const QString& key, const QString& attribute,
 	return retval;
 }
 
-QString CSettings::getXmlSettings()
+QString CXmlSettings::getXmlSettings()
 {
 	flush();
 	return m_domDocument.toString( 4 );
 }
 
-bool CSettings::clear()
+bool CXmlSettings::clear()
 {
 	bool bRet = JFALSE;
 
@@ -451,7 +450,7 @@ bool CSettings::clear()
 	return bRet;
 }
 
-void CSettings::setXmlSettings( const QString& xml )
+void CXmlSettings::setXmlSettings( const QString& xml )
 {
 	if ( !xml.isEmpty() )
 	{

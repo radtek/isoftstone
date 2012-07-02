@@ -2,7 +2,7 @@
 #ifndef _DLLMODULE_H_
 #define _DLLMODULE_H_
 
-#include "escore.h"
+#include "icecore.h"
 #include <IceUtil/Shared.h>
 #include <Ice/DynamicLibrary.h>
 #include <string>
@@ -49,7 +49,7 @@ typedef IceUtil::Handle < CDllPlugin > CDllPluginPtr;
 
 typedef CDllPlugin* (*Ptr_getDllPlugin)(const char* plugin);
 
-class LIBCORE_EXPORT  CDllPluginProxy 
+class LIB_ICECORE_EXPORT  CDllPluginProxy 
 {
 public:
 

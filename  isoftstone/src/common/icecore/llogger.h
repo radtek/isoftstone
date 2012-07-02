@@ -16,7 +16,7 @@
 #include <log4cplus/streams.h>
 #include <ostream>
 #include <strstream>
-#include "escore.h"
+#include "icecore.h"
 
 #  pragma warning( disable : 4099 )
 
@@ -54,7 +54,7 @@ enum EAppendLogType
 #define LOG4PLUS_LOG(TYPE,LOGGER,msg) \
 LOG4CPLUS_##TYPE(LOGGER,msg);
 
-class  LIBCORE_EXPORT CLogger
+class  LIB_ICECORE_EXPORT CLogger
 {
 public:
 

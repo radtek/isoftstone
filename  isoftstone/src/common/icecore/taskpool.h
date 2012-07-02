@@ -12,8 +12,8 @@
 #include <list>
 #include <ostream>
 #include "llogger.h"
-#include "escore.h"
-#include "interface.h"
+#include "icecore.h"
+#include "objects.h"
 
 
 namespace HiRTDB
@@ -32,7 +32,7 @@ namespace HiRTDB
 		eForever
 	};
 
-	class  LIBCORE_EXPORT CTaskWrapper :public IceUtil::TimerTask
+	class  LIB_ICECORE_EXPORT CTaskWrapper :public IceUtil::TimerTask
 	{
 
 	public:
@@ -164,7 +164,7 @@ namespace HiRTDB
 	// 任务池，以后扩展出任务工作策略，暂定为先来先服务，以后可以根据任务优先级来确定。
 	// 或者根据任务期待时间来确定。
 	// 用map容器来组织任务池，这样比较清晰点
-	class LIBCORE_EXPORT CTaskPool : public IceUtil::Shared
+	class LIB_ICECORE_EXPORT CTaskPool : public IceUtil::Shared
 	{
 	public:
 		CTaskPool(const std::string& StrName);

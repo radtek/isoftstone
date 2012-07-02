@@ -1,7 +1,6 @@
 
 #include <algorithm>
 #include <iterator>
-#include <IceUtil/StringUtil.h>
 #include "stringlist.h"
 #include "container2stream.h"
 
@@ -59,27 +58,27 @@ HiStringList HiStringList::split( const char* delimer, const std::string &str )
 
 bool HiStringList::split(const std::string& str, const std::string& delimer, std::vector<std::string>& outstrseq)
 {
-	return IceUtilInternal::splitString(str,delimer,outstrseq);
+	return true;
 }
 
 std::string HiStringList::trim(const std::string& str)
 {
-	return IceUtilInternal::trim(str);	
+	return str;	
 }
 
 std::string HiStringList::removeAllspace(const std::string& str)
 {
-	return IceUtilInternal::removeWhitespace(str);
+	return str;
 }
 
 std::string HiStringList::toLower(const std::string& str)
 {
-	return IceUtilInternal::toLower(str);
+	return str;
 }
 
 std::string HiStringList::toUpper(const std::string& str)
 {
-	return IceUtilInternal::toUpper(str);
+	return str;
 }
 
 std::string HiStringList::join( const std::string &sep ) const

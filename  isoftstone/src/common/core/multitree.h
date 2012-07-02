@@ -3,15 +3,16 @@
 #ifndef MULTITREE_LCSH_H
 #define MULTITREE_LCSH_H
 
-#include <Ice/Ice.h>
 #include <list>
 #include <string>
 #include <map>
+#include <QtCore>
 #include "node.h"
 #include <iostream>
 #include <fstream>
 #include "enumfile.h"
 #include "escore.h"
+
 
 class CPrintTreeCommand;
 
@@ -73,11 +74,11 @@ public:
 
 private:
 
-	IceUtil::Mutex m_nodeMutex; // 读写锁粒度较小
+	QMutex m_nodeMutex; // 读写锁粒度较小
 
 	HiNode* m_RootNode;
 
-	IceUtil::Mutex m_containerMutex; // 锁的粒度较大
+	QMutex m_containerMutex; // 锁的粒度较大
 
 	std::map<int,HiNode*> m_NodeContainer;
 

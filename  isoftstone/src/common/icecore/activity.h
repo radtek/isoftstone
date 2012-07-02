@@ -2,7 +2,7 @@
 #ifndef ACTIVITYBASE_H_20070208
 #define ACTIVITYBASE_H_20070208
 
-#include "escore.h"
+#include "icecore.h"
 #include "iestypedef.h"
 #include <Ice/Ice.h>
 #include <IceUtil/IceUtil.h>
@@ -10,7 +10,7 @@
 namespace HiRTDB
 {
 
-class LIBCORE_EXPORT CActivity
+class LIB_ICECORE_EXPORT CActivity
 {
 public:
 	virtual ~CActivity(void);

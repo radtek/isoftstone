@@ -2,15 +2,16 @@
 #ifndef __ACTIVITY_THREAD_H
 #define __ACTIVITY_THREAD_H
 
-#include <IceUtil/IceUtil.h>
 #include <list>
-#include "escore.h"
+#include "icecore.h"
 #include "activity.h"
 #include "threadwrapper.h"
 
+#include <IceUtil/IceUtil.h>
+
 using namespace HiRTDB;
 
-class LIBCORE_EXPORT CActivityThread : public CThreadWrapper
+class LIB_ICECORE_EXPORT CActivityThread : public CThreadWrapper
 {
 public:
 

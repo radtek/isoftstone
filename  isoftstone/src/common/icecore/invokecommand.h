@@ -9,9 +9,9 @@
 #include <Ice/LocalException.h>
 #include <IceUtil/Mutex.h>
 
-#include "escore.h"
+#include "icecore.h"
 
-class LIBCORE_EXPORT CInvokeCommand : public IceUtil::Shared
+class LIB_ICECORE_EXPORT CInvokeCommand : public IceUtil::Shared
 {
 public:
 
@@ -55,7 +55,7 @@ protected:
 
 typedef IceUtil::Handle< CInvokeCommand > CInvokeCommandPtr;
 
-class LIBCORE_EXPORT CInvokeCommandProxy : public CInvokeCommand
+class LIB_ICECORE_EXPORT CInvokeCommandProxy : public CInvokeCommand
 {
 public:
 

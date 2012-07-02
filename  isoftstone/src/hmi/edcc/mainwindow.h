@@ -9,13 +9,14 @@
 #include "scene.h"
 
 class QtToolBarManager;
+class CService;
 
 class CMainWindow : public QMainWindow
 {
 	Q_OBJECT
 
 public:
-	CMainWindow();
+	CMainWindow(CService* pServer);
 
 	void iniMenuAndTool(CView* pView,CGraphicsScene* pScene);
 
@@ -58,6 +59,8 @@ private:
 	CPluginWindow m_pluginWindow;
 
 	QtToolBarManager *toolBarManager;
+
+	CService*		m_Server;
 };
 
 #endif

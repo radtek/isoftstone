@@ -44,20 +44,20 @@ struct SNodePropertyFactor : public SXmlEntryFactor
 };
 
 
-class LIBCORE_EXPORT CSettings
+class LIBCORE_EXPORT CXmlSettings
 {
 public:
 	// bFile=JTRUE 时 string 是文件名
 	// bFile=JFALSE 时 string 是 xml 片断字符串
 	// bNoThrowException=JTRUE 加载配置文件失败或者 xml 片断非法，抛异常
 	// bNoThrowException=JFALSE 加载配置文件失败或者 xml 片断非法，不抛异常
-	CSettings(const QString& string, bool bFile=JTRUE, bool bThrowException=JFALSE);
+	CXmlSettings(const QString& string, bool bFile=JTRUE, bool bThrowException=JFALSE);
 
-	CSettings();
+	CXmlSettings();
 
 	void open(const QString& string, bool bFile=JTRUE, bool bThrowException=JFALSE);
 
-	virtual ~CSettings();
+	virtual ~CXmlSettings();
 
 	// 配置文件是否加载成功
 	bool isReady() const;
@@ -136,9 +136,9 @@ protected:
 	QDomDocument m_domDocument;
 };
 
-typedef CSigleton<CSettings> CSettingSigleton;
+typedef CSigleton<CXmlSettings> CSettingSigleton;
 
-class LIBCORE_EXPORT CFileTransformer : public CSettings
+class LIBCORE_EXPORT CFileTransformer : public CXmlSettings
 {
 public:
 

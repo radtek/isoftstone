@@ -19,7 +19,7 @@
 #include <string>
 #include <list>
 #include "taskpool.h"
-#include "escore.h"
+#include "icecore.h"
 
 
 namespace HiRTDB
@@ -32,7 +32,7 @@ typedef IceUtil::Monitor<IceUtil::Mutex> IceMonitor;
 
 typedef IceMonitor::Lock IceMonitorLock;
 
-class LIBCORE_EXPORT CThreadWorker : public HiRTDB::CThreadWrapper 
+class LIB_ICECORE_EXPORT CThreadWorker : public HiRTDB::CThreadWrapper 
 {
 public:
 
@@ -71,7 +71,7 @@ typedef IceUtil::Handle<CThreadWorker> CThreadWorkerPtr;
  * 所有程序内得线程注册到线程管理容器中
  */
 
-class LIBCORE_EXPORT CThreadPool : virtual public IceUtil::Shared
+class LIB_ICECORE_EXPORT CThreadPool : virtual public IceUtil::Shared
 {
 public :
 

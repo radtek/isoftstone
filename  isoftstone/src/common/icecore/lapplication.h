@@ -4,15 +4,15 @@
 #define _LAPPLICATION_LCSH_H
 
 #include <Ice/Ice.h>
-#include<Ice/Service.h>
+#include <Ice/Service.h>
 #include <Ice/Connection.h>
 
 #include "timerreactor.h"
 #include "activitythread.h"
 #include "macro2.h"
-#include "escore.h"
+#include "icecore.h"
 
-class LIBCORE_EXPORT CLApplication : public PlatApplication
+class LIB_ICECORE_EXPORT CLApplication : public PlatApplication
 {
 public:
 

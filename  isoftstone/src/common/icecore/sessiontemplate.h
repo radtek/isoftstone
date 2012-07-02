@@ -12,7 +12,7 @@
 #include <ostream>
 #include "activity.h"
 #include "llogger.h"
-#include "escore.h"
+#include "icecore.h"
 #include "Macro.h"
 using namespace std;
 

@@ -93,8 +93,7 @@ int main( int argc, char** argv )
 	QThreadPool::globalInstance()->setMaxThreadCount(10);
 
 	CService service;
-	service.start();
-	CMainWindow mainwindow;
+	CMainWindow mainwindow(&service);
 	//mainwindow.setWindowFlags(Qt::CustomizeWindowHint|Qt::FramelessWindowHint);
 
 	mainwindow.showMaximized();

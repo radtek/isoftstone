@@ -1,25 +1,8 @@
-/*********************************************************************************
- *
- * @file	HiException.h
- * @version	1.0
- * @date	2010-01-11
- * @author	刘瑞功
- *
- * @brief	异常处理类
- *
- ********************************************************************************/
- // 版权(C) 2009 - 2010 海信网络科技
- // 改动历史
- // 日期		作者	改动内容
- // 2010-01-11  刘瑞功  创建文件
- //===============================================================================
 
 #ifndef __HI_EXCEPTION_H__
 #define __HI_EXCEPTION_H__
 
 
-#include <Ice/Exception.h>
-#include <Ice/LocalException.h>
 #include <stdexcept>
 #include "escore.h"
 #include "iestypedef.h"
@@ -36,46 +19,6 @@
 	ostringstream ostr; \
 	ostr<< "caught unhandled std::exception:"<< ECONTEXT; \
 	cout << ostr.str();\
-}
-
-#define  TRY try 
-
-#define CATCH_ICE_EXCEPTION() \
-catch(const Ice::SystemException& e) \
-{ \
-	COUT_ICE_EXCEPTION("1",e.what()); \
-} \
-catch(const Ice::LocalException& e) \
-{ \
-	COUT_ICE_EXCEPTION("2",e.what()); \
-} \
-catch(const Ice::UserException& e) \
-{ \
-	COUT_ICE_EXCEPTION("3",e.what()); \
-} \
-catch(const Ice::Exception& e) \
-{ \
-	COUT_ICE_EXCEPTION("4",e.what()); \
-} \
-catch(const std::exception & e) \
-{ \
-	COUT_SYSTEM_EXCEPTION("5",e.what()) \
-} \
-catch(const string &e) \
-{ \
-	COUT_SYSTEM_EXCEPTION("6",e) \
-} \
-catch(const char *e) \
-{ \
-	COUT_SYSTEM_EXCEPTION("7",e) \
-} \
-catch(const int e) \
-{ \
-	COUT_SYSTEM_EXCEPTION("8",e) \
-} \
-catch(...) \
-{ \
-	COUT_SYSTEM_EXCEPTION("未知","未知异常") \
 }
 
 namespace core
@@ -170,9 +113,6 @@ public:
 
 LIBCORE_EXPORT std::string exception2string(const std::exception& e);
 LIBCORE_EXPORT std::string exception2string(const CException& e);
-LIBCORE_EXPORT std::string exception2string(const Ice::Exception& e);
-LIBCORE_EXPORT std::string exception2string(const Ice::SystemException& e);
-
 
 }
 
