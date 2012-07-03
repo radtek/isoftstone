@@ -5,7 +5,7 @@
 #include "mainwindow.h"
 #include "config.h"
 #include "setting.h"
-#include "dcc-global.h"
+#include "edcc-global.h"
 #include "qttoolbardialog.h"
 
 #include "server.h"

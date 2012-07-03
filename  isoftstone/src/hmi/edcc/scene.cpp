@@ -2,7 +2,7 @@
 #include "event.h"
 #include "scene.h"
 #include "resource.h"
-#include "dcc-global.h"
+#include "edcc-global.h"
 #include "enum.h"
 #include "ialgorithm.h"
 #include "ItemFactory.h"

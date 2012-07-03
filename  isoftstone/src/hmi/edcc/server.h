@@ -3,7 +3,8 @@
 #define SERVER_H
 
 #include <vector>
-#include <QThreadPool>
+#include <QTcpServer>
+#include <QTcpSocket>
 
 #include "thread.h"
 
@@ -23,7 +24,9 @@ private:
 
 private:
 
-	std::vector<CThread*> m_Threads;
+	std::vector<CThread*>	m_Threads;		/* 线程对象类 */
+	QTcpServer				m_localServer;	/* 本地服务接收端 */
+	
 	
 };
 

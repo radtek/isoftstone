@@ -4,6 +4,8 @@ include ($(STONEDIR)/proj/stone.pri)
 
 TEMPLATE	= app
 
+QT      += network
+
 DEFINES += QT_NO_OPENGL
 
 HEADERS	    =   mainwindow.h \
@@ -12,7 +14,7 @@ HEADERS	    =   mainwindow.h \
                 task.h \
                 view.h \
                 scene.h \
-                dcc-global.h
+                edcc-global.h
                 
 SOURCES	    =   main.cpp \
                 mainwindow.cpp \

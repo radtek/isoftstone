@@ -101,13 +101,28 @@ QStringList CSettings::childGroups() const
 	return m_SeqGroups;
 }
 
-void CSettings::setValue(const QString &key, const QVariant &value)
+void CSettings::setValue(const QString &key, const QVariant &defaultValue)
 {
 	if(!m_SeqKeys[m_CurrentGroup].contains(key))
 	{
 		m_SeqKeys[m_CurrentGroup].append(key);
 	}	
-	m_IniMap[m_CurrentGroup][key] = value;
+	m_IniMap[m_CurrentGroup][key] = defaultValue;
+}
+
+QString	CSettings::getValue(const QString &key, const QVariant &defaultValue)
+{
+	return value(key,defaultValue).toString();
+}
+
+QString	CSettings::getValue(const QString& group,const QString &key, const QVariant &defaultValue)
+{
+	QString ret = "";
+	beginGroup(group);
+	QVariant var = value(key,defaultValue);
+	ret = var.toString();
+	endGroup();
+	return ret;
 }
 
 void CSettings::saveValue(const QString& group,const QString &key, const QVariant &value)

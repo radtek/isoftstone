@@ -1,6 +1,11 @@
 
+#include "edcc-global.h"
 #include "server.h"
 #include "task.h"
+#include "setting.h"
+#include "config.h"
+
+#include <QThreadPool>
 
 CService::CService()
 {
@@ -9,12 +14,11 @@ CService::CService()
 
 void CService::init()
 {
-	// 增加任务和线程
-	CThread* pThread = NULL;
-	pThread = new CThread;
-	pThread->addTask(new CDealDataTask());
-	m_Threads.push_back(pThread);
-
+	QString configFile = CConfig::instance()->getConfigDir() + CONFIG_FILE;
+	CSettings cst(configFile);
+	int nPort = cst.getValue("SERVER","PORT","10001").toInt();
+	// 启动监听端口
+	m_localServer.listen(QHostAddress::Any,nPort);
 	// 创建主线程
 
 	// 前置采集线程

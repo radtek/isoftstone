@@ -28,6 +28,8 @@ public:
 	void removeGroups(const QString &group);
 
 	void setValue(const QString &key, const QVariant &value);
+	QString	getValue(const QString &key, const QVariant &value);
+	QString	getValue(const QString& group,const QString &key, const QVariant &value);
 	void saveValue(const QString& group,const QString &key, const QVariant &value);
 	void remove(const QString &key);
 	bool contains(const QString &key) const;
