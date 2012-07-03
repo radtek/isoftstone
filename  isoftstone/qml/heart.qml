@@ -8,7 +8,7 @@ Rectangle
   
   Text 
   {
-        id: helloText
+        id: helloText 
         text: "Hello world!"
         y: 30
         anchors.horizontalCenter: page.horizontalCenter
