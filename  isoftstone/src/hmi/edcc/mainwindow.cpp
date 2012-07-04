@@ -38,10 +38,10 @@ CMainWindow::CMainWindow(CService* pServer): QMainWindow()
 	m_pluginWindow.setParentWindow(this);
 	m_pluginWindow.setMenuBar(menuBar());
 
-	CItemFactory::instance()->loadElement(CConfig::instance()->getElementDir());
-	CItemFactory::instance()->loadBay(CConfig::instance()->getBayDir());
-
-	openHomePage();
+//  	CItemFactory::instance()->loadElement(CConfig::instance()->getElementDir());
+//  	CItemFactory::instance()->loadBay(CConfig::instance()->getBayDir());
+// 
+// 	openHomePage();
 
 	setCentralWidget(m_view);
 }

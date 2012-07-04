@@ -14,6 +14,8 @@ HEADERS	    =   mainwindow.h \
                 task.h \
                 view.h \
                 scene.h \
+                localserver.h \
+                tcpclient.h \
                 edcc-global.h
                 
 SOURCES	    =   main.cpp \
@@ -22,7 +24,9 @@ SOURCES	    =   main.cpp \
                 resource.cpp \
                 task.cpp \
                 view.cpp \
-                scene.cpp
+                scene.cpp  \
+                localserver.cpp \
+                tcpclient.cpp
                 
 RESOURCES   =	edcc.qrc              
 	

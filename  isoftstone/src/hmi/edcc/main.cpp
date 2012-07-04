@@ -84,13 +84,13 @@ int main( int argc, char** argv )
 // 		QMessageBox::information(0,  QString::fromLocal8Bit("警告"), QString::fromLocal8Bit("对不起，程序已经运行！"), QMessageBox::Ok);
 // 		return 0;
 // 
-	QStringList args = QCoreApplication::arguments();
-	if (!(args.count() > 1 && args[1] == "stdout"))
-	{
-		qInstallMsgHandler(visMessageOutput);
-	}
+// 	QStringList args = QCoreApplication::arguments();
+// 	if (!(args.count() > 1 && args[1] == "stdout"))
+// 	{
+// 		qInstallMsgHandler(visMessageOutput);
+// 	}
 	
-	QThreadPool::globalInstance()->setMaxThreadCount(10);
+	//QThreadPool::globalInstance()->setMaxThreadCount(10);
 
 	CService service;
 	CMainWindow mainwindow(&service);
