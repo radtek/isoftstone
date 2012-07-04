@@ -14,7 +14,7 @@ class EXPORT_COMMON CThread :public QThread
 {
 public:
 
-	CThread(QObject* parent = 0);
+	CThread(const QString& strName,QObject* parent = 0);
 
 	void addTask(QRunnable* task);
 
@@ -22,9 +22,9 @@ public:
 
 	void exit(int returnCode = 0);
 
-	void setThreadName(const std::string& strName);
+	void setThreadName(const QString& strName);
 	
-	std::string getThreadName();
+	QString getThreadName();
 
 protected:
 
@@ -42,7 +42,7 @@ private:
 
 	int	m_internal;
 
-	std::string m_threadName;
+	QString m_threadName;
 
 };
 

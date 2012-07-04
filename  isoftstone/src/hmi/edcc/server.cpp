@@ -5,6 +5,12 @@
 #include "setting.h"
 #include "config.h"
 
+#ifdef WIN32
+#include "win_qextserialport.h"
+#else
+#include "posix_qextserialport.h"
+#endif
+
 #include <QThreadPool>
 
 CService::CService()
@@ -12,16 +18,32 @@ CService::CService()
 	init();
 }
 
+CService::~CService()
+{
+	stop();
+}
+
 void CService::init()
 {
 	// tcp 上位机下位机通信
 	initServer();
 	initClient();
+
+	// 串口服务
+
+	initSerial();
+
+	// 配置文件或者数据库的装载
+
+	// 规约协议管理类
+
 	// 创建主线程
 
 	// 前置采集线程
 
 	// 定时传送线程
+
+	// 数据重传线程
 
 	// 命令消息处理线程
 
@@ -29,7 +51,8 @@ void CService::init()
 
 	// 历史与告警查询线程
 
-	// 协议管理类
+	start();
+	
 }
 
 void CService::initServer()
@@ -56,6 +79,22 @@ void CService::initClient()
 	int timeout = cst.getValue("SERVER","UPPERTIMEOUT","20").toInt();
 	m_localClient.setTimeout(timeout);
 	m_localClient.connect(host,port);
+}
+
+void CService::initSerial()
+{
+	m_serialComm = NULL;
+#ifdef WIN32
+	m_serialComm = new Win_QextSerialPort("COM2");
+#else
+	m_serialComm = new Posix_QextSerialPort("COM2");
+#endif
+	m_serialComm->open();
+
+	QRunnable* dcTask = new CDCTask(m_serialComm);
+	CThread* thread = new CThread(QObject::tr("数据采集线程"));
+	thread->addTask(dcTask);
+	m_Threads.push_back(thread);
 }
 
 void CService::start()

@@ -28,6 +28,7 @@ INCLUDEPATH += $(STONEDIR)/src/common/commonwidget \
                 $(STONEDIR)/src/common/common \
                 $(STONEDIR)/src/common/pluginmgrlib \
                 $(STONEDIR)/src/common/qtsolutions \
+                $(STONEDIR)/src/common/serialport \
                 $(STONEDIR)/src/hmi/extitem \
                 $(STONEDIR)/src/hmi/itemlib  \
                 $(STONEDIR)/src/hmi/contextmenu
@@ -50,7 +51,8 @@ debug{
                   -lcommon_d  \
                   -lcontextmenu_d \
                   -lpluginmgrlib_d  \
-                  -lqtsolutions    
+                  -lqtsolutions   \
+                  -lserialport_d 
            
 }
 release{
@@ -60,5 +62,6 @@ release{
                   -lcommon   \
                   -lcontextmenu \
                   -lpluginmgrlib \
-                  -lqtsolutions
+                  -lqtsolutions  \
+                  -lserialport
 }

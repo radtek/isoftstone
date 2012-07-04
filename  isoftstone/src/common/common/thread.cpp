@@ -2,11 +2,11 @@
 #include "thread.h"
 
 
-CThread::CThread(QObject* parent):QThread(parent)
+CThread::CThread(const QString& strName,QObject* parent):QThread(parent)
 {
 	m_bExit = false;
 	m_internal = 500;
-
+	m_threadName = strName;
 }
 
 void CThread::addTask(QRunnable* task)
@@ -26,12 +26,12 @@ void CThread::exit(int returnCode )
 }
 
 
-void CThread::setThreadName(const std::string& strName)
+void CThread::setThreadName(const QString& strName)
 {
 	m_threadName = strName;
 }
 
-std::string CThread::getThreadName()
+QString CThread::getThreadName()
 {
 	return m_threadName;
 }

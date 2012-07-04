@@ -11,6 +11,7 @@
 
 #include "thread.h"
 #include "tcpclient.h"
+#include "qextserialbase.h"
 
 class CService : public QObject
 {
@@ -19,9 +20,9 @@ class CService : public QObject
 public:
 
 	CService();
+	~CService();
 
 	void start();
-
 	void stop();
 
 private slots:
@@ -35,6 +36,7 @@ private:
 	void init();
 	void initServer();
 	void initClient();
+	void initSerial();
 
 private:
 
@@ -43,6 +45,8 @@ private:
 	std::map<QString,QTcpSocket*>	m_clientMap;
 	
 	CTcpClient				m_localClient;	/*  连接上位机客户端 */
+	QextSerialBase*			m_serialComm;	/*  串口通信接口 */
+	QIODevice*				m_comProxy;		/* 数据上传方式代理，可以为网络或者串口方式 */
 };
 
 #endif

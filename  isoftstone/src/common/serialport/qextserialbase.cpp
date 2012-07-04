@@ -33,6 +33,12 @@ QextSerialBase::QextSerialBase()
     construct();
 }
 
+QextSerialBase::QextSerialBase(PortSettings setting):QIODevice()
+{
+	construct();
+	Settings = setting;
+}
+
 /*!
 \fn QextSerialBase::QextSerialBase(const QString & name)
 Construct a port and assign it to the device specified by the name parameter.
@@ -60,7 +66,7 @@ Common constructor function for setting up default port settings.
 */
 void QextSerialBase::construct()
 {
-    Settings.BaudRate=BAUD115200;
+    Settings.BaudRate=BAUD9600;
     Settings.DataBits=DATA_8;
     Settings.Parity=PAR_NONE;
     Settings.StopBits=STOP_1;

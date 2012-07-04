@@ -133,6 +133,18 @@ enum FlowType
  */
 struct PortSettings 
 {
+	PortSettings& operator ==(const PortSettings& setting)
+	{
+		this->BaudRate = setting.BaudRate;
+		this->DataBits = setting.DataBits;
+		this->Parity = setting.Parity;
+		this->StopBits = setting.StopBits;
+		this->FlowControl = setting.FlowControl;
+		this->Timeout_Millisec = setting.Timeout_Millisec;
+
+		return *this;
+	}
+
     BaudRateType BaudRate;
     DataBitsType DataBits;
     ParityType Parity;
@@ -169,6 +181,7 @@ class SERIAL_EXPORT QextSerialBase : public QIODevice
 
 	public:
 	    QextSerialBase();
+		QextSerialBase(PortSettings setting);
 	    QextSerialBase(const QString & name);
 	    virtual ~QextSerialBase();
 	    virtual void construct();
@@ -219,7 +232,7 @@ class SERIAL_EXPORT QextSerialBase : public QIODevice
 	    virtual FlowType flowControl() const;
 	    virtual void setTimeout(long)=0;
 	
-	    virtual bool open(OpenMode mode)=0;
+	    virtual bool open(OpenMode mode = QIODevice::ReadWrite) =0;
 	    virtual bool isSequential() const;
 	    virtual void close()=0;
 	    virtual void flush()=0;
