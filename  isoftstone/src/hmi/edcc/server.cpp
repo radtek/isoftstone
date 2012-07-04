@@ -14,7 +14,9 @@ CService::CService()
 
 void CService::init()
 {
+	// tcp 上位机下位机通信
 	initServer();
+	initClient();
 	// 创建主线程
 
 	// 前置采集线程
@@ -41,6 +43,19 @@ void CService::initServer()
 		qDebug() << m_localServer.errorString();
 	}
 	connect(&m_localServer, SIGNAL(newConnection()), this, SLOT(slot_newConnection()));
+
+	
+}
+
+void CService::initClient()
+{
+	QString configFile = CConfig::instance()->getConfigDir() + CONFIG_FILE;
+	CSettings cst(configFile);
+	QString host = cst.getValue("SERVER","UPPERIP","127.0.0.1");
+	int port = cst.getValue("SERVER","UPPERPORT","60000").toInt();
+	int timeout = cst.getValue("SERVER","UPPERTIMEOUT","20").toInt();
+	m_localClient.setTimeout(timeout);
+	m_localClient.connect(host,port);
 }
 
 void CService::start()
@@ -106,4 +121,6 @@ void CService::slot_readRead()
 		} while (client->bytesAvailable() > 0);
 		qDebug() << QString::fromLocal8Bit(buffer.data());
 	}
+	client->write(buffer);
+	client->flush();
 }

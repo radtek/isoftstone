@@ -34,6 +34,7 @@ private:
 
 	void init();
 	void initServer();
+	void initClient();
 
 private:
 
@@ -41,7 +42,7 @@ private:
 	QTcpServer				m_localServer;	/* 本地服务接收端 */
 	std::map<QString,QTcpSocket*>	m_clientMap;
 	
-	
+	CTcpClient				m_localClient;	/*  连接上位机客户端 */
 };
 
 #endif

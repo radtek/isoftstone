@@ -6,9 +6,10 @@
 #include <QTcpSocket>
 #include <QTime>
 #include <QTimer>
+#include <QBuffer>
 
 static const int MaxBufferSize = 102400;
-static const int PingInterval = 30;
+static const int DefaultInterval = 20;
 
 class CTcpClient : public QTcpSocket
 {
@@ -16,7 +17,12 @@ class CTcpClient : public QTcpSocket
 
 public:
 
-	CTcpClient(bool bPing = false,QObject *parent = 0);
+	CTcpClient(bool bTimer = true,QObject *parent = 0);
+	void setTimeout(int sec);
+	bool connect(const QString& host,int port);
+	void disconnect();
+	bool isConnected();
+	bool reconnect();
 
 signals:
 
@@ -26,15 +32,22 @@ private slots:
 
 	void slot_Connected();
 	void slot_ReadyRead();
-	void slot_Ping();
+	void slot_Timeout();
 
 private:
 
 	void processData();
 
-	QTimer	m_pingTimer;
-	bool	m_bPing;
-	QByteArray m_buffer;
+private:
+
+	QTimer	m_Timer;	/* 如果断开定时重练，如果连接定时发送ping指令 */
+	bool	m_bTimer;	/* 是否开启重练机制 */
+	QBuffer m_buffer;	/* 采用buffer的目的是因为它提供了IODEVICE的操作，可以方便定位和查找 */
+	QByteArray* m_byteArray;/* 缓存容器 */
+	QString m_host;	
+	int		m_port;
+	int		m_timeout;
+
 };
 
 class CClientProxy : public QObject
