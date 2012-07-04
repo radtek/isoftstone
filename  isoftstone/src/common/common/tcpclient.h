@@ -8,10 +8,12 @@
 #include <QTimer>
 #include <QBuffer>
 
+#include "common.h"
+
 static const int MaxBufferSize = 102400;
 static const int DefaultInterval = 20;
 
-class CTcpClient : public QTcpSocket
+class EXPORT_COMMON CTcpClient : public QTcpSocket
 {
 	Q_OBJECT
 

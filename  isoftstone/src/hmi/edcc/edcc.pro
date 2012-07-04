@@ -4,8 +4,6 @@ include ($(STONEDIR)/proj/stone.pri)
 
 TEMPLATE	= app
 
-QT      += network
-
 DEFINES += QT_NO_OPENGL
 
 HEADERS	    =   mainwindow.h \
@@ -14,8 +12,6 @@ HEADERS	    =   mainwindow.h \
                 task.h \
                 view.h \
                 scene.h \
-                localserver.h \
-                tcpclient.h \
                 edcc-global.h
                 
 SOURCES	    =   main.cpp \
@@ -24,9 +20,7 @@ SOURCES	    =   main.cpp \
                 resource.cpp \
                 task.cpp \
                 view.cpp \
-                scene.cpp  \
-                localserver.cpp \
-                tcpclient.cpp
+                scene.cpp 
                 
 RESOURCES   =	edcc.qrc              
 	

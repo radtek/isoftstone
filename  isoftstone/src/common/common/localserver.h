@@ -4,7 +4,9 @@
 
 #include <QTcpServer>
 
-class CLocalServer : public QTcpServer
+#include "common.h"
+
+class EXPORT_COMMON CLocalServer : public QTcpServer
 {
 	Q_OBJECT
 

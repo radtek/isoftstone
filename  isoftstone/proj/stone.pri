@@ -15,7 +15,7 @@ STONE_OBJ_PATH = $$(STONEDIR)/obj
 STONE_SRC_PATH = $$(STONEDIR)/src
 STONE_PRI_PATH = $$(STONEDIR)/proj
 
-QT      += xml
+QT      += xml  network
 
 CONFIG	+= qt warn_on thread xml ordered
 

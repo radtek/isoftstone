@@ -17,7 +17,9 @@ HEADERS	    =   painterpath.h   \
                 thread.h  \
                 setting.h \
                 pluginmgrbase.h \
-                config.h
+                config.h    \
+                localserver.h \
+                tcpclient.h
                  
 SOURCES	    =   painterpath.cpp \
                 resource.cpp \
@@ -28,7 +30,9 @@ SOURCES	    =   painterpath.cpp \
                 thread.cpp  \
                 setting.cpp \
                 pluginmgrbase.cpp \
-                config.cpp
+                config.cpp    \
+                localserver.cpp \
+                tcpclient.cpp
                 
 RESOURCES *=	
 
