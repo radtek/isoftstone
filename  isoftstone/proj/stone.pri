@@ -26,7 +26,7 @@ LANGUAGE = C++
 LIBS *= -L$$STONE_LIB_PATH
 
 DEPENDPATH *= .\
-	    $$STONE_SRC_PATH/include \
+	    $$(STONEDIR)/include \
             $$STONE_SRC_PATH/common/common \
             $$STONE_SRC_PATH/hmi/auto_element
 
