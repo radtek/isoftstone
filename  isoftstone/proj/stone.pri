@@ -27,6 +27,7 @@ LIBS *= -L$$STONE_LIB_PATH
 
 DEPENDPATH *= .\
 	    $$(STONEDIR)/include \
+            $$(STONEDIR)/include/dbi \
             $$STONE_SRC_PATH/common/common \
             $$STONE_SRC_PATH/hmi/auto_element
 

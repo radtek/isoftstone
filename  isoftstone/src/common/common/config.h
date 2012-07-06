@@ -26,6 +26,7 @@ public:
 	QString getDisplayDir();
 	QString getCurveDir();
 	QString getTableDir();
+	QString getBackupDir();
 
 	QString getConfigValue(const QString& fileName,const QString& groupName,const QString& attrName);
 

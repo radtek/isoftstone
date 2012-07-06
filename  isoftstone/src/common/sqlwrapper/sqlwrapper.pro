@@ -21,9 +21,6 @@ DEPENDPATH *= \
 	
 INCLUDEPATH *= $$DEPENDPATH
 		
-LIBPATH *= \
-	$(LSCADA)/lib \
-	$(LSCADA)/bin
 
 OBJECTS_DIR = $$LCSH_OBJ_PATH/common/sqlwrapper
 

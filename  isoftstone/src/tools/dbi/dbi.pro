@@ -2,6 +2,10 @@
 # 全局设置
 include ($(STONEDIR)/proj/stone.pri)
 
+QT              += sql
+
+#INCLUDEPATH     += $$(STONEDIR)/include
+
 TEMPLATE	= app
 
 HEADERS       = \
@@ -16,11 +20,13 @@ release{
 }
 
 debug{
-	LIBS += \  
+	LIBS += -lcommon_d \
+                -lrtdb_api_d  
            
 }
 release{
-	LIBS += \
+	LIBS += -lcommon \
+                -lrtdb_api 
 }
 
 

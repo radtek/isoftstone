@@ -8,7 +8,7 @@
 #define PROJECT_HOME "STONEDIR"
 #define DATA_HOME	"VISDATAPATH"
 
-#ifdef Q_WS_WIN
+#ifdef WIN32
 	#ifdef  EXPORT_STATIC
 		#define EXPORT_LIB _declspec(dllexport)
 	#else 

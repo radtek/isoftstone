@@ -5,6 +5,8 @@
 #include <QTextCodec>
 #include <QtCore>
 
+#include "rtdb_api.h"
+
 int main(int argc, char *argv[])
 {
 	Q_UNUSED(argc);
@@ -18,7 +20,8 @@ int main(int argc, char *argv[])
 #ifdef WIN32
 	setlocale(LC_ALL,"");
 #endif
-
+	
+	CRtTable table(1);
 
     return 0;
 }

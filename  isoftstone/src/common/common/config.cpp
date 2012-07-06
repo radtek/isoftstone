@@ -100,6 +100,11 @@ QString CConfig::getTableDir()
 	return m_dataHome + "/table/";
 }
 
+QString CConfig::getBackupDir()
+{
+	return m_home + "/backup/";
+}
+
 QString CConfig::getConfigValue(const QString& fileName,const QString& groupName,const QString& attrName)
 {
 	CSettings ct(getConfigDir() + fileName);
