@@ -1,0 +1,2 @@
+insert into tableinfo(tableid,en_name,cn_name,next_rec_id) values(1,'tableinfo','表信息表',6)
+insert into tableinfo(tableid,en_name,cn_name,next_rec_id) values(2,'fieldinfo','域信息表','0')

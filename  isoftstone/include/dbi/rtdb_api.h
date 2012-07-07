@@ -44,7 +44,7 @@ typedef long KEY_ID_STRU;
 
 struct TB_DESCR 
 {
-	std::string		table_name;	//表名
+	QString			table_name;	//表名
 	int 			table_id;					//表号
 	bool         	is_local;    			//本地or网络
 };
@@ -110,15 +110,15 @@ public:
 	
 	int		   getTableNoByName(QString table_name);
 	//	根据单个ID和多个列获取多个值
-	int		   getFiledsByID(int recID,const QVector<int>& vecField,QVector<QVariant>& vecValue);
+	int		   getFiledsByID(int recID,const QVector<int>& vecField,QVariantList& vecValue);
 	//	根据单个ID核多个列名获得多个值
-	int		   getFiledsByName(int recID,const QVector<QString>& vecField,QVector<QVariant>& vecValue);
+	int		   getFiledsByName(int recID,const QStringList& vecField,QVariantList& vecValue);
 	// 根据单个ID单个列获得单个值
 	int		   getFiledByID(int recID,int fieldID,QVariant& value);
 	// 根据单个ID和单个列名获得单个值
 	int		   getFiledsByName(int recID,const QString& fieldName,QVariant& value);
 	// 得到表中制定列所有记录
-	int		   getTableFields(const QVector<QString>& vecField,QVector<QVariant>& vecValue);
+	int		   getTableFields(const QStringList& vecField,QVector<QVariantList>& vecRows);
 
 	// 根据域名获得列ID
 	int		   getFieldNo(const QString& filedName);
@@ -126,7 +126,7 @@ public:
 	QString	   getFieldName(int fieldID);
 
 	// 根据列名称获得相应列ID
-	bool	   getFiledIDByNames(const QVector<QString>& vecField,QMap<QString,int>& mapValue);
+	bool	   getFiledIDByNames(const QStringList& vecField,QMap<QString,int>& mapValue);
 	bool	   getFiledNameByIDS(const QVector<int>& vecField,QMap<int,QString>& mapValue);
 
 	// 根据多个ID获得单个列的值
@@ -141,12 +141,14 @@ public:
 	// 得到多条记录所有列的值
 	void	   getRecsByID(QVector<int> vecKeyid,QVector< QVariantList >& vecRows); 
 	void	   getRecsBySQL(const QString& strSQL,QVector< QVariantList>& vecRows);  
+	void	   getRecsByCondition(const QString& strSQL,const QStringList& vecField,QVector< QVariantList>& vecRows);  
 
 	// 记录是否存在
 	bool	   isRecExist(int keyid);
 
 	// 删除数据
 	void	   deleteRecord(int keyID);
+	void	   deleteRecByConditon(const QString& strSQL);
 
 	// 修改单个记录所有列数据
 	void	   updateRecord(int keyID,const QVariantList& values);
@@ -167,6 +169,10 @@ public:
 private:
 
 	void	   initTableAndField();
+	void	   updateNextID();
+	QString	   getSelectSQL(const QStringList& vecField);
+	QString	   getIDSet(const QVector<int>& vecID);
+	QString	   getAllField();
 
 private:
 
