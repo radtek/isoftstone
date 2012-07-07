@@ -5,6 +5,9 @@
 #include <QtCore>
 #include <QWidget>
 
+#include "tabletree.h"
+#include "fieldtable.h"
+
 class CModelWidget : public QWidget
 {
 	Q_OBJECT
@@ -16,8 +19,8 @@ public:
 
 private:
 
-	
-
+	CTableTree*		m_tableTree;
+	CFieldTable*	m_fieldTable;
 };
 
 #endif

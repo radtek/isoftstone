@@ -4,12 +4,9 @@
 #include <iostream>
 #include <QTextCodec>
 #include <QtCore>
+#include <QApplication>
 
-#include "rtdb_api.h"
-
-#include "uiwidget.h"
-#include "tabletree.h"
-#include "fieldtable.h"
+#include "modelwidget.h"
 
 
 int main(int argc, char *argv[])
@@ -30,24 +27,10 @@ int main(int argc, char *argv[])
 	setlocale(LC_ALL,"");
 #endif
 	
-	CRtTable table(1);
-	QVector< QVariantList > vecRows;
-	table.getTableRecs(vecRows);
-
-	QVariantList rowValue;
-	table.getRecByID(3,rowValue);
-
 	QApplication app(argc,NULL);
 
-// 	CTableModelForm* wid = new CTableModelForm;
-// 	wid->show();
-
-// 	CTableTree ttree;
-// 	ttree.show();
-
-	CFieldTable ftable;
-	ftable.slot_table_changed(1,"");
-	ftable.show();
+	CModelWidget wid;
+	wid.showMaximized();
 	app.exec();
 
     return 0;
