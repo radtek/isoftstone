@@ -12,7 +12,12 @@ CTableTree::CTableTree(QWidget* parent):QTreeWidget(parent)
 
 	connect(this,SIGNAL(currentItemChanged ( QTreeWidgetItem * , QTreeWidgetItem *  )),this,SLOT(slot_item_changed()));
 	connect(this,SIGNAL(itemDoubleClicked (QTreeWidgetItem * , int )),this,SLOT(slot_item_double_clicked()));
+	createPopMenu();
+	init();
+}
 
+void CTableTree::createPopMenu()
+{
 	m_popMenu = new QMenu(this);
 	QAction* act = NULL;
 
@@ -35,8 +40,6 @@ CTableTree::CTableTree(QWidget* parent):QTreeWidget(parent)
 	act = new QAction(QObject::tr("保存到文件"),m_popMenu);
 	connect(act,SIGNAL(triggered(bool)),this,SLOT(slot_save_to_file()));
 	m_popMenu->addAction(act);
-
-	init();
 }
 
 void CTableTree::init()

@@ -38,6 +38,7 @@ protected:
 private:
 
 	void init();
+	void createPopMenu();
 
 private:
 
