@@ -8,10 +8,16 @@ QT              += sql
 
 TEMPLATE	= app
 
-HEADERS       = \
+HEADERS       = datawidget.h \
+                modelwidget.h \
+                uiwidget.h
         
-SOURCES       = main.cpp
+SOURCES       = main.cpp \
+                datawidget.cpp \
+                modelwidget.cpp
 
+FORMS        += tablemodel.ui \
+                fieldmodel.ui
 debug{
 	TARGET = dbi_d   
 }

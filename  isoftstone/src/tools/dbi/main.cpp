@@ -7,6 +7,9 @@
 
 #include "rtdb_api.h"
 
+#include "uiwidget.h"
+
+
 int main(int argc, char *argv[])
 {
 	Q_UNUSED(argc);
@@ -32,6 +35,13 @@ int main(int argc, char *argv[])
 
 	QVariantList rowValue;
 	table.getRecByID(3,rowValue);
+
+	QApplication app(argc,NULL);
+
+	CTableModelForm* wid = new CTableModelForm;
+	wid->show();
+
+	app.exec();
 
     return 0;
 }
