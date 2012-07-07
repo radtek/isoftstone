@@ -67,26 +67,22 @@ struct TABLE_PARA_STRU
 	int				next_id;
 };
 
-struct FIELD_PARA_STRU //..
-{                                                               
-	short           column_id; 					//域ID号
-	short           field_length; 				//域数据长度
-	int            	column_special; 			//域特殊属性
+struct FIELD_PARA_STRU
+{                        
+	int				table_id;					// 表号
+	short           field_id; 					//域ID号
+	QString         field_name_eng; 			//域英文名
+	QString         field_name_chn; 			//域中文名
 	unsigned char   data_type; 					//数据类型	
-	QString         field_name_eng; 		//域英文名
-	QString         field_name_chn; 		//域中文名
-	short   		field_no;   				//域内部排序号
-	int             offset;     				//偏移量
+	short           data_length; 				//域数据长度
+	bool		    is_keyword; 				//是否关键字
+	bool		    allow_null; 				//是否允许为空
+	unsigned char   display_type; 				//显示类型
+	bool		    ref_flag; 					//数据引用方式
+	unsigned char   ref_mode; 					//数据模式
 	int             ref_tableno; 				//引用表号
 	short       	ref_fieldno; 				//引用域号
-	unsigned char   is_keyword; 				//是否关键字
-	unsigned char   is_index; 					//是否索引
-	unsigned char   allow_null; 				//是否允许为空
-	unsigned char   sort_order_no; 				//默认排序顺序号**
-	unsigned char   display_type; 				//显示类型
-	unsigned char   reference_flag; 			//数据引用方式
-	unsigned char   reference_display; 			//是否引用显示
-	int             search_attribute;   		//检索器的域特性
+	unsigned char   ref_display; 				//显示列
 };
 
 class EXPORT_LIB CRtTable
@@ -100,7 +96,7 @@ public:
 
 public:
 
-	CRtTable(int tableID);
+	CRtTable(int tableID = 1);
 	CRtTable(char* table_name);
 	~CRtTable();
 
@@ -108,6 +104,10 @@ public:
 	bool       openTableByName(QString tableName);
 	void	   closeTable();
 	
+	const QMap<int,TABLE_PARA_STRU>& getTableMap() const;
+	QMap<int,FIELD_PARA_STRU> getFieldMap(int tableID);
+	FIELD_PARA_STRU getFiledInfo(int tableID,int fieldID);
+
 	int		   getTableNoByName(QString table_name);
 	//	根据单个ID和多个列获取多个值
 	int		   getFiledsByID(int recID,const QVector<int>& vecField,QVariantList& vecValue);
@@ -180,6 +180,7 @@ private:
 	int		   m_next_id;
 
 	QMap<int,TABLE_PARA_STRU> m_tableMap;
+	QMap<int,QMap<int,FIELD_PARA_STRU> > m_fieldMap;
 	QSqlDatabase	m_db;
 
 };

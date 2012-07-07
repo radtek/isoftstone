@@ -9,6 +9,7 @@
 
 #include "uiwidget.h"
 #include "tabletree.h"
+#include "fieldtable.h"
 
 
 int main(int argc, char *argv[])
@@ -42,9 +43,12 @@ int main(int argc, char *argv[])
 // 	CTableModelForm* wid = new CTableModelForm;
 // 	wid->show();
 
-	CTableTree ttree;
-	ttree.show();
+// 	CTableTree ttree;
+// 	ttree.show();
 
+	CFieldTable ftable;
+	ftable.slot_table_changed(1,"");
+	ftable.show();
 	app.exec();
 
     return 0;

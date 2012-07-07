@@ -70,13 +70,50 @@ void CRtTable::initTableAndField()
 		stru.table_id = rec.value(i++).toInt();
 		stru.table_name_eng = rec.value(i++).toString();
 		stru.table_name_chn = rec.value(i++).toString();
-// 		QByteArray br = stru.table_name_chn.toLocal8Bit();
-// 		QString tmp = QString::fromLocal8Bit(br.data());
 		stru.next_id = rec.value(i++).toInt();
 
 		m_tableMap.insert(stru.table_id,stru);
 	}
+
+	query.exec("select * from fieldinfo");
+	while (query.next())
+	{
+		QSqlRecord rec = query.record();
+		FIELD_PARA_STRU stru;
+		int i = 0;
+		stru.table_id = rec.value(i++).toInt();
+		stru.field_id = rec.value(i++).toInt();
+		stru.field_name_eng = rec.value(i++).toString(); 	
+		stru.field_name_chn = rec.value(i++).toString();  
+		stru.data_type = rec.value(i++).toInt(); 		
+		stru.data_length = rec.value(i++).toInt(); 	
+		stru.is_keyword = rec.value(i++).toBool(); 
+		stru.allow_null = rec.value(i++).toBool(); 	
+		stru.display_type = rec.value(i++).toInt();
+		stru.ref_flag = rec.value(i++).toBool(); 	
+		stru.ref_mode = rec.value(i++).toInt(); 	
+		stru.ref_tableno = rec.value(i++).toInt(); 		
+		stru.ref_fieldno = rec.value(i++).toInt(); 			
+		stru.ref_display = rec.value(i++).toInt(); 
+
+		m_fieldMap[stru.table_id][stru.field_id] = stru;
+	}
 	
+}
+
+const QMap<int,TABLE_PARA_STRU>& CRtTable::getTableMap() const
+{
+	return m_tableMap;
+}
+
+QMap<int,FIELD_PARA_STRU> CRtTable::getFieldMap(int tableID)
+{
+	return m_fieldMap[tableID];
+}
+
+FIELD_PARA_STRU CRtTable::getFiledInfo(int tableID,int fieldID)
+{
+	return m_fieldMap[tableID][fieldID];
 }
 
 bool CRtTable::openTableByID(int tableId )
