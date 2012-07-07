@@ -39,9 +39,9 @@ private:
 	
 private:
 
+	QSqlDatabase	m_db;
 	QMap<int,TABLE_PARA_STRU> m_tableMap;
 	QMap<int,QMap<int,FIELD_PARA_STRU> > m_fieldMap;
-	QSqlDatabase	m_db;
 };
 
 #endif

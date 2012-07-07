@@ -40,6 +40,8 @@ private:
 private:
 
 	QMenu*	m_popMenu;
+
+	int		m_tableID;
 };
 
 #endif

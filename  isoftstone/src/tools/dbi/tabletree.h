@@ -7,6 +7,8 @@
 #include <QMenu>
 #include <QAction>
 
+#include "odb_public.h"
+
 class CTableTree : public QTreeWidget
 {
 	Q_OBJECT
@@ -39,6 +41,7 @@ private:
 
 	void init();
 	void createPopMenu();
+	QTreeWidgetItem* toItem(const TABLE_PARA_STRU& table);
 
 private:
 

@@ -34,6 +34,9 @@ const int C_APPID_TYPE    = 13;
 const int C_UINT_TYPE     = 14;
 const int C_LONG_TYPE     = 15;
 
+// À©Õ¹
+const int C_BOOLEAN_TYPE = 16;
+
 struct KEY_STRU
 {
 	int key;

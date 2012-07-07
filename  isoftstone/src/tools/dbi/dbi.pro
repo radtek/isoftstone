@@ -18,7 +18,8 @@ SOURCES       = main.cpp \
                 datawidget.cpp \
                 modelwidget.cpp \
                 fieldtable.cpp \
-                tabletree.cpp
+                tabletree.cpp  \
+                uiwidget.cpp
 
 FORMS        += tablemodel.ui \
                 fieldmodel.ui

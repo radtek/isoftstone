@@ -51,6 +51,7 @@ void CFieldTable::init()
 
 void CFieldTable::slot_table_changed(int tableid,QString tableName)
 {
+	m_tableID = tableid;
 	QMap<int,FIELD_PARA_STRU> fieldMap = CODBTable::instance()->getFieldMap(tableid);
 	int nRow = fieldMap.count();
 
@@ -141,7 +142,31 @@ void CFieldTable::slot_item_double_clicked(QTableWidgetItem * )
 void CFieldTable::slot_add_field()
 {
 	CFieldModelForm frm;
-	frm.exec();
+	frm.line_tableno->setText(QString::number(m_tableID));
+	if(frm.exec() == QDialog::Accepted)
+	{
+		FIELD_PARA_STRU field;
+		field.table_id = frm.line_tableno->text().toInt();
+		field.field_id = frm.line_fieldno->text().toInt();
+		field.field_name_eng = frm.line_enname->text();
+		field.field_name_chn = frm.line_cnname->text();
+
+		field.data_type = frm.combo_datatype->itemData(frm.combo_datatype->currentIndex()).toInt();
+		field.data_length = frm.spin_length->text().toInt();
+		field.is_keyword = frm.cb_keyword->isChecked();
+		field.allow_null = frm.cb_allownull->isChecked();
+		field.display_type = frm.combo_display_datatype->itemData(frm.combo_display_datatype->currentIndex()).toInt();
+		
+		field.ref_flag = frm.cb_foreign->isChecked();
+		field.ref_mode = '0';
+		field.ref_tableno = frm.combo_ref_table->itemData(frm.combo_ref_table->currentIndex()).toInt();
+		field.ref_fieldno = frm.combo_ref_field->itemData(frm.combo_ref_field->currentIndex()).toInt();
+		field.ref_display = frm.combo_display_column->itemData(frm.combo_display_column->currentIndex()).toInt();
+
+		CODBTable::instance()->addField(field);
+
+		slot_table_changed(m_tableID,"");
+	}
 }
 
 void CFieldTable::slot_modify_field()
@@ -165,6 +190,8 @@ void CFieldTable::slot_delete_field()
 
 void CFieldTable::slot_delete_field(int nrow,int tableID,int fieldID)
 {
+	// sqllite 不支持删除字段
+	return;
 	// 从当前表删除
 	removeRow(nrow);
 	// 从数据库删除
