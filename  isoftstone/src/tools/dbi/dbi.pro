@@ -10,11 +10,15 @@ TEMPLATE	= app
 
 HEADERS       = datawidget.h \
                 modelwidget.h \
-                uiwidget.h
+                uiwidget.h  \
+                fieldtable.h \
+                tabletree.h
         
 SOURCES       = main.cpp \
                 datawidget.cpp \
-                modelwidget.cpp
+                modelwidget.cpp \
+                fieldtable.cpp \
+                tabletree.cpp
 
 FORMS        += tablemodel.ui \
                 fieldmodel.ui
