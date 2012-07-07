@@ -2,6 +2,8 @@
 #include "rtdb_api.h"
 #include "config.h"
 
+#include "odb_api.h"
+
 
 KEY_STRU CRtTable::long_to_keyid(unsigned int keyid)
 {
@@ -26,128 +28,42 @@ short	CRtTable::long_to_field_id(unsigned int keyid)
 }
 
 
-CRtTable::CRtTable(int tableID)
+CRtTable::CRtTable(int tableID):m_db(CODBTable::instance()->getDataBase())
 {
 	m_tb_descr.table_id = tableID;
-	initTableAndField();
-	m_next_id = m_tableMap[m_tb_descr.table_id].next_id;
-	m_tb_descr.table_name = m_tableMap[m_tb_descr.table_id].table_name_eng;
+	m_next_id = CODBTable::instance()->getNextID(tableID);
+	m_tb_descr.table_name = CODBTable::instance()->getTableNameByID(tableID);
 }
 
-CRtTable::CRtTable(char* table_name)
+CRtTable::CRtTable(char* table_name):m_db(CODBTable::instance()->getDataBase())
 {
 	m_tb_descr.table_name = table_name;
-	initTableAndField();
-	m_tb_descr.table_id = getTableNoByName(table_name);
-	m_next_id = m_tableMap[m_tb_descr.table_id].next_id;
+	m_tb_descr.table_id = CODBTable::instance()->getTableNoByName(table_name);
+	m_next_id = CODBTable::instance()->getNextID(m_tb_descr.table_id);;
 }
 
 CRtTable::~CRtTable()
 {
-	m_tableMap.clear();
-}
-
-void CRtTable::initTableAndField()
-{
-	QString strDir = CConfig::instance()->getBackupDir();
-	QString strDB = strDir + "edcc.s3db";
-	m_db = QSqlDatabase::addDatabase("QSQLITE");
-	m_db.setDatabaseName(strDB);
-	if (!m_db.open())
-	{
-		qDebug() << "Open Database Error!";
-		return;
-	}
 	
-	// 从表信息表和域信息表中读取模型信息，这两个表内容不会在dbi中修改
-	QSqlQuery query(m_db);
-	query.exec("select id,en_name,cn_name,next_rec_id from tableinfo");
-	while (query.next())
-	{
-		QSqlRecord rec = query.record();
-		TABLE_PARA_STRU stru;
-		int i = 0;
-		stru.table_id = rec.value(i++).toInt();
-		stru.table_name_eng = rec.value(i++).toString();
-		stru.table_name_chn = rec.value(i++).toString();
-		stru.next_id = rec.value(i++).toInt();
-
-		m_tableMap.insert(stru.table_id,stru);
-	}
-
-	query.exec("select * from fieldinfo");
-	while (query.next())
-	{
-		QSqlRecord rec = query.record();
-		FIELD_PARA_STRU stru;
-		int i = 0;
-		stru.table_id = rec.value(i++).toInt();
-		stru.field_id = rec.value(i++).toInt();
-		stru.field_name_eng = rec.value(i++).toString(); 	
-		stru.field_name_chn = rec.value(i++).toString();  
-		stru.data_type = rec.value(i++).toInt(); 		
-		stru.data_length = rec.value(i++).toInt(); 	
-		stru.is_keyword = rec.value(i++).toBool(); 
-		stru.allow_null = rec.value(i++).toBool(); 	
-		stru.display_type = rec.value(i++).toInt();
-		stru.ref_flag = rec.value(i++).toBool(); 	
-		stru.ref_mode = rec.value(i++).toInt(); 	
-		stru.ref_tableno = rec.value(i++).toInt(); 		
-		stru.ref_fieldno = rec.value(i++).toInt(); 			
-		stru.ref_display = rec.value(i++).toInt(); 
-
-		m_fieldMap[stru.table_id][stru.field_id] = stru;
-	}
-	
-}
-
-const QMap<int,TABLE_PARA_STRU>& CRtTable::getTableMap() const
-{
-	return m_tableMap;
-}
-
-QMap<int,FIELD_PARA_STRU> CRtTable::getFieldMap(int tableID)
-{
-	return m_fieldMap[tableID];
-}
-
-FIELD_PARA_STRU CRtTable::getFiledInfo(int tableID,int fieldID)
-{
-	return m_fieldMap[tableID][fieldID];
 }
 
 bool CRtTable::openTableByID(int tableId )
 {
 	m_tb_descr.table_id = tableId;
-	m_tb_descr.table_name = m_tableMap[tableId].table_name_chn;
+	m_tb_descr.table_name = CODBTable::instance()->getTableNameByID(tableId);
 	return true;
 }
 
 bool CRtTable::openTableByName(QString tableName)
 {
 	m_tb_descr.table_name = tableName;
-	m_tb_descr.table_id = getTableNoByName(tableName);
+	m_tb_descr.table_id = CODBTable::instance()->getTableNoByName(tableName);
 	return true;
 }
 
 void CRtTable::closeTable()
 {
-	m_tableMap.clear();
-}
 
-int CRtTable::getTableNoByName(QString table_name)
-{
-	QMapIterator<int,TABLE_PARA_STRU> iter(m_tableMap);
-	while (iter.hasNext())
-	{
-		iter.next();
-
-		if (iter.value().table_name_eng.toUpper() == QString(table_name).toUpper())
-		{
-			return iter.key();
-		}
-	}
-	return -1;
 }
 
 int CRtTable::getFiledsByID(int recID,const QVector<int>& vecField,QVariantList& vecValue)
@@ -318,13 +234,13 @@ void CRtTable::getRecsBySQL(const QString& strSQL,QVector<QVariantList>& vecRows
 
 			if (var.type() == QVariant::String)
 			{
-				qDebug() << var.toString();
+				//qDebug() << var.toString();
 // 				qDebug() << var.toString().toUtf8();
 // 				qDebug() << var.toString().toLocal8Bit();
 			}
 			else
 			{
-				qDebug() << var;
+				//qDebug() << var;
 			}
 			
 		}
@@ -408,11 +324,7 @@ int CRtTable::getTableID()
 
 bool CRtTable::getTableParam(TABLE_PARA_STRU& param)
 {
-	if (m_tableMap.contains(m_tb_descr.table_id))
-	{
-		param = m_tableMap[m_tb_descr.table_id];
-		return true;
-	}
+	param = CODBTable::instance()->getTableParam(getTableID());
 	return true;
 }
 

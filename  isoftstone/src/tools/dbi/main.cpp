@@ -33,7 +33,6 @@ int main(int argc, char *argv[])
 	CRtTable table(1);
 	QVector< QVariantList > vecRows;
 	table.getTableRecs(vecRows);
-	table.getTableNoByName("calculator");
 
 	QVariantList rowValue;
 	table.getRecByID(3,rowValue);

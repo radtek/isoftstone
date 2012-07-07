@@ -2,6 +2,7 @@
 #include "tabletree.h"
 
 #include "rtdb_api.h"
+#include "odb_api.h"
 
 CTableTree::CTableTree(QWidget* parent):QTreeWidget(parent)
 {
@@ -23,8 +24,7 @@ void CTableTree::init()
 	m_rootItem->setText(0,QObject::tr("¹ØÏµ±í"));
 	addTopLevelItem(m_rootItem);
 
-	CRtTable table(1);
-	const QMap<int,TABLE_PARA_STRU>& tableMap = table.getTableMap();
+	const QMap<int,TABLE_PARA_STRU>& tableMap = CODBTable::instance()->getTableMap();
 	QMapIterator<int,TABLE_PARA_STRU> iter(tableMap);
 	while(iter.hasNext())
 	{

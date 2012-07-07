@@ -3,6 +3,7 @@
 
 #include "fieldtable.h"
 #include "rtdb_api.h"
+#include "odb_api.h"
 
 CFieldTable::CFieldTable(QWidget* parent ):QTableWidget(parent)
 {
@@ -25,8 +26,7 @@ void CFieldTable::init()
 
 void CFieldTable::slot_table_changed(int tableid,QString tableName)
 {
-	CRtTable table;
-	QMap<int,FIELD_PARA_STRU> fieldMap = table.getFieldMap(tableid);
+	QMap<int,FIELD_PARA_STRU> fieldMap = CODBTable::instance()->getFieldMap(tableid);
 	int nRow = fieldMap.count();
 
 	clearContents();

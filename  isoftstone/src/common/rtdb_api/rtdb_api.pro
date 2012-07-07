@@ -10,7 +10,8 @@ DEFINES         += EXPORT_STATIC
 
 HEADERS	    =   \
                  
-SOURCES	    =   rtdb_api.cpp
+SOURCES	    =   rtdb_api.cpp \
+                odb_api.cpp
                 
 RESOURCES *=	
 
