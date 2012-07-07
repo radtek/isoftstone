@@ -101,6 +101,11 @@ QString CODBTable::getTableNameByID(int table_id)
 	return m_tableMap[table_id].table_name_eng;
 }
 
+QString CODBTable::getFieldNameByID(int table_id,int field_id)
+{
+	return m_fieldMap[table_id][field_id].field_name_eng;
+}
+
 int	CODBTable::getNextID(int table_id)
 {
 	return m_tableMap[table_id].next_id;
@@ -134,4 +139,74 @@ TABLE_PARA_STRU CODBTable::getTableParam(int table_id)
 		param = m_tableMap[table_id];
 	}
 	return param;
+}
+
+void CODBTable::deleteField(int tableID,int fieldID)
+{
+	QSqlQuery query(m_db);
+	// 修改表字段结构
+
+	QString strSQL = "alter table ";
+	strSQL += getTableNameByID(tableID);
+	strSQL += " drop column ";
+	strSQL += getFieldNameByID(tableID,fieldID);
+	query.exec(strSQL);
+
+	// 从域信息表中删除
+
+	strSQL = "delete from fieldinfo where table_id = ";
+	strSQL += QString::number(tableID);
+	strSQL += " and field_id = ";
+	strSQL += QString::number(fieldID);
+	query.exec(strSQL);
+
+	// 从内存表中删除
+
+	m_fieldMap[tableID].remove(fieldID);
+}
+
+void CODBTable::deleteTable(int tableID)
+{
+	// 从域信息表中删除
+
+	QSqlQuery query(m_db);	
+	QString strSQL = "delete from fieldinfo where table_id = ";
+	strSQL += QString::number(tableID);
+	query.exec(strSQL);
+
+	// 从表信息表删除
+
+	strSQL = "delete from tableinfo where id = ";
+	strSQL += QString::number(tableID);
+	query.exec(strSQL);
+
+	// 删除表
+
+	strSQL = "drop table ";
+	strSQL += getTableNameByID(tableID);
+	query.exec(strSQL);
+
+	// 从内存表中删除
+
+	m_fieldMap.remove(tableID);
+}
+
+void CODBTable::addTable(const TABLE_PARA_STRU& stTable)
+{
+
+}
+
+void CODBTable::addField(const FIELD_PARA_STRU& stField)
+{
+
+}
+
+void CODBTable::modifyTable(const TABLE_PARA_STRU& stTable)
+{
+
+}
+
+void CODBTable::modifyField(const FIELD_PARA_STRU& stField)
+{
+
 }

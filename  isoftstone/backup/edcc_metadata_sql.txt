@@ -1,0 +1,25 @@
+
+CREATE TABLE [tableinfo] (
+[id] INTEGER  NOT NULL PRIMARY KEY,
+[en_name] VARCHAR(24)  NOT NULL,
+[cn_name] VARCHAR(32)  NOT NULL,
+[next_rec_id] INTEGER  NOT NULL
+)
+
+CREATE TABLE [fieldinfo] (
+[table_id] INTEGER  NOT NULL,
+[field_id] INTEGER  NOT NULL,
+[en_name] VARCHAR(24)  NOT NULL,
+[cn_name] VARCHAR(32)  NULL,
+[data_type] VARCHAR(1)  NULL,
+[data_length] INTEGER  NULL,
+[is_key] BOOLEAN  NULL,
+[allow_null] BOOLEAN  NULL,
+[display_type] VARCHAR(1)  NULL,
+[reference_flag] VARCHAR(1)  NULL,
+[reference_mode] VARCHAR(1)  NULL,
+[reference_table] INTEGER  NULL,
+[reference_column] INTEGER  NULL,
+[reference_display] VARCHAR(1)  NULL
+)
+

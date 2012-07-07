@@ -35,7 +35,7 @@ private:
 	void init();
 	void createPopMenu();
 
-	void slot_delete_field(int tableID,int fieldID);
+	void slot_delete_field(int row,int tableID,int fieldID);
 	
 private:
 

@@ -18,7 +18,17 @@ public:
 
 	int getTableNoByName(QString table_name);
 	QString getTableNameByID(int table_id);
+	QString getFieldNameByID(int table_id,int field_id);
 	int	getNextID(int table_id);
+
+	void deleteField(int tableID,int field);
+	void deleteTable(int tableID);
+
+	void addTable(const TABLE_PARA_STRU& stTable);
+	void addField(const FIELD_PARA_STRU& stField);
+
+	void modifyTable(const TABLE_PARA_STRU& stTable);
+	void modifyField(const FIELD_PARA_STRU& stField);
 
 private:
 

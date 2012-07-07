@@ -155,16 +155,20 @@ void CFieldTable::slot_delete_field()
 	QTableWidgetItem* citem = currentItem();
 	if (citem)
 	{
-		int tableID = item(row(citem),0)->text().toInt();
-		int fieldID = item(row(citem),1)->text().toInt();
+		int nrow = row(citem);
+		int tableID = item(nrow,0)->text().toInt();
+		int fieldID = item(nrow,1)->text().toInt();
 
-		slot_delete_field(tableID,fieldID);
+		slot_delete_field(nrow,tableID,fieldID);
 	}
 }
 
-void CFieldTable::slot_delete_field(int tableID,int fieldID)
+void CFieldTable::slot_delete_field(int nrow,int tableID,int fieldID)
 {
-	
+	// 从当前表删除
+	removeRow(nrow);
+	// 从数据库删除
+	CODBTable::instance()->deleteField(tableID,fieldID);
 }
 
 void CFieldTable::slot_clone_field()
