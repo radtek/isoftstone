@@ -26,6 +26,7 @@ public:
 
 	void addTable(const TABLE_PARA_STRU& stTable);
 	void addField(const FIELD_PARA_STRU& stField);
+	void insertToFieldInfo(const FIELD_PARA_STRU& stField);
 
 	void modifyTable(const TABLE_PARA_STRU& stTable);
 	void modifyField(const FIELD_PARA_STRU& stField);
@@ -36,6 +37,7 @@ private:
 	~CODBTable();
 
 	void	   initTableAndField();
+	FIELD_PARA_STRU idKeyToField(int tableID);
 	
 private:
 

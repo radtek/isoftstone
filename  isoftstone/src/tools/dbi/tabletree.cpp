@@ -74,6 +74,25 @@ QTreeWidgetItem* CTableTree::toItem(const TABLE_PARA_STRU& stTable)
 	return item;
 }
 
+void CTableTree::updateItem(QTreeWidgetItem* item,const TABLE_PARA_STRU& stTable)
+{
+	item->setText(0,QString::number(stTable.table_id));
+	item->setText(1,stTable.table_name_eng);
+	item->setText(2,stTable.table_name_chn);
+	item->setText(3,QString::number(stTable.next_id));
+}
+
+TABLE_PARA_STRU CTableTree::toTableParam(CTableModelForm* frm)
+{
+	TABLE_PARA_STRU table;
+	table.table_id = frm->line_tableno->text().toInt();
+	table.table_name_eng = frm->line_enname->text();
+	table.table_name_chn = frm->line_cnname->text();
+	table.next_id = frm->line_nextid->text().toInt();
+
+	return table;
+}
+
 void CTableTree::contextMenuEvent(QContextMenuEvent * event)
 {
 	QTreeWidgetItem* item = currentItem();
@@ -103,16 +122,11 @@ void CTableTree::slot_item_double_clicked()
 void CTableTree::slot_add_table()
 {
 	CTableModelForm frm;
+	frm.line_tableno->setText(QString::number( CODBTable::instance()->getNextID(1)));
 	if(frm.exec() == QDialog::Accepted)
 	{
-		TABLE_PARA_STRU table;
-		table.table_id = frm.line_tableno->text().toInt();
-		table.table_name_eng = frm.line_enname->text();
-		table.table_name_chn = frm.line_cnname->text();
-		table.next_id = frm.line_nextid->text().toInt();
-
+		TABLE_PARA_STRU table = toTableParam(&frm);
 		CODBTable::instance()->addTable(table);
-
 		m_rootItem->addChild(toItem(table));
 	}
 }
@@ -128,7 +142,14 @@ void CTableTree::slot_modify_table()
 		frm.line_enname->setText(item->text(1));
 		frm.line_cnname->setText(item->text(2));
 		frm.line_nextid->setText(item->text(3));
-		frm.exec();
+		if(frm.exec() == QDialog::Accepted)
+		{
+			TABLE_PARA_STRU table = toTableParam(&frm);
+			CODBTable::instance()->modifyTable(table);
+
+			// 更改当前显示属性
+			updateItem(item,table);
+		}
 	}
 }
 

@@ -65,8 +65,9 @@ void CFieldModelForm::slot_foreign_changed(int)
 		group_ref->setEnabled(false);
 	}
 }
-void CFieldModelForm::slot_table_changed(int tableID)
+void CFieldModelForm::slot_table_changed(int index)
 {
+	int tableID = combo_ref_table->itemData(index).toInt();
 	QMap<int,FIELD_PARA_STRU> fieldMap = CODBTable::instance()->getFieldMap(tableID);
 	combo_ref_field->clear();
 	combo_display_column->clear();

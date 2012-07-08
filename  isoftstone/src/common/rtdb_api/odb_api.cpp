@@ -195,7 +195,8 @@ void CODBTable::addTable(const TABLE_PARA_STRU& stTable)
 {
 	// 内存中增加
 	m_tableMap.insert(stTable.table_id,stTable);
-
+	// 更改内存中表信息表nextid
+	m_tableMap[1].next_id++;
 	QSqlQuery query(m_db);
 	
 	// 创建表
@@ -213,6 +214,39 @@ void CODBTable::addTable(const TABLE_PARA_STRU& stTable)
 	query.bindValue(i++,stTable.table_name_chn);
 	query.bindValue(i++,stTable.next_id);
 	query.exec();
+
+	// 表信息表nextid + 1
+	strSQL = "update tableinfo set next_rec_id = ";
+	strSQL += QString::number(m_tableMap[1].next_id);
+	strSQL += " where id = 1";
+	query.exec(strSQL);
+	// 增加域，由于默认增加了id 这个关键字段
+	
+	FIELD_PARA_STRU stField = idKeyToField(stTable.table_id);
+	m_fieldMap[stField.table_id][stField.field_id] = stField;
+	insertToFieldInfo(stField);
+}
+
+FIELD_PARA_STRU CODBTable::idKeyToField(int tableID)
+{
+	FIELD_PARA_STRU stField;
+	stField.table_id = tableID;
+	stField.field_id = 1;
+	stField.field_name_eng = "id";
+	stField.field_name_chn = "ID";
+	stField.data_type = C_INT_TYPE;
+	stField.data_length= 4;
+	stField.is_keyword = true;
+	stField.allow_null = false;
+	stField.display_type = C_STRING_TYPE;
+	stField.ref_flag = false;
+	stField.ref_mode = 0;
+	stField.ref_tableno = 0;
+	stField.ref_fieldno = 0;
+	stField.ref_display = 0;
+
+	return stField;
+
 }
 
 void CODBTable::addField(const FIELD_PARA_STRU& stField)
@@ -286,6 +320,14 @@ void CODBTable::addField(const FIELD_PARA_STRU& stField)
 		query.exec(strSQL);
 	}
 
+	insertToFieldInfo(stField);
+	
+}
+
+void CODBTable::insertToFieldInfo(const FIELD_PARA_STRU& stField)
+{
+	QString strSQL;
+	QSqlQuery query(m_db);
 	// 域信息表中增加
 	strSQL = "insert into fieldinfo(table_id,field_id,en_name,cn_name,data_type,data_length,is_key,allow_null,display_type,reference_flag,reference_mode,reference_table,reference_column,reference_display)"
 		"values(:table_id,:field_id,:en_name,:cn_name,:data_type,:data_length,:is_key,:allow_null,:display_type,:reference_flag,:reference_mode,:reference_table,:reference_column,:reference_display)";
@@ -306,7 +348,6 @@ void CODBTable::addField(const FIELD_PARA_STRU& stField)
 	query.bindValue(i++,stField.ref_fieldno);
 	query.bindValue(i++,stField.ref_display);
 	query.exec();
-	
 }
 
 void CODBTable::modifyTable(const TABLE_PARA_STRU& stTable)
@@ -318,8 +359,7 @@ void CODBTable::modifyTable(const TABLE_PARA_STRU& stTable)
 	// 表信息表中修改
 
 	QSqlQuery query(m_db);
-	QString strSQL = "update ";
-	strSQL += stTable.table_name_eng;
+	QString strSQL = "update tableinfo";
 	strSQL += " set cn_name = '";
 	strSQL += stTable.table_name_chn ;
 	strSQL += "' ,next_rec_id = ";

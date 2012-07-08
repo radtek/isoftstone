@@ -8,6 +8,7 @@
 #include <QAction>
 
 #include "odb_public.h"
+#include "uiwidget.h"
 
 class CTableTree : public QTreeWidget
 {
@@ -42,6 +43,8 @@ private:
 	void init();
 	void createPopMenu();
 	QTreeWidgetItem* toItem(const TABLE_PARA_STRU& table);
+	void updateItem(QTreeWidgetItem* item,const TABLE_PARA_STRU& table);
+	TABLE_PARA_STRU toTableParam(CTableModelForm* frm);
 
 private:
 
