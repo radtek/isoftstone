@@ -131,3 +131,18 @@ void CRecordForm::slot_record_changed(int keyid)
 {
 	
 }
+
+QVariantList CRecordForm::getValueList()
+{
+	QVariantList lstValue;
+	QTableWidgetItem* pItem = NULL;
+	for (int i = 0; i < m_recordTable->rowCount();i++)
+	{
+		pItem = m_recordTable->item(i,0);
+		if (pItem)
+		{
+			lstValue.append(pItem->text());
+		}
+	}
+	return lstValue;
+}

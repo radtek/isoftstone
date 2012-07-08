@@ -111,7 +111,7 @@ void CDataTable::slot_add_record()
 	frm.slot_table_changed(m_tableID);
 	if(frm.exec() == QDialog::Accepted)
 	{
-		
+		m_rtTable.addRecord(frm.getValueList());
 	}
 }
 

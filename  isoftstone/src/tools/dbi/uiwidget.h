@@ -5,6 +5,7 @@
 #include <QDialog>
 #include <QPushButton>
 #include <QTableWidget>
+#include <QVariantList>
 
 #include "ui_fieldmodel.h"
 #include "ui_tablemodel.h"
@@ -42,6 +43,8 @@ class CRecordForm : public QDialog
 public:
 
 	CRecordForm(QTableWidget* datatable,QWidget* parent = 0);
+
+	QVariantList getValueList();
 
 public Q_SLOTS:
 

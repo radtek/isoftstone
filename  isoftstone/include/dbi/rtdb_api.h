@@ -84,13 +84,16 @@ private:
 	void	   updateNextID();
 	QString	   getSelectSQL(const QStringList& vecField);
 	QString	   getIDSet(const QVector<int>& vecID);
+	void	   fillFieldArray();
 	QString	   getAllField();
 
 private:
 
 	TB_DESCR   m_tb_descr;
-	int		   m_next_id;
 	QSqlDatabase m_db;
+	QVector<FIELD_PARA_STRU> m_fields;
+
+	QString	   m_strfield;
 
 };
 

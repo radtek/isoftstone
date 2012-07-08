@@ -51,6 +51,8 @@ bool CRtTable::openTableByID(int tableId )
 	{
 		m_tb_descr.table_id = tableId;
 		m_tb_descr.table_name = CODBTable::instance()->getTableNameByID(tableId);
+
+		fillFieldArray();
 		return true;
 	}
 	else
@@ -66,13 +68,7 @@ bool CRtTable::openTableByName(QString tableName)
 {
 	m_tb_descr.table_name = tableName;
 	m_tb_descr.table_id = CODBTable::instance()->getTableNoByName(tableName);
-	if (m_tb_descr.table_id > limit_table_id)
-	{
-		return true;
-	}
-	m_tb_descr.table_id = 0;
-	m_tb_descr.table_name = "";
-	return false;
+	return openTableByID(m_tb_descr.table_id);
 }
 
 void CRtTable::closeTable()
@@ -157,6 +153,27 @@ QString CRtTable::getAllField()
 	QString strSQL = "select * from ";
 	strSQL += m_tb_descr.table_name;
 	return strSQL;
+}
+
+void CRtTable::fillFieldArray()
+{
+	m_fields.clear();
+	m_strfield.clear();
+
+	QMap<int,FIELD_PARA_STRU> fieldMap = CODBTable::instance()->getFieldMap(m_tb_descr.table_id);
+	QMapIterator<int,FIELD_PARA_STRU > iter(fieldMap);
+	while(iter.hasNext())
+	{
+		iter.next();
+		const FIELD_PARA_STRU& field = iter.value();
+		m_fields.append(field);
+
+		m_strfield += field.field_name_eng;
+		if (iter.hasNext())
+		{
+			m_strfield += ",";
+		}
+	}	
 }
 
 int CRtTable::getTableFields(const QStringList& vecField,QVector<QVariantList>& vecRows)
@@ -312,12 +329,54 @@ void CRtTable::updateNextID()
 
 void CRtTable::addRecord(const QVariantList& values)
 {
-	// 按顺序添加记录到表中
+	// 按顺序添加记录到表中,分析各字段的数据类型，然后根据类型解析值，放到数据库中
+	
+	if (m_fields.count() == values.count())
+	{
+		QString strSQL ;
+		strSQL = "INSERT INTO ";
+		strSQL += m_tb_descr.table_name;
+		strSQL += "(";
+		strSQL += m_strfield;
+		strSQL += ") VALUES(";
+		QSqlQuery query(m_db);
+		for (int i = 0 ; i < m_fields.count() ;i++)
+		{
+			const FIELD_PARA_STRU& stField = m_fields[i];
+
+			// 添加KEYID
+			if (i == 0)
+			{
+				int keyid = getNextID();
+				strSQL += QString::number(keyid);
+				strSQL += ",";
+				continue;
+			}
+			
+			switch (stField.data_type)
+			{
+			case C_STRING_TYPE:
+				strSQL += "'";
+				strSQL += values[i].toString();
+				strSQL += "'";
+				break;
+			default:
+				strSQL += QString::number(values[i].toInt());
+				break;
+			}
+			if (i < m_fields.count() -1)
+			{
+				strSQL +=  ",";
+			}
+		}
+		strSQL += ")";
+		query.exec(strSQL);
+	}
 }
 
 bool CRtTable::isTableOpen()
 {
-	if (m_tb_descr.table_id > 2)
+	if (m_tb_descr.table_id > limit_table_id)
 	{
 		return true;
 	}
@@ -342,15 +401,27 @@ bool CRtTable::getTableParam(TABLE_PARA_STRU& param)
 
 bool CRtTable::getFieldsPara(QVector<FIELD_PARA_STRU>& vecParams)
 {
+	vecParams = m_fields;
 	return true;
 }
 
-bool CRtTable::getFieldPara(int filedID,FIELD_PARA_STRU& param)
+bool CRtTable::getFieldPara(int fieldID,FIELD_PARA_STRU& param)
 {
-	return true;
+	for (int i = 0 ; i < m_fields.count() ;i++)
+	{
+		const FIELD_PARA_STRU& stField = m_fields[i];
+		if (stField.field_id == fieldID)
+		{
+			param = stField;
+			return true;
+		}
+	}
+	return false;
 }
 
 quint64 CRtTable::getNextID()
 {
-	return m_next_id;
+	int nextid = CODBTable::instance()->getNextID(m_tb_descr.table_id);;
+	CODBTable::instance()->updateNextID(m_tb_descr.table_id);
+	return nextid;
 }
