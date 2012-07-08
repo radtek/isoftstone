@@ -145,34 +145,119 @@ void CFieldTable::slot_add_field()
 	frm.line_tableno->setText(QString::number(m_tableID));
 	if(frm.exec() == QDialog::Accepted)
 	{
-		FIELD_PARA_STRU field;
-		field.table_id = frm.line_tableno->text().toInt();
-		field.field_id = frm.line_fieldno->text().toInt();
-		field.field_name_eng = frm.line_enname->text();
-		field.field_name_chn = frm.line_cnname->text();
-
-		field.data_type = frm.combo_datatype->itemData(frm.combo_datatype->currentIndex()).toInt();
-		field.data_length = frm.spin_length->text().toInt();
-		field.is_keyword = frm.cb_keyword->isChecked();
-		field.allow_null = frm.cb_allownull->isChecked();
-		field.display_type = frm.combo_display_datatype->itemData(frm.combo_display_datatype->currentIndex()).toInt();
-		
-		field.ref_flag = frm.cb_foreign->isChecked();
-		field.ref_mode = '0';
-		field.ref_tableno = frm.combo_ref_table->itemData(frm.combo_ref_table->currentIndex()).toInt();
-		field.ref_fieldno = frm.combo_ref_field->itemData(frm.combo_ref_field->currentIndex()).toInt();
-		field.ref_display = frm.combo_display_column->itemData(frm.combo_display_column->currentIndex()).toInt();
-
+		FIELD_PARA_STRU field = toFieldParam(&frm);
 		CODBTable::instance()->addField(field);
-
 		slot_table_changed(m_tableID,"");
 	}
 }
 
+FIELD_PARA_STRU CFieldTable::toFieldParam(CFieldModelForm* frm)
+{
+	FIELD_PARA_STRU field;
+	field.table_id = frm->line_tableno->text().toInt();
+	field.field_id = frm->line_fieldno->text().toInt();
+	field.field_name_eng = frm->line_enname->text();
+	field.field_name_chn = frm->line_cnname->text();
+
+	field.data_type = frm->combo_datatype->itemData(frm->combo_datatype->currentIndex()).toInt();
+	field.data_length = frm->spin_length->text().toInt();
+	field.is_keyword = frm->cb_keyword->isChecked();
+	field.allow_null = frm->cb_allownull->isChecked();
+	field.display_type = frm->combo_display_datatype->itemData(frm->combo_display_datatype->currentIndex()).toInt();
+
+	field.ref_flag = frm->cb_foreign->isChecked();
+	field.ref_mode = '0';
+	field.ref_tableno = frm->combo_ref_table->itemData(frm->combo_ref_table->currentIndex()).toInt();
+	field.ref_fieldno = frm->combo_ref_field->itemData(frm->combo_ref_field->currentIndex()).toInt();
+	field.ref_display = frm->combo_display_column->itemData(frm->combo_display_column->currentIndex()).toInt();
+
+	return field;
+}
+
+void CFieldTable::fillForm(CFieldModelForm* frm,const FIELD_PARA_STRU& field)
+{
+	frm->line_tableno->setText(  QString::number(field.table_id) );
+	frm->line_fieldno->setText(  QString::number(field.field_id) );
+	frm->line_enname->setText( field.field_name_eng );
+	frm->line_cnname->setText( field.field_name_chn );
+
+	int index = 0;
+	index = findIndexOfUserData(frm->combo_datatype,field.data_type);
+	frm->combo_datatype->setCurrentIndex( index );
+	frm->spin_length->setValue(  field.data_length );
+	frm->cb_keyword->setChecked(  field.is_keyword );
+	frm->cb_allownull->setChecked(  field.allow_null);
+	frm->cb_foreign->setChecked(  field.ref_flag );
+
+	index = findIndexOfUserData(frm->combo_display_datatype,field.display_type);
+	frm->combo_display_datatype->setCurrentIndex( index );
+
+	index = findIndexOfUserData(frm->combo_ref_table,field.ref_tableno);
+	frm->combo_ref_table->setCurrentIndex( index );
+
+	index = findIndexOfUserData(frm->combo_ref_field,field.ref_fieldno);
+	frm->combo_ref_field->setCurrentIndex( index );
+
+	index = findIndexOfUserData(frm->combo_display_column,field.ref_display);
+	frm->combo_display_column->setCurrentIndex( index );
+}
+
+int	CFieldTable::findIndexOfUserData(QComboBox* combo,int value)
+{
+	for (int i = 0 ; i < combo->count();i++)
+	{
+		if (combo->itemData(i).toInt() == value)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
+int	CFieldTable::findIndexOfUserData(QComboBox* combo,QString value)
+{
+	for (int i = 0 ; i < combo->count();i++)
+	{
+		if (combo->itemData(i).toString() == value)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
 void CFieldTable::slot_modify_field()
 {
-	CFieldModelForm frm;
-	frm.exec();
+	QTableWidgetItem* citem = currentItem();
+	if (citem)
+	{
+		int nrow = row(citem);
+		int tableID = item(nrow,0)->text().toInt();
+		int fieldID = item(nrow,1)->text().toInt();
+
+		CFieldModelForm frm;
+		FIELD_PARA_STRU field = CODBTable::instance()->getFiledInfo(tableID,fieldID);
+		fillForm(&frm,field);
+		frm.line_tableno->setEnabled(false);
+		frm.line_fieldno->setEnabled(false);
+
+		// sqllite 不支持修改和删除字段，所以在此加以屏蔽
+		frm.line_enname->setEnabled(false);
+		frm.combo_datatype->setEnabled(false);
+		frm.spin_length->setEnabled(false);
+		frm.cb_keyword->setEnabled(false);
+		frm.cb_allownull->setEnabled(false);
+		if(frm.exec() == QDialog::Accepted)
+		{
+			// 对比变化值，如果有变化则修改，否则不修改
+			FIELD_PARA_STRU field2 = toFieldParam(&frm);
+			CODBTable::instance()->modifyField(field2);
+
+			// 更新界面
+			slot_table_changed(m_tableID,"");
+		}
+	}
+
 }
 
 void CFieldTable::slot_delete_field()

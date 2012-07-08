@@ -8,6 +8,8 @@
 #include <QAction>
 #include <QContextMenuEvent>
 
+#include "uiwidget.h"
+
 class CFieldTable : public QTableWidget
 {
 	Q_OBJECT
@@ -36,6 +38,12 @@ private:
 	void createPopMenu();
 
 	void slot_delete_field(int row,int tableID,int fieldID);
+
+	FIELD_PARA_STRU toFieldParam(CFieldModelForm* frm);
+	void fillForm(CFieldModelForm* frm,const FIELD_PARA_STRU& field);
+
+	int	findIndexOfUserData(QComboBox* combo,int value);
+	int	findIndexOfUserData(QComboBox* combo,QString value);
 	
 private:
 

@@ -372,10 +372,87 @@ void CODBTable::modifyTable(const TABLE_PARA_STRU& stTable)
 
 void CODBTable::modifyField(const FIELD_PARA_STRU& stField)
 {
-	// sqllite 不支持直接修改和删除字段
 	// 内存中修改
-
+	FIELD_PARA_STRU oldField = m_fieldMap[stField.table_id][stField.field_id];
+	m_fieldMap[stField.table_id][stField.field_id] = stField;
+	
 	// 修改域
-
+	// sqllite 不支持直接修改和删除字段
+	
 	// 域信息表中修改
+
+	QString strSQL = "update fieldinfo set ";
+	QSqlQuery query(m_db);
+	if (oldField.field_name_chn != stField.field_name_chn)
+	{
+		strSQL += " cn_name = '";
+		strSQL += stField.field_name_chn;
+		strSQL += "' , ";
+	}
+	if (oldField.display_type != stField.display_type)
+	{
+		strSQL += " display_type = ";
+		strSQL += QString::number(stField.display_type);
+		strSQL += " , ";
+	}
+	if (oldField.ref_flag != stField.ref_flag)
+	{
+		strSQL += " reference_flag = ";
+		strSQL += QString::number(stField.ref_flag);
+		strSQL += " , ";
+	}
+	if (oldField.ref_mode != stField.ref_mode)
+	{
+		strSQL += " reference_mode = ";
+		strSQL += QString::number(stField.ref_mode);
+		strSQL += " , ";
+	}
+	if (oldField.ref_tableno != stField.ref_tableno)
+	{
+		strSQL += " reference_table = ";
+		strSQL += QString::number(stField.ref_tableno);
+		strSQL += " , ";
+
+	}
+	if (oldField.ref_fieldno != stField.ref_fieldno)
+	{
+		strSQL += " reference_column = ";
+		strSQL += QString::number(stField.ref_fieldno);
+		strSQL += " , ";
+	}
+	if (oldField.ref_display != stField.ref_display)
+	{
+		strSQL += " reference_display = ";
+		strSQL += QString::number(stField.ref_display);
+		strSQL += " , ";
+	}
+
+	strSQL.simplified();
+	int index = -1;
+	index = strSQL.lastIndexOf(",");
+	if (strSQL.endsWith(", "))
+	{
+		if (index > 0)
+		{
+			strSQL.remove(index,1);
+		}
+	}
+
+	index = strSQL.lastIndexOf("set");
+	if (strSQL.endsWith("set "))
+	{
+		if (index > 0)
+		{
+			strSQL.remove(index,3);
+		}
+	}
+	else
+	{
+		strSQL += " where table_id = ";
+		strSQL += QString::number(stField.table_id);
+		strSQL += " and field_id = ";
+		strSQL += QString::number(stField.field_id);
+		strSQL.simplified();
+		query.exec(strSQL);
+	}
 }
