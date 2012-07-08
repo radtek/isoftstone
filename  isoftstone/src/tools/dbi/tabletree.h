@@ -33,6 +33,7 @@ public	Q_SLOTS:
 	void slot_clone_table();
 	void slot_save_create_to_file();
 	void slot_save_insert_to_file();
+	void slot_import_from_file();
 
 protected:
 

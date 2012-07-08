@@ -46,6 +46,10 @@ void CTableTree::createPopMenu()
 	act = new QAction(QObject::tr("导出插入到文件"),m_popMenu);
 	connect(act,SIGNAL(triggered(bool)),this,SLOT(slot_save_insert_to_file()));
 	m_popMenu->addAction(act);
+
+	act = new QAction(QObject::tr("从文件导入表格"),m_popMenu);
+	connect(act,SIGNAL(triggered(bool)),this,SLOT(slot_import_from_file()));
+	m_popMenu->addAction(act);
 }
 
 void CTableTree::init()
@@ -316,4 +320,9 @@ void CTableTree::slot_save_insert_to_file()
 		}
 	}
 
+}
+
+void CTableTree::slot_import_from_file()
+{
+	// 解析文本文件，然后解析出表名和域，然后导入
 }
