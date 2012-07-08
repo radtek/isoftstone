@@ -19,7 +19,7 @@ public:
 
 public Q_SLOTS:
 
-	void slot_table_changed(int tableid,QString tableName);
+	void slot_table_changed(int tableid);
 
 	void slot_add_field();
 	void slot_modify_field();

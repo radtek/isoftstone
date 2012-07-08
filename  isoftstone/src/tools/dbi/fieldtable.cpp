@@ -49,7 +49,7 @@ void CFieldTable::init()
 
 }
 
-void CFieldTable::slot_table_changed(int tableid,QString tableName)
+void CFieldTable::slot_table_changed(int tableid)
 {
 	m_tableID = tableid;
 	QMap<int,FIELD_PARA_STRU> fieldMap = CODBTable::instance()->getFieldMap(tableid);
@@ -147,7 +147,7 @@ void CFieldTable::slot_add_field()
 	{
 		FIELD_PARA_STRU field = toFieldParam(&frm);
 		CODBTable::instance()->addField(field);
-		slot_table_changed(m_tableID,"");
+		slot_table_changed(m_tableID);
 	}
 }
 
@@ -254,7 +254,7 @@ void CFieldTable::slot_modify_field()
 			CODBTable::instance()->modifyField(field2);
 
 			// 更新界面
-			slot_table_changed(m_tableID,"");
+			slot_table_changed(m_tableID);
 		}
 	}
 

@@ -10,17 +10,15 @@
 #include "odb_public.h"
 #include "uiwidget.h"
 
-class CTableTree : public QTreeWidget
+#include "tablelist.h"
+
+class CTableTree : public CTableList
 {
 	Q_OBJECT
 
 public:
 
 	CTableTree(QWidget* parent = 0);
-
-signals:
-
-	void signal_table_changed(int tableid,QString tablename);
 
 public	Q_SLOTS:
 
@@ -41,15 +39,10 @@ protected:
 
 private:
 
-	void init();
 	void createPopMenu();
-	QTreeWidgetItem* toItem(const TABLE_PARA_STRU& table);
-	void updateItem(QTreeWidgetItem* item,const TABLE_PARA_STRU& table);
-	TABLE_PARA_STRU toTableParam(CTableModelForm* frm);
 
 private:
 
-	QTreeWidgetItem* m_rootItem;
 	QMenu*			 m_popMenu;
 };
 

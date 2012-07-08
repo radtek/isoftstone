@@ -12,14 +12,18 @@ HEADERS       = datawidget.h \
                 modelwidget.h \
                 uiwidget.h  \
                 fieldtable.h \
-                tabletree.h
+                tabletree.h \
+                datatable.h \
+                tablelist.h
         
 SOURCES       = main.cpp \
                 datawidget.cpp \
                 modelwidget.cpp \
                 fieldtable.cpp \
                 tabletree.cpp  \
-                uiwidget.cpp
+                uiwidget.cpp  \
+                datatable.cpp \
+                tablelist.cpp
 
 FORMS        += tablemodel.ui \
                 fieldmodel.ui

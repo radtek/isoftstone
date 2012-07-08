@@ -11,7 +11,7 @@ CModelWidget::CModelWidget(QObject* parent )
 	m_tableTree = new CTableTree(this);
 	m_fieldTable = new CFieldTable(this);
 
-	connect(m_tableTree,SIGNAL(signal_table_changed(int,QString)),m_fieldTable,SLOT(slot_table_changed(int,QString)));
+	connect(m_tableTree,SIGNAL(signal_table_changed(int)),m_fieldTable,SLOT(slot_table_changed(int)));
 
 	resize(800,800);
 	QVBoxLayout *layout = new QVBoxLayout;
