@@ -1,5 +1,7 @@
 
 #include <QContextMenuEvent>
+#include <QFileDialog>
+#include <QFile>
 
 #include "tabletree.h"
 #include "uiwidget.h"
@@ -37,8 +39,12 @@ void CTableTree::createPopMenu()
 	connect(act,SIGNAL(triggered(bool)),this,SLOT(slot_clone_table()));
 	m_popMenu->addAction(act);
 
-	act = new QAction(QObject::tr("保存到文件"),m_popMenu);
-	connect(act,SIGNAL(triggered(bool)),this,SLOT(slot_save_to_file()));
+	act = new QAction(QObject::tr("导出创建到文件"),m_popMenu);
+	connect(act,SIGNAL(triggered(bool)),this,SLOT(slot_save_create_to_file()));
+	m_popMenu->addAction(act);
+
+	act = new QAction(QObject::tr("导出插入到文件"),m_popMenu);
+	connect(act,SIGNAL(triggered(bool)),this,SLOT(slot_save_insert_to_file()));
 	m_popMenu->addAction(act);
 }
 
@@ -170,7 +176,57 @@ void CTableTree::slot_clone_table()
 	frm.exec();
 }
 
-void CTableTree::slot_save_to_file()
+void CTableTree::slot_save_create_to_file()
 {
+	// 根据表信息表和域信息表生成创建语句
+	QTreeWidgetItem* item = currentItem();
+	if (item && item->parent() == m_rootItem)
+	{
+		QString strSQL ;
 
+		int tableID = item->text(0).toInt();
+		TABLE_PARA_STRU stTable = CODBTable::instance()->getTableParam(tableID);
+
+		strSQL = "CREATE TABLE ";
+		strSQL += stTable.table_name_eng;
+		strSQL += "(\n";
+		
+		QMap<int,FIELD_PARA_STRU> fieldMap = CODBTable::instance()->getFieldMap(tableID);
+		QMapIterator<int,FIELD_PARA_STRU > iter(fieldMap);
+		int i = 0;
+		while(iter.hasNext())
+		{
+			i++;
+			iter.next();
+			int fieldID = iter.key();
+			const FIELD_PARA_STRU& field = iter.value();
+			
+			strSQL += field.field_name_eng;
+			strSQL += " ";
+			strSQL += CODBTable::getDataType(field.data_type,field.data_length,field.is_keyword,field.allow_null); 
+			if (i < fieldMap.count())
+			{
+				strSQL += ",\n";
+			}
+		}
+		strSQL += "\n)";
+
+		QString fileName = QFileDialog::getSaveFileName(this,tr("保存创建到文件"), QString(), "*.sql");
+		if (fileName.isEmpty())
+			return;
+
+		QFile file(fileName);
+		if (file.open(QFile::WriteOnly|QFile::Text)) 
+		{
+			QTextStream out(&file);
+			out << strSQL;
+			out.flush();
+			file.close();
+		}
+	}
+}
+
+void CTableTree::slot_save_insert_to_file()
+{
+	
 }

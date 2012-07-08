@@ -2,6 +2,68 @@
 #include "odb_api.h"
 #include "config.h"
 
+QString CODBTable::getDataType(int datatype,int data_length,bool iskey,bool isNull)
+{
+	QString strSQL;
+	switch(datatype)
+	{
+	case C_STRING_TYPE:
+		strSQL += "VARCHAR(";
+		strSQL += QString::number(data_length);
+		strSQL += ")";
+		break;
+	case C_UCHAR_TYPE:
+		strSQL += "VARCHAR(";
+		strSQL += QString::number(1);
+		strSQL += ")";
+		break;
+	case C_SHORT_TYPE:
+	case C_INT_TYPE:
+		strSQL += "INTEGER";
+		break;
+	case C_BOOLEAN_TYPE:
+		strSQL += "BOOLEAN";
+		break;
+	case C_DATETIME_TYPE:
+		strSQL += "TIMESTAMP";
+		break;
+	case C_FLOAT_TYPE:
+		strSQL += "FLOAT";
+		break;
+	case C_DOUBLE_TYPE:
+		strSQL += "REAL";
+		break;
+	case C_KEYID_TYPE:
+		strSQL += "INTEGER";
+		break;
+	case C_IMAGE_TYPE:
+	case C_BINARY_TYPE:
+		strSQL += "BLOB";
+		break;
+	case C_TEXT_TYPE:
+		strSQL += "TEXT";
+		break;
+	case C_UINT_TYPE:
+		strSQL += "INTEGER";
+		break;
+	case C_LONG_TYPE:
+		strSQL += "INTEGER";
+		break;
+	default:
+		strSQL += "VARCHAR(10)";
+		break;
+	}
+	if (iskey)
+	{
+		strSQL += " PRIMARY KEY";
+	}
+	if (!isNull&& iskey)
+	{
+		strSQL += " NOT NULL";
+	}
+	return strSQL;
+}
+
 CODBTable* CODBTable::instance()
 {
 	static CODBTable* s_odb = NULL;
@@ -264,59 +326,8 @@ void CODBTable::addField(const FIELD_PARA_STRU& stField)
 		strSQL += " add ";
 		strSQL += stField.field_name_eng;
 		strSQL += " ";
-		switch (stField.data_type)
-		{
-		case C_STRING_TYPE:
-			strSQL += "VARCHAR(";
-			strSQL += QString::number(stField.data_length);
-			strSQL += ")";
-			break;
-		case C_UCHAR_TYPE:
-			strSQL += "VARCHAR(";
-			strSQL += QString::number(1);
-			strSQL += ")";
-			break;
-		case C_SHORT_TYPE:
-		case C_INT_TYPE:
-			strSQL += "INTEGER";
-			break;
-		case C_DATETIME_TYPE:
-			strSQL += "TIMESTAMP";
-			break;
-		case C_FLOAT_TYPE:
-			strSQL += "FLOAT";
-			break;
-		case C_DOUBLE_TYPE:
-			strSQL += "REAL";
-			break;
-		case C_KEYID_TYPE:
-			strSQL += "INTEGER";
-			break;
-		case C_IMAGE_TYPE:
-		case C_BINARY_TYPE:
-			strSQL += "BLOB";
-			break;
-		case C_TEXT_TYPE:
-			strSQL += "TEXT";
-			break;
-		case C_UINT_TYPE:
-			strSQL += "INTEGER";
-			break;
-		case C_LONG_TYPE:
-			strSQL += "INTEGER";
-			break;
-		default:
-			strSQL += "VARCHAR(10)";
-			break;
-		}
-		if (stField.is_keyword)
-		{
-			strSQL += " PRIMARY KEY";
-		}
-		if (!stField.allow_null&& stField.is_keyword)
-		{
-			strSQL += " NOT NULL";
-		}
+
+		strSQL += CODBTable::getDataType(stField.data_type,stField.data_length,stField.is_keyword,stField.allow_null);
 		query.exec(strSQL);
 	}
 

@@ -31,8 +31,8 @@ public	Q_SLOTS:
 	void slot_modify_table();
 	void slot_delete_table();
 	void slot_clone_table();
-	void slot_save_to_file();
-
+	void slot_save_create_to_file();
+	void slot_save_insert_to_file();
 
 protected:
 

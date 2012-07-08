@@ -19,7 +19,7 @@ CModelWidget::CModelWidget(QObject* parent )
 	layout->addWidget(m_fieldTable);
 	
 	setLayout(layout);
-	setWindowTitle(QObject::tr("模式编辑"));
+	setWindowTitle(QObject::tr("模式编辑器"));
 }
 
 CModelWidget::~CModelWidget()
