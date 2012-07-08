@@ -1,22 +1,15 @@
 
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+
 #include "uiwidget.h"
 
 CTableModelForm::CTableModelForm(QWidget* parent ):QDialog(parent)
 {
 	setupUi(this);
 
-	connect(btn_ok,SIGNAL(clicked ()),this,SLOT(slot_ok()));
-	connect(btn_cancel,SIGNAL(clicked ()),this,SLOT(slot_cancel()));
-}
-
-void CTableModelForm::slot_ok()
-{
-	accept();
-}
-
-void CTableModelForm::slot_cancel()
-{
-	reject();
+	connect(btn_ok,SIGNAL(clicked ()),this,SLOT(accept()));
+	connect(btn_cancel,SIGNAL(clicked ()),this,SLOT(reject()));
 }
 
 CFieldModelForm::CFieldModelForm(QWidget* parent ):QDialog(parent)
@@ -28,8 +21,8 @@ CFieldModelForm::CFieldModelForm(QWidget* parent ):QDialog(parent)
 
 	connect(cb_foreign,SIGNAL(stateChanged ( int  )),this,SLOT(slot_foreign_changed(int)));
 	connect(combo_ref_table,SIGNAL(currentIndexChanged ( int  )),this,SLOT(slot_table_changed(int)));
-	connect(btn_ok,SIGNAL(clicked ()),this,SLOT(slot_ok()));
-	connect(btn_cancel,SIGNAL(clicked ()),this,SLOT(slot_cancel()));
+	connect(btn_ok,SIGNAL(clicked ()),this,SLOT(accept()));
+	connect(btn_cancel,SIGNAL(clicked ()),this,SLOT(reject()));
 }
 
 void CFieldModelForm::initCombo()
@@ -84,12 +77,67 @@ void CFieldModelForm::slot_table_changed(int index)
 	}
 }
 
-void CFieldModelForm::slot_ok()
+CRecordForm::CRecordForm(QTableWidget* datatable,QWidget* parent ):QDialog(parent)
 {
-	accept();
+	m_dataTable = datatable;
+	m_recordTable = new QTableWidget(this);
+	m_recordTable->setColumnCount(1);
+	m_recordTable->horizontalHeader()->hide();
+	
+	resize(600,600);
+	m_recordTable->setColumnWidth(0,540);
+
+	QVBoxLayout *layout = new QVBoxLayout(this);
+
+	QHBoxLayout * layout1 = new QHBoxLayout(this);
+	btn_previous = new QPushButton(QObject::tr("上一记录"),this);
+	btn_next = new QPushButton(QObject::tr("下一记录"),this);
+	btn_first = new QPushButton(QObject::tr("首记录"),this);
+	btn_last = new QPushButton(QObject::tr("末记录"),this);
+	layout1->addWidget(btn_first);
+	layout1->addWidget(btn_previous);
+	layout1->addWidget(btn_next);
+	layout1->addWidget(btn_last);
+
+	layout->addLayout(layout1);
+
+
+	layout->addWidget(m_recordTable);
+
+	QHBoxLayout * layout2 = new QHBoxLayout(this);
+	btn_ok = new QPushButton(QObject::tr("确认"),this);
+	btn_cancel = new QPushButton(QObject::tr("取消"),this);
+	layout2->addWidget(btn_ok);
+	layout2->addWidget(btn_cancel);
+	layout->addLayout(layout2);
+
+	connect(btn_ok,SIGNAL(clicked ()),this,SLOT(accept()));
+	connect(btn_cancel,SIGNAL(clicked ()),this,SLOT(reject()));
+
+	setLayout(layout);
+	setWindowTitle(QObject::tr("记录编辑器"));
 }
 
-void CFieldModelForm::slot_cancel()
+void CRecordForm::slot_table_changed(int tableID)
 {
-	reject();
+	m_tableID = tableID;
+	QMap<int,FIELD_PARA_STRU> fieldMap = CODBTable::instance()->getFieldMap(tableID);
+	QMapIterator<int,FIELD_PARA_STRU > iter(fieldMap);
+	QStringList lstHeader;
+	while(iter.hasNext())
+	{
+		iter.next();
+
+		const FIELD_PARA_STRU& field = iter.value();
+		lstHeader.append(field.field_name_chn);
+	}
+
+	m_recordTable->clear();
+	m_recordTable->setRowCount(lstHeader.count());
+	m_recordTable->setVerticalHeaderLabels(lstHeader);
+}
+
+void CRecordForm::slot_record_changed(int keyid)
+{
+	
 }

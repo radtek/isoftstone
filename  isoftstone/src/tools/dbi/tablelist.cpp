@@ -58,7 +58,7 @@ TABLE_PARA_STRU CTableList::toTableParam(CTableModelForm* frm)
 
 CRtTableView::CRtTableView(QWidget* parent ):CTableList(parent)
 {
-	connect(this,SIGNAL(itemDoubleClicked (QTreeWidgetItem * , int )),this,SLOT(slot_item_double_clicked()));
+	connect(this,SIGNAL(currentItemChanged(QTreeWidgetItem * , QTreeWidgetItem* )),this,SLOT(slot_item_double_clicked()));
 }
 
 void CRtTableView::slot_item_double_clicked()

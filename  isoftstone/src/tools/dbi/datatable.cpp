@@ -2,17 +2,44 @@
 #include "datatable.h"
 #include "rtdb_api.h"
 #include "odb_api.h"
+#include "uiwidget.h"
 
 CDataTable::CDataTable(QWidget* parent ):QTableWidget(parent)
 {
+	m_tableID = 0;
 	setAlternatingRowColors(true);
 	setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+	connect(this,SIGNAL(itemDoubleClicked ( QTableWidgetItem * )),this,SLOT(slot_item_double_clicked(QTableWidgetItem *)));
+	createPopMenu();
+}
+
+void CDataTable::createPopMenu()
+{
+	m_popMenu = new QMenu(this);
+	QAction* act = NULL;
+
+	act = new QAction(QObject::tr("添加新记录"),m_popMenu);
+	connect(act,SIGNAL(triggered(bool)),this,SLOT(slot_add_record()));
+	m_popMenu->addAction(act);
+
+	act = new QAction(QObject::tr("修改当前记录"),m_popMenu);
+	connect(act,SIGNAL(triggered(bool)),this,SLOT(slot_modify_record()));
+	m_popMenu->addAction(act);
+
+	act = new QAction(QObject::tr("删除当前记录"),m_popMenu);
+	connect(act,SIGNAL(triggered(bool)),this,SLOT(slot_delete_record()));
+	m_popMenu->addAction(act);
+
+	act = new QAction(QObject::tr("类似克隆记录"),m_popMenu);
+	connect(act,SIGNAL(triggered(bool)),this,SLOT(slot_clone_record()));
+	m_popMenu->addAction(act);
 }
 
 void CDataTable::slot_table_changed(int tableID)
 {
 	// 清理表结构，包括表头和数据
-
+	m_tableID = tableID;
 	clear();
 
 	// 添加表头
@@ -58,3 +85,42 @@ void CDataTable::slot_table_changed(int tableID)
 		}
 	}
 }
+
+void CDataTable::contextMenuEvent(QContextMenuEvent * event)
+{
+	if (m_tableID > 2)
+	{
+		m_popMenu->exec(event->globalPos());
+	}
+}
+
+void CDataTable::slot_item_double_clicked(QTableWidgetItem * )
+{
+	slot_modify_record();
+}
+
+
+void CDataTable::slot_add_record()
+{
+	CRecordForm frm(this,this);
+	frm.slot_table_changed(m_tableID);
+	frm.exec();
+}
+
+void CDataTable::slot_modify_record()
+{
+	CRecordForm frm(this,this);
+	frm.exec();
+}
+
+void CDataTable::slot_delete_record()
+{
+
+}
+
+void CDataTable::slot_clone_record()
+{
+	CRecordForm frm(this,this);
+	frm.exec();
+}
+

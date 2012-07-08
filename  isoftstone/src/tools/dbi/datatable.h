@@ -3,6 +3,9 @@
 #define DATA_TABLE_H
 
 #include <QTableWidget>
+#include <QMenu>
+#include <QAction>
+#include <QContextMenuEvent>
 
 class CDataTable : public QTableWidget
 {
@@ -14,6 +17,24 @@ public:
 public Q_SLOTS:
 
 	void slot_table_changed(int tableid);
+
+	void slot_item_double_clicked(QTableWidgetItem * );
+
+	void slot_add_record();
+	void slot_modify_record();
+	void slot_delete_record();
+	void slot_clone_record();
+
+protected:
+
+	virtual void contextMenuEvent(QContextMenuEvent * event);
+	void createPopMenu();
+
+private:
+
+	QMenu*	m_popMenu;
+
+	int		m_tableID;
 };
 
 #endif
