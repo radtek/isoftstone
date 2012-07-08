@@ -14,6 +14,7 @@ public:
 	const QSqlDatabase& getDataBase() const;	
 	const QMap<int,TABLE_PARA_STRU>& getTableMap() const;
 	QMap<int,FIELD_PARA_STRU> getFieldMap(int tableID);
+	QStringList getHeaerList(int tableID);
 	TABLE_PARA_STRU getTableParam(int table_id);
 	FIELD_PARA_STRU getFiledInfo(int tableID,int fieldID);
 

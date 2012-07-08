@@ -188,6 +188,21 @@ QMap<int,FIELD_PARA_STRU> CODBTable::getFieldMap(int tableID)
 	return m_fieldMap[tableID];
 }
 
+QStringList CODBTable::getHeaerList(int tableID)
+{
+	QStringList lstHeaders;
+	const QMap<int,FIELD_PARA_STRU>& fieldMap = m_fieldMap[tableID];
+	QMapIterator<int,FIELD_PARA_STRU > iter(fieldMap);
+	QVector<FIELD_PARA_STRU> vecFields;
+	while(iter.hasNext())
+	{
+		iter.next();
+		const FIELD_PARA_STRU& field = iter.value();
+		lstHeaders.append(field.field_name_chn);
+	}
+	return lstHeaders;
+}
+
 FIELD_PARA_STRU CODBTable::getFiledInfo(int tableID,int fieldID)
 {
 	return m_fieldMap[tableID][fieldID];

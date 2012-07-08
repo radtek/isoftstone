@@ -121,17 +121,7 @@ CRecordForm::CRecordForm(QTableWidget* datatable,QWidget* parent ):QDialog(paren
 void CRecordForm::slot_table_changed(int tableID)
 {
 	m_tableID = tableID;
-	QMap<int,FIELD_PARA_STRU> fieldMap = CODBTable::instance()->getFieldMap(tableID);
-	QMapIterator<int,FIELD_PARA_STRU > iter(fieldMap);
-	QStringList lstHeader;
-	while(iter.hasNext())
-	{
-		iter.next();
-
-		const FIELD_PARA_STRU& field = iter.value();
-		lstHeader.append(field.field_name_chn);
-	}
-
+	QStringList lstHeader = CODBTable::instance()->getHeaerList(tableID);
 	m_recordTable->clear();
 	m_recordTable->setRowCount(lstHeader.count());
 	m_recordTable->setVerticalHeaderLabels(lstHeader);
