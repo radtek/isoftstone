@@ -1,4 +1,5 @@
 
+#说明 字段增加时必须是递增方式，不能比以前的小，否则可能出现问题
 CREATE TABLE [tableinfo] (
 [id] INTEGER  NOT NULL PRIMARY KEY,
 [en_name] VARCHAR(24)  NOT NULL,

@@ -8,6 +8,7 @@ class EXPORT_LIB CODBTable
 {
 public:
 	static CODBTable* instance();
+	static QString getDataType(int datatype,int data_length,bool iskey,bool isNull);
 	void destory();
 
 	const QSqlDatabase& getDataBase() const;	

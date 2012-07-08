@@ -228,5 +228,92 @@ void CTableTree::slot_save_create_to_file()
 
 void CTableTree::slot_save_insert_to_file()
 {
-	
+	// 先获得模式信息
+	QTreeWidgetItem* item = currentItem();
+	if (item && item->parent() == m_rootItem)
+	{
+		QString strSQL ;
+
+		int tableID = item->text(0).toInt();
+		TABLE_PARA_STRU stTable = CODBTable::instance()->getTableParam(tableID);
+
+		QStringList vecInserts;
+
+		strSQL = "INSERT INTO ";
+		strSQL += stTable.table_name_eng;
+		strSQL += "(";
+		QMap<int,FIELD_PARA_STRU> fieldMap = CODBTable::instance()->getFieldMap(tableID);
+		QMapIterator<int,FIELD_PARA_STRU > iter(fieldMap);
+		int i = 0;
+		QVector<FIELD_PARA_STRU> vecFields;
+		while(iter.hasNext())
+		{
+			i++;
+			iter.next();
+			int fieldID = iter.key();
+			const FIELD_PARA_STRU& field = iter.value();
+			vecFields.append(field);
+			strSQL += field.field_name_eng;
+			strSQL += " "; 
+			if (i < fieldMap.count())
+			{
+				strSQL += ",";
+			}
+		}
+		strSQL += ") VALUES(";
+
+
+		// 查询到表数据
+		CRtTable table(tableID);
+		QVector< QVariantList > vecRows;
+		table.getTableRecs(vecRows);
+		
+		foreach (const QVariantList& lstRec,vecRows)
+		{
+			int i = 0;
+			QString insertSql = strSQL;
+			if (lstRec.count() == fieldMap.count())
+			{
+				foreach(const QVariant& rec,lstRec)
+				{
+					if (vecFields[i++].data_type == C_STRING_TYPE)
+					{
+						insertSql += "'";
+						insertSql += rec.toString();
+						insertSql += "'";
+					}
+					else
+					{
+						insertSql += QString::number(rec.toInt());
+					}
+					if (i < lstRec.count())
+					{
+						insertSql += ",";
+					}
+				}
+				insertSql += ");\n";
+
+				vecInserts.append(insertSql);
+			}
+		}
+
+		// 生成insert 语句，保存到文件
+
+		QString fileName = QFileDialog::getSaveFileName(this,tr("保存插入到文件"), QString(), "*.sql");
+		if (fileName.isEmpty())
+			return;
+
+		QFile file(fileName);
+		if (file.open(QFile::WriteOnly|QFile::Text)) 
+		{
+			QTextStream out(&file);
+			foreach(QString strSQL,vecInserts)
+			{
+				out << strSQL;
+			}
+			out.flush();
+			file.close();
+		}
+	}
+
 }
