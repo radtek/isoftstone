@@ -5,8 +5,10 @@
 #include <QTextCodec>
 #include <QtCore>
 #include <QApplication>
+#include <QTabWidget>
 
 #include "modelwidget.h"
+#include "datawidget.h"
 
 
 int main(int argc, char *argv[])
@@ -29,8 +31,13 @@ int main(int argc, char *argv[])
 	
 	QApplication app(argc,NULL);
 
-	CModelWidget wid;
-	wid.showMaximized();
+	QTabWidget* tabWid = new QTabWidget;
+	CModelWidget* modelWid = new CModelWidget(tabWid);
+	CDataWidget*  dataWid = new CDataWidget(tabWid);
+	
+	tabWid->addTab(dataWid,dataWid->windowTitle());
+	tabWid->addTab(modelWid,modelWid->windowTitle());
+	tabWid->showMaximized();
 	app.exec();
 
     return 0;
