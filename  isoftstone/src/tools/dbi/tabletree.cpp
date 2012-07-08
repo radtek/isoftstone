@@ -155,7 +155,13 @@ void CTableTree::slot_modify_table()
 
 void CTableTree::slot_delete_table()
 {
-	
+	QTreeWidgetItem* item = currentItem();
+	if (item && item->parent() == m_rootItem)
+	{
+		int tableID = item->text(0).toInt();
+		CODBTable::instance()->deleteTable(tableID);
+		m_rootItem->removeChild(item);
+	}
 }
 
 void CTableTree::slot_clone_table()

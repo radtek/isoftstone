@@ -206,7 +206,7 @@ void CODBTable::addTable(const TABLE_PARA_STRU& stTable)
 	query.exec(strSQL);
 	
 	// 在表信息表中增加
-	strSQL = "insert into tableinfo(tableid,en_name,cn_name,next_rec_id) values(:tableid,:en_name,:cn_name,:next_rec_id)";
+	strSQL = "insert into tableinfo(id,en_name,cn_name,next_rec_id) values(:id,:en_name,:cn_name,:next_rec_id)";
 	query.prepare(strSQL);
 	int i = 0;
 	query.bindValue(i++,stTable.table_id);
@@ -269,12 +269,12 @@ void CODBTable::addField(const FIELD_PARA_STRU& stField)
 		case C_STRING_TYPE:
 			strSQL += "VARCHAR(";
 			strSQL += QString::number(stField.data_length);
-			strSQL == ")";
+			strSQL += ")";
 			break;
 		case C_UCHAR_TYPE:
 			strSQL += "VARCHAR(";
 			strSQL += QString::number(1);
-			strSQL == ")";
+			strSQL += ")";
 			break;
 		case C_SHORT_TYPE:
 		case C_INT_TYPE:
@@ -313,7 +313,7 @@ void CODBTable::addField(const FIELD_PARA_STRU& stField)
 		{
 			strSQL += " PRIMARY KEY";
 		}
-		if (!stField.allow_null)
+		if (!stField.allow_null&& stField.is_keyword)
 		{
 			strSQL += " NOT NULL";
 		}

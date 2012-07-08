@@ -191,7 +191,6 @@ void CFieldTable::slot_delete_field()
 void CFieldTable::slot_delete_field(int nrow,int tableID,int fieldID)
 {
 	// sqllite 不支持删除字段
-	return;
 	// 从当前表删除
 	removeRow(nrow);
 	// 从数据库删除
