@@ -70,7 +70,7 @@ public:
 	void	   updateFiled(int keyID,int filed,const QVariant& value);
 
 	// Ìí¼ÓÊý¾Ý
-	void	   insertRecord(const QVariantList& values);
+	void	   addRecord(const QVariantList& values);
 
 	bool	   isTableOpen();
 	TB_DESCR   getTableDesc();

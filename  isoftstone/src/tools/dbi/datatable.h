@@ -7,6 +7,8 @@
 #include <QAction>
 #include <QContextMenuEvent>
 
+#include "rtdb_api.h"
+
 class CDataTable : public QTableWidget
 {
 	Q_OBJECT
@@ -35,6 +37,8 @@ private:
 	QMenu*	m_popMenu;
 
 	int		m_tableID;
+
+	CRtTable m_rtTable;
 };
 
 #endif

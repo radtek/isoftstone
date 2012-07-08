@@ -22,6 +22,7 @@ public:
 	QString getTableNameByID(int table_id);
 	QString getFieldNameByID(int table_id,int field_id);
 	int	getNextID(int table_id);
+	void updateNextID(int tableID);
 
 	void deleteField(int tableID,int field);
 	void deleteTable(int tableID);

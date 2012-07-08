@@ -40,6 +40,11 @@ void CDataTable::slot_table_changed(int tableID)
 {
 	// 清理表结构，包括表头和数据
 	m_tableID = tableID;
+	if (m_rtTable.isTableOpen())
+	{
+		m_rtTable.closeTable();
+	}
+	m_rtTable.openTableByID(m_tableID);
 	clear();
 
 	// 添加表头
@@ -104,7 +109,10 @@ void CDataTable::slot_add_record()
 {
 	CRecordForm frm(this,this);
 	frm.slot_table_changed(m_tableID);
-	frm.exec();
+	if(frm.exec() == QDialog::Accepted)
+	{
+		
+	}
 }
 
 void CDataTable::slot_modify_record()

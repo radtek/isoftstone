@@ -4,6 +4,7 @@
 
 #include "odb_api.h"
 
+const int limit_table_id = 0;
 
 KEY_STRU CRtTable::long_to_keyid(unsigned int keyid)
 {
@@ -30,16 +31,12 @@ short	CRtTable::long_to_field_id(unsigned int keyid)
 
 CRtTable::CRtTable(int tableID):m_db(CODBTable::instance()->getDataBase())
 {
-	m_tb_descr.table_id = tableID;
-	m_next_id = CODBTable::instance()->getNextID(tableID);
-	m_tb_descr.table_name = CODBTable::instance()->getTableNameByID(tableID);
+	openTableByID(tableID);
 }
 
 CRtTable::CRtTable(char* table_name):m_db(CODBTable::instance()->getDataBase())
 {
-	m_tb_descr.table_name = table_name;
-	m_tb_descr.table_id = CODBTable::instance()->getTableNoByName(table_name);
-	m_next_id = CODBTable::instance()->getNextID(m_tb_descr.table_id);;
+	openTableByName(table_name);
 }
 
 CRtTable::~CRtTable()
@@ -47,18 +44,35 @@ CRtTable::~CRtTable()
 	
 }
 
+// 限制rtdb 不能操作模型库，否则会造成意想不到的问题
 bool CRtTable::openTableByID(int tableId )
 {
-	m_tb_descr.table_id = tableId;
-	m_tb_descr.table_name = CODBTable::instance()->getTableNameByID(tableId);
-	return true;
+	if (tableId > limit_table_id )
+	{
+		m_tb_descr.table_id = tableId;
+		m_tb_descr.table_name = CODBTable::instance()->getTableNameByID(tableId);
+		return true;
+	}
+	else
+	{
+		m_tb_descr.table_id = 0;
+		m_tb_descr.table_name = "";
+		return false;
+	}
+	
 }
 
 bool CRtTable::openTableByName(QString tableName)
 {
 	m_tb_descr.table_name = tableName;
 	m_tb_descr.table_id = CODBTable::instance()->getTableNoByName(tableName);
-	return true;
+	if (m_tb_descr.table_id > limit_table_id)
+	{
+		return true;
+	}
+	m_tb_descr.table_id = 0;
+	m_tb_descr.table_name = "";
+	return false;
 }
 
 void CRtTable::closeTable()
@@ -293,23 +307,21 @@ void CRtTable::updateFiled(int keyID,int filed,const QVariant& value)
 
 void CRtTable::updateNextID()
 {
-	QString strSQL = "update tableinfo set next_rec_id = ";
-	strSQL += QString::number(m_next_id + 1);
-	strSQL += "where id = ";
-	strSQL += QString::number(m_tb_descr.table_id);
-
-	QSqlQuery query(m_db);
-	query.exec(strSQL);
+	CODBTable::instance()->updateNextID(m_tb_descr.table_id);
 }
 
-void CRtTable::insertRecord(const QVariantList& values)
+void CRtTable::addRecord(const QVariantList& values)
 {
-	
+	// 按顺序添加记录到表中
 }
 
 bool CRtTable::isTableOpen()
 {
-	return true;
+	if (m_tb_descr.table_id > 2)
+	{
+		return true;
+	}
+	return false;
 }
 
 TB_DESCR CRtTable::getTableDesc()
