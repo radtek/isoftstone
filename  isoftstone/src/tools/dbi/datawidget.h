@@ -14,6 +14,9 @@ public:
 	CDataWidget(QObject* parent = 0);
 	~CDataWidget();
 
+public Q_SLOTS:
+		void slot_active_data_widget(int index);
+
 private:
 
 	CRtTableView*	m_tableList;

@@ -32,6 +32,7 @@ public	Q_SLOTS:
 	void slot_save_create_to_file();
 	void slot_save_insert_to_file();
 	void slot_import_from_file();
+	void slot_import_from_input();
 
 protected:
 
@@ -40,6 +41,8 @@ protected:
 private:
 
 	void createPopMenu();
+	void importTableBySQL(const QString& strSQL);
+	bool checkSQLValid(const QString& strSQL);
 
 private:
 

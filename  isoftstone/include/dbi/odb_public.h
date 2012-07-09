@@ -73,7 +73,24 @@ struct TABLE_PARA_STRU
 };
 
 struct FIELD_PARA_STRU
-{                        
+{             
+	FIELD_PARA_STRU()
+	{
+		table_id = 0;		
+		field_id = 0; 		
+		field_name_eng = ""; 
+		field_name_chn = ""; 
+		data_type = 0; 		
+		data_length = 1; 	
+		is_keyword = false; 	
+		allow_null = true; 	
+		display_type = 0; 	
+		ref_flag = false; 		
+		ref_mode = 0; 		
+		ref_tableno = 0; 	
+		ref_fieldno = 0; 	
+		ref_display = 0; 	
+	}
 	int				table_id;					// ±Ì∫≈
 	short           field_id; 					//”ÚID∫≈
 	QString         field_name_eng; 			//”Ú”¢Œƒ√˚

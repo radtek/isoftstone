@@ -16,6 +16,8 @@ public:
 
 	CTableList(QWidget* parent = 0);
 
+	void reload();
+
 signals:
 	void signal_table_changed(int tableid);
 

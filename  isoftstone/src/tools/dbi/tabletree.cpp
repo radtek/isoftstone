@@ -2,6 +2,7 @@
 #include <QContextMenuEvent>
 #include <QFileDialog>
 #include <QFile>
+#include <QInputDialog>
 
 #include "tabletree.h"
 #include "uiwidget.h"
@@ -44,6 +45,10 @@ void CTableTree::createPopMenu()
 
 	act = new QAction(QObject::tr("导出插入到文件"),m_popMenu);
 	connect(act,SIGNAL(triggered(bool)),this,SLOT(slot_save_insert_to_file()));
+	m_popMenu->addAction(act);
+
+	act = new QAction(QObject::tr("从输入框导入表格"),m_popMenu);
+	connect(act,SIGNAL(triggered(bool)),this,SLOT(slot_import_from_input()));
 	m_popMenu->addAction(act);
 
 	act = new QAction(QObject::tr("从文件导入表格"),m_popMenu);
@@ -271,4 +276,116 @@ void CTableTree::slot_save_insert_to_file()
 void CTableTree::slot_import_from_file()
 {
 	// 解析文本文件，然后解析出表名和域，然后导入
+}
+
+void CTableTree::slot_import_from_input()
+{
+	// 解析文本框，然后导入
+
+	QString strSQL = QInputDialog::getText(this,"Create SQL","SQL");
+	if (checkSQLValid(strSQL))
+	{
+		importTableBySQL(strSQL);
+	}
+}
+
+bool CTableTree::checkSQLValid(const QString& strSQL)
+{
+	if (strSQL.contains("CREATE TABLE",Qt::CaseInsensitive)
+		&& strSQL.contains("(")
+		&& strSQL.contains(")"))
+	{
+		return true;
+	}
+	return false;
+}
+
+void CTableTree::importTableBySQL(const QString& strSQL)
+{
+	TABLE_PARA_STRU stTable;
+	QString en_name;
+
+	int nLeftTable = strSQL.indexOf("TABLE",0,Qt::CaseInsensitive);
+	int nRightTable = strSQL.indexOf('(');
+	int nLast = strSQL.length();
+
+	en_name = strSQL.mid(nLeftTable,nRightTable - nLeftTable);
+	en_name.remove('[');
+	en_name.remove(']');
+	en_name.remove("TABLE",Qt::CaseInsensitive);
+	en_name.trimmed().simplified();
+
+	stTable.table_id = CODBTable::instance()->getNextID(1);
+	stTable.table_name_eng = en_name;
+	stTable.table_name_chn = en_name;
+	stTable.next_id = 1;
+
+	// 增加表
+	CODBTable::instance()->addTable(stTable);
+	m_rootItem->addChild(toItem(stTable));
+
+	// 增加域
+	
+	QString strField = strSQL.mid(nRightTable,nLast - nRightTable);
+	strField.simplified();
+	strField.remove(0,1);
+	strField.remove(-1,1);
+	QStringList lstField = strField.split(',');
+
+	int fieldID = CODBTable::instance()->getNextID(stTable.table_id);
+	foreach(QString strField,lstField)
+	{
+		FIELD_PARA_STRU stField;
+		stField.table_id = stTable.table_id;
+		stField.field_id = fieldID++;
+
+		QString strFieldName = strField.split(' ')[0];
+		strFieldName.remove('[');
+		strFieldName.remove(']');
+		stField.field_name_eng = strFieldName;
+		stField.field_name_chn = strFieldName;
+
+		if (strField.contains("PRIMARY KEY",Qt::CaseInsensitive))
+		{
+			stField.is_keyword = true;
+		}
+		else
+		{
+			stField.is_keyword = false;
+		}
+		if (strField.contains("NOT NULL",Qt::CaseInsensitive))
+		{
+			stField.allow_null = false;
+		}
+		else
+		{
+			stField.allow_null = true;
+		}
+		
+		if (strField.contains("INTEGER",Qt::CaseInsensitive))
+		{
+			stField.data_type = C_INT_TYPE;
+			stField.data_length = 4;
+		}
+		if (strField.contains("BOOLEAN",Qt::CaseInsensitive))
+		{
+			stField.data_type = C_BOOLEAN_TYPE;
+			stField.data_length = 1;
+		}
+		if (strField.contains("VARCHAR",Qt::CaseInsensitive))
+		{
+			stField.data_type = C_STRING_TYPE;
+			int nL = strField.indexOf('(');
+			int nR = strField.indexOf(')');
+
+			QString strLen = strField.mid(nL+1,nR - nL -1);
+			stField.data_length = strLen.toInt();
+		}
+
+		if (stField.field_name_eng.simplified().toUpper() != QString("id").toUpper())
+		{
+			CODBTable::instance()->addField(stField);
+		}
+	}
+	emit signal_table_changed(stTable.table_id);
 }

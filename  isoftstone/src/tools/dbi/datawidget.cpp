@@ -25,3 +25,11 @@ CDataWidget::~CDataWidget()
 {
 
 }
+
+void CDataWidget::slot_active_data_widget(int index)
+{
+	if (index == 0)
+	{
+		m_tableList->reload();
+	}
+}

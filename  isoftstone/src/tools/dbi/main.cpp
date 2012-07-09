@@ -32,11 +32,12 @@ int main(int argc, char *argv[])
 	QApplication app(argc,NULL);
 
 	QTabWidget* tabWid = new QTabWidget;
-	CModelWidget* modelWid = new CModelWidget(tabWid);
 	CDataWidget*  dataWid = new CDataWidget(tabWid);
+	CModelWidget* modelWid = new CModelWidget(tabWid);
 	
 	tabWid->addTab(dataWid,dataWid->windowTitle());
 	tabWid->addTab(modelWid,modelWid->windowTitle());
+	QObject::connect(tabWid,SIGNAL(currentChanged(int)),dataWid,SLOT(slot_active_data_widget(int)));
 	tabWid->showMaximized();
 	app.exec();
 

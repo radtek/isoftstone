@@ -8,6 +8,7 @@ CTableList::CTableList(QWidget* parent ):QTreeWidget(parent)
 
 void CTableList::init()
 {
+	clear();
 	// 读取表信息表中数据，然后显示
 	setHeaderLabels(QStringList() << QObject::tr("表号") << QObject::tr("表名") << QObject::tr("中文名") << QObject::tr("NEXT序号") );
 	setColumnCount(4);
@@ -25,6 +26,11 @@ void CTableList::init()
 		m_rootItem->addChild(toItem(stTable));
 	}
 	m_rootItem->setExpanded (true);
+}
+
+void CTableList::reload()
+{
+	init();
 }
 
 QTreeWidgetItem* CTableList::toItem(const TABLE_PARA_STRU& stTable)
