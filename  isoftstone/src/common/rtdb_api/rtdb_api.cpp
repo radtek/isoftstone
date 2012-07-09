@@ -314,7 +314,52 @@ void CRtTable::deleteRecByConditon(const QString& strCon)
 
 void CRtTable::updateRecord(int keyID,const QVariantList& values)
 {
-	
+	// 按关键字进行修改
+	if (m_fields.count() == values.count())
+	{
+		QString strSQL ;
+		strSQL = "UPDATE ";
+		strSQL += m_tb_descr.table_name;
+		strSQL += " SET ";
+		QSqlQuery query(m_db);
+		for (int i = 0 ; i < m_fields.count() ;i++)
+		{
+			const FIELD_PARA_STRU& stField = m_fields[i];
+
+			// 添加KEYID
+			if (i == 0)
+			{
+				continue;
+			}
+			strSQL += stField.field_name_eng;
+			strSQL += " = ";
+			strSQL += getSqlValue(stField.data_type,values[i]);
+			if (i < m_fields.count() -1)
+			{
+				strSQL +=  ",";
+			}
+		}
+		strSQL += " where id = ";
+		strSQL += QString::number(keyID);
+		query.exec(strSQL);
+	}
+}
+
+QString CRtTable::getSqlValue(int type,const QVariant& value)
+{
+	QString strValue;
+	switch (type)
+	{
+	case C_STRING_TYPE:
+		strValue += "'";
+		strValue += value.toString();
+		strValue += "'";
+		break;
+	default:
+		strValue += QString::number(value.toInt());
+		break;
+	}
+	return strValue;
 }
 
 void CRtTable::updateFiled(int keyID,int filed,const QVariant& value)
@@ -352,18 +397,7 @@ void CRtTable::addRecord(const QVariantList& values)
 				strSQL += ",";
 				continue;
 			}
-			
-			switch (stField.data_type)
-			{
-			case C_STRING_TYPE:
-				strSQL += "'";
-				strSQL += values[i].toString();
-				strSQL += "'";
-				break;
-			default:
-				strSQL += QString::number(values[i].toInt());
-				break;
-			}
+			strSQL += getSqlValue(stField.data_type,values[i]);			
 			if (i < m_fields.count() -1)
 			{
 				strSQL +=  ",";
@@ -371,6 +405,8 @@ void CRtTable::addRecord(const QVariantList& values)
 		}
 		strSQL += ")";
 		query.exec(strSQL);
+
+		updateNextID();
 	}
 }
 
@@ -421,7 +457,5 @@ bool CRtTable::getFieldPara(int fieldID,FIELD_PARA_STRU& param)
 
 quint64 CRtTable::getNextID()
 {
-	int nextid = CODBTable::instance()->getNextID(m_tb_descr.table_id);;
-	CODBTable::instance()->updateNextID(m_tb_descr.table_id);
-	return nextid;
+	return CODBTable::instance()->getNextID(m_tb_descr.table_id);;
 }

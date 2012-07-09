@@ -489,7 +489,7 @@ void CODBTable::updateNextID(int tableID)
 
 	QString strSQL = "update tableinfo set next_rec_id = ";
 	strSQL += QString::number(m_tableMap[tableID].next_id);
-	strSQL += "where id = ";
+	strSQL += " where id = ";
 	strSQL += QString::number(tableID);
 
 	QSqlQuery query(m_db);

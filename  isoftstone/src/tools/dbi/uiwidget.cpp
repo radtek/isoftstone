@@ -77,8 +77,9 @@ void CFieldModelForm::slot_table_changed(int index)
 	}
 }
 
-CRecordForm::CRecordForm(QTableWidget* datatable,QWidget* parent ):QDialog(parent)
+CRecordForm::CRecordForm(CRtTable* rtTable,QTableWidget* datatable,QWidget* parent ):QDialog(parent)
 {
+	m_rtTable = rtTable;
 	m_dataTable = datatable;
 	m_recordTable = new QTableWidget(this);
 	m_recordTable->setColumnCount(1);
@@ -118,18 +119,37 @@ CRecordForm::CRecordForm(QTableWidget* datatable,QWidget* parent ):QDialog(paren
 	setWindowTitle(QObject::tr("¼ÇÂ¼±à¼­Æ÷"));
 }
 
-void CRecordForm::slot_table_changed(int tableID)
+void CRecordForm::table_changed(int tableID)
 {
 	m_tableID = tableID;
 	QStringList lstHeader = CODBTable::instance()->getHeaerList(tableID);
 	m_recordTable->clear();
+	m_recordTable->setColumnCount(1);
 	m_recordTable->setRowCount(lstHeader.count());
 	m_recordTable->setVerticalHeaderLabels(lstHeader);
+
+	m_recordTable->setItem(0,0,new QTableWidgetItem(""));
+	m_recordTable->item(0,0)->setText(0);
 }
 
 void CRecordForm::slot_record_changed(int keyid)
 {
-	
+	QVariantList lstValue;
+	m_rtTable->getRecByID(keyid,lstValue);
+	QTableWidgetItem* item  = NULL;
+	int j = 0;
+	foreach(const QVariant& rec,lstValue)
+	{
+		item = new QTableWidgetItem();
+		item->setText(rec.toString());
+		m_recordTable->setItem(j++,0,item);
+	}
+}
+
+void CRecordForm::slot_update_keyid()
+{
+	int keyid = CODBTable::instance()->getNextID(m_tableID);
+	m_recordTable->item(0,0)->setText(QString::number(keyid));
 }
 
 QVariantList CRecordForm::getValueList()

@@ -11,6 +11,7 @@
 #include "ui_tablemodel.h"
 
 #include "odb_api.h"
+#include "rtdb_api.h"
 
 class CTableModelForm : public QDialog,public Ui_frmTableModel
 {
@@ -42,14 +43,16 @@ class CRecordForm : public QDialog
 	Q_OBJECT
 public:
 
-	CRecordForm(QTableWidget* datatable,QWidget* parent = 0);
+	CRecordForm(CRtTable* rtTable,QTableWidget* datatable,QWidget* parent = 0);
 
 	QVariantList getValueList();
 
+	void table_changed(int tableID);
+
 public Q_SLOTS:
 
-	void slot_table_changed(int tableID);
 	void slot_record_changed(int keyid);
+	void slot_update_keyid();
 private:
 
 	QTableWidget* m_recordTable;
@@ -65,6 +68,8 @@ private:
 
 	int		m_tableID;
 	int		m_keyID;
+
+	CRtTable*	m_rtTable;
 };
 
 #endif

@@ -12,6 +12,9 @@ CDataTable::CDataTable(QWidget* parent ):QTableWidget(parent)
 
 	connect(this,SIGNAL(itemDoubleClicked ( QTableWidgetItem * )),this,SLOT(slot_item_double_clicked(QTableWidgetItem *)));
 	createPopMenu();
+
+	m_rtTable = new CRtTable;
+	m_recordForm = new CRecordForm(m_rtTable,this,this);
 }
 
 void CDataTable::createPopMenu()
@@ -40,11 +43,11 @@ void CDataTable::slot_table_changed(int tableID)
 {
 	// 清理表结构，包括表头和数据
 	m_tableID = tableID;
-	if (m_rtTable.isTableOpen())
+	if (m_rtTable->isTableOpen())
 	{
-		m_rtTable.closeTable();
+		m_rtTable->closeTable();
 	}
-	m_rtTable.openTableByID(m_tableID);
+	m_rtTable->openTableByID(m_tableID);
 	clear();
 
 	// 添加表头
@@ -79,15 +82,24 @@ void CDataTable::slot_table_changed(int tableID)
 	{
 		if (lstRec.count() == fieldMap.count())
 		{
-			int j = 0;
-			foreach(const QVariant& rec,lstRec)
-			{
-				item = new QTableWidgetItem();
-				item->setText(rec.toString());
-				setItem(i,j++,item);
-			}
+			updateRow(i,lstRec);
 			i++;
 		}
+	}
+
+	// 修改记录表单
+	m_recordForm->table_changed(tableID);
+}
+
+void CDataTable::updateRow(int row,const QVariantList& lstRec)
+{
+	int j = 0;
+	QTableWidgetItem* item  = NULL;
+	foreach(const QVariant& rec,lstRec)
+	{
+		item = new QTableWidgetItem();
+		item->setText(rec.toString());
+		setItem(row,j++,item);
 	}
 }
 
@@ -104,31 +116,53 @@ void CDataTable::slot_item_double_clicked(QTableWidgetItem * )
 	slot_modify_record();
 }
 
-
 void CDataTable::slot_add_record()
 {
-	CRecordForm frm(this,this);
-	frm.slot_table_changed(m_tableID);
-	if(frm.exec() == QDialog::Accepted)
+	if(m_recordForm->exec() == QDialog::Accepted)
 	{
-		m_rtTable.addRecord(frm.getValueList());
+		QVariantList lstRec = m_recordForm->getValueList();
+		m_rtTable->addRecord(m_recordForm->getValueList());
+
+		setRowCount(rowCount()+1);
+		updateRow(rowCount()-1,lstRec);
 	}
 }
 
 void CDataTable::slot_modify_record()
 {
-	CRecordForm frm(this,this);
-	frm.exec();
+	QTableWidgetItem* pitem = item(row(currentItem()),0);
+	int keyid = pitem->text().toInt();
+	m_recordForm->slot_record_changed(keyid);
+	if(m_recordForm->exec() == QDialog::Accepted)
+	{
+		QVariantList lstRec = m_recordForm->getValueList();
+		m_rtTable->updateRecord(keyid,lstRec);
+
+		updateRow(row(pitem),lstRec);
+	}
 }
 
 void CDataTable::slot_delete_record()
 {
+	int keyid = item(row(currentItem()),0)->text().toInt();
+	m_rtTable->deleteRecord(keyid);
 
+	removeRow(row(currentItem()));
 }
 
 void CDataTable::slot_clone_record()
 {
-	CRecordForm frm(this,this);
-	frm.exec();
+	QTableWidgetItem* pitem = item(row(currentItem()),0);
+	int keyid = pitem->text().toInt();
+	m_recordForm->slot_record_changed(keyid);
+	m_recordForm->slot_update_keyid();
+	if(m_recordForm->exec() == QDialog::Accepted)
+	{
+		QVariantList lstRec = m_recordForm->getValueList();
+		m_rtTable->addRecord(lstRec);
+
+		setRowCount(rowCount()+1);
+		updateRow(rowCount()-1,lstRec);
+	}
 }
 

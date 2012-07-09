@@ -9,6 +9,8 @@
 
 #include "rtdb_api.h"
 
+class CRecordForm;
+
 class CDataTable : public QTableWidget
 {
 	Q_OBJECT
@@ -34,11 +36,17 @@ protected:
 
 private:
 
+	void updateRow(int row,const QVariantList& lstRec);
+
+private:
+
 	QMenu*	m_popMenu;
 
 	int		m_tableID;
 
-	CRtTable m_rtTable;
+	CRtTable* m_rtTable;
+
+	CRecordForm* m_recordForm;
 };
 
 #endif

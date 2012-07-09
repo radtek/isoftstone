@@ -15,7 +15,7 @@ public:
 
 public:
 
-	CRtTable(int tableID = 1);
+	CRtTable(int tableID = 0);
 	CRtTable(char* table_name);
 	~CRtTable();
 
@@ -86,6 +86,7 @@ private:
 	QString	   getIDSet(const QVector<int>& vecID);
 	void	   fillFieldArray();
 	QString	   getAllField();
+	QString	   getSqlValue(int type,const QVariant& value);
 
 private:
 
