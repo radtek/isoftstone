@@ -1,0 +1,299 @@
+<ui version="4.0" >
+ <class>Form</class>
+ <widget class="QWidget" name="Form" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>665</width>
+    <height>233</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>串口配置</string>
+  </property>
+  <widget class="QGroupBox" name="gpB_name" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>-12</y>
+     <width>261</width>
+     <height>241</height>
+    </rect>
+   </property>
+   <property name="title" >
+    <string/>
+   </property>
+   <widget class="QLabel" name="lbl_serial" >
+    <property name="geometry" >
+     <rect>
+      <x>10</x>
+      <y>18</y>
+      <width>78</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>选择串行口</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_rate" >
+    <property name="geometry" >
+     <rect>
+      <x>130</x>
+      <y>18</y>
+      <width>115</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>选择波特率</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkB_DTUserail" >
+    <property name="geometry" >
+     <rect>
+      <x>10</x>
+      <y>178</y>
+      <width>101</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>DTU串行口</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comb_serail" >
+    <property name="geometry" >
+     <rect>
+      <x>10</x>
+      <y>40</y>
+      <width>100</width>
+      <height>21</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comb_rate" >
+    <property name="geometry" >
+     <rect>
+      <x>130</x>
+      <y>40</y>
+      <width>120</width>
+      <height>21</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_stop" >
+    <property name="geometry" >
+     <rect>
+      <x>10</x>
+      <y>68</y>
+      <width>78</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>选择停止位</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_data" >
+    <property name="geometry" >
+     <rect>
+      <x>135</x>
+      <y>68</y>
+      <width>110</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>选择数据位</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comb_data" >
+    <property name="geometry" >
+     <rect>
+      <x>130</x>
+      <y>90</y>
+      <width>120</width>
+      <height>21</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comb_stop" >
+    <property name="geometry" >
+     <rect>
+      <x>10</x>
+      <y>90</y>
+      <width>100</width>
+      <height>21</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comb_check" >
+    <property name="geometry" >
+     <rect>
+      <x>10</x>
+      <y>140</y>
+      <width>100</width>
+      <height>21</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comb_protocol" >
+    <property name="geometry" >
+     <rect>
+      <x>130</x>
+      <y>140</y>
+      <width>120</width>
+      <height>21</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_protocol" >
+    <property name="geometry" >
+     <rect>
+      <x>135</x>
+      <y>118</y>
+      <width>115</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>关联设备协议</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_check" >
+    <property name="geometry" >
+     <rect>
+      <x>10</x>
+      <y>118</y>
+      <width>78</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>选择校验位</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pB_add" >
+    <property name="geometry" >
+     <rect>
+      <x>10</x>
+      <y>208</y>
+      <width>78</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>添加</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pB_modified" >
+    <property name="geometry" >
+     <rect>
+      <x>94</x>
+      <y>208</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>修改</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pB_delete" >
+    <property name="geometry" >
+     <rect>
+      <x>175</x>
+      <y>208</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>删除</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QTableWidget" name="tbW_serailConfig" >
+   <property name="geometry" >
+    <rect>
+     <x>268</x>
+     <y>28</y>
+     <width>393</width>
+     <height>201</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_tbWName" >
+   <property name="geometry" >
+    <rect>
+     <x>270</x>
+     <y>8</y>
+     <width>115</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font" >
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="text" >
+    <string>串口配置</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
