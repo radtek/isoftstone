@@ -4,8 +4,6 @@ SUBDIRS	= \
 			common \
 			commonwidget \
                         core \
-                        escommon \
                         pluginmgrlib \
                         qtsolutions \
-                        serialport \
-                        zlib
+                        serialport 

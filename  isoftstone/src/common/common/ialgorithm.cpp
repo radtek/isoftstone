@@ -3,6 +3,8 @@
 #include <QAction>
 #include <QMenu>
 
+#include <QXmlStreamReader>
+
 #include "ialgorithm.h"
 
 QTreeWidgetItem* CAlgorithm::findItemExtend(QTreeWidget* treeWidget,const QVector<QString>& vecFilter,int nColumn)
