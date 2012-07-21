@@ -8,6 +8,8 @@
 #include "interface.h"
 #include <qdom.h> 
 
+#include "objects.h"
+
 struct SXmlEntryFactor
 {
 	virtual void operator()( QDomNode& node) = 0;

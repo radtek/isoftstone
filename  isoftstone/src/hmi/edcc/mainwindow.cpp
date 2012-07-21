@@ -216,7 +216,6 @@ void CMainWindow::iniMenuAndTool(CView* pView,CGraphicsScene* pScene)
 void CMainWindow::openHomePage()
 {
 	QString strHome = CConfig::instance()->getConfigValue("dcc.ini","HOMEPAGE","HOMEPAGE");
-	strHome = CConfig::instance()->getFilePath(strHome);
 	m_view->openFile(strHome);
 }
 
