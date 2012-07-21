@@ -14,4 +14,10 @@ SOURCES  += main.cpp\
 	    commandview.cpp\
 	    treeview.cpp\
 	    treewidget.cpp
+            
+FORMS += menumgr.ui   
+
+UIDIR += .ui
+MOCDIR += .moc
+         
 
