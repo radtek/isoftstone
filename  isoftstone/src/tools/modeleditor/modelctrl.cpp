@@ -46,6 +46,7 @@ void CModelCtrl::ParseXml(const QString fileName)
 			{
 				DomModel *newModel = new DomModel(document, this);
 				m_pviewR->setModel(newModel);
+				m_pviewL->setModel(newModel);
 				delete model;
 				model = newModel;
 				xmlPath = fileName;
