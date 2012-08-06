@@ -1,0 +1,2 @@
+fdisk -l
+mount -t vfat /dev/sdg2 /mnt/usb
