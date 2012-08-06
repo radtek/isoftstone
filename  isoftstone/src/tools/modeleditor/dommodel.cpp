@@ -44,21 +44,22 @@ QVariant DomModel::data(const QModelIndex &index, int role) const
 
 	QDomNode node = item->node();
 	//! [3] //! [4]
-	QStringList attributes;
-	QDomNamedNodeMap attributeMap = node.attributes();
+	QStringList attributes;	//存放元素的属性
+	QDomNamedNodeMap attributeMap = node.attributes();	//获取元素属性集合
 
-	switch (index.column()) {
+	switch (index.column()) 
+	{
 		case 0:
-			return node.nodeName();
+			return node.nodeName();						   //获取根节点
 		case 1:
-			for (int i = 0; i < attributeMap.count(); ++i) {
+			for (int i = 0; i < attributeMap.count(); ++i) //获取每个属性
+			{
 				QDomNode attribute = attributeMap.item(i);
-				attributes << attribute.nodeName() + "=\""
-					+attribute.nodeValue() + "\"";
+				attributes << attribute.nodeName() + "=\"" + attribute.nodeValue() + "\"";
 			}
-			return attributes.join(" ");
+			return attributes.join(" ");	//用一个空格分隔
 		case 2:
-			return node.nodeValue().split("\n").join(" ");
+			return node.nodeValue().split("\n").join(" ");	//获取元素值
 		default:
 			return QVariant();
 	}
@@ -76,8 +77,7 @@ Qt::ItemFlags DomModel::flags(const QModelIndex &index) const
 //! [5]
 
 //! [6]
-QVariant DomModel::headerData(int section, Qt::Orientation orientation,
-							  int role) const
+QVariant DomModel::headerData(int section, Qt::Orientation orientation,int role) const
 {
 	if (orientation == Qt::Horizontal && role == Qt::DisplayRole) {
 		switch (section) {
@@ -97,8 +97,7 @@ QVariant DomModel::headerData(int section, Qt::Orientation orientation,
 //! [6]
 
 //! [7]
-QModelIndex DomModel::index(int row, int column, const QModelIndex &parent)
-const
+QModelIndex DomModel::index(int row, int column, const QModelIndex &parent) const
 {
 	if (!hasIndex(row, column, parent))
 		return QModelIndex();

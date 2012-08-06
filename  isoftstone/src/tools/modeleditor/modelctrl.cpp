@@ -16,16 +16,20 @@ CModelCtrl::CModelCtrl(QWidget* parent)
 }
 CModelCtrl::~CModelCtrl()
 {
-	delete model;
+	//delete model;
 }
 void CModelCtrl::mkTree()
 {
     QSplitter *splitter = new QSplitter(Qt::Horizontal,this);
 	QStringList headerLabel = (QStringList() << tr("表名") << tr("域名") << tr("值")); 
+	model = new DomModel(QDomDocument(), this);
     m_pviewR = new QTreeView(this);
+	m_pviewR->setModel(model);
     splitter->addWidget(m_pviewR);
     m_pviewL = new QTreeView(this);
+	m_pviewL->setModel(model);
     splitter->addWidget(m_pviewL);
+
 }
 
 //func parsexml
@@ -42,6 +46,7 @@ void CModelCtrl::ParseXml(const QString fileName)
 			{
 				DomModel *newModel = new DomModel(document, this);
 				m_pviewR->setModel(newModel);
+				delete model;
 				model = newModel;
 				xmlPath = fileName;
 			}

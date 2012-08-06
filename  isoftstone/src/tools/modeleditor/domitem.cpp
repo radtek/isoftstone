@@ -43,7 +43,8 @@ DomItem *DomItem::child(int i)
 	if (childItems.contains(i))
 		return childItems[i];
 
-	if (i >= 0 && i < domNode.childNodes().count()) {
+	if (i >= 0 && i < domNode.childNodes().count()) 
+	{
 		QDomNode childNode = domNode.childNodes().item(i);
 		DomItem *childItem = new DomItem(childNode, i, this);
 		childItems[i] = childItem;
