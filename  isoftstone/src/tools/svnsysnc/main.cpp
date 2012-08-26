@@ -93,7 +93,7 @@ void svnsync(const QString& strSource,const QString& strDest)
 	{
 		CMDPair pair;
 		pair.first = eSVN_SYNC;
-		pair.second = sourceInfo.absoluteFilePath();
+		pair.second = sourceInfo.absoluteFilePath().replace('/','\\');
 		g_CommandList.append(pair);
 
 		if (destInfo.exists())
@@ -139,7 +139,7 @@ void reversedelete(const QString& strSource,const QString& strDest)
 	{
 		CMDPair pair;
 		pair.first = eSVN_REVERSE;
-		pair.second = destInfo.absoluteFilePath();
+		pair.second = destInfo.absoluteFilePath().replace('/','\\');
 		g_CommandList.append(pair);
 
 		QDir sourceDir(strSource);
@@ -285,33 +285,33 @@ void writebat()
 		QTextStream out(&file);
 		foreach(const CMDPair& pair,g_CommandList)
 		{
-			if (pair.first == e_ADD)
-			{
-				out << "REM ADD \n";
-			}
-			else if (pair.first == eSVN_ADD)
-			{
-				out << "REM SVN ADD \n";
-			}
-			else if (pair.first == eSVN_MODIFY)
-			{
-				out << "REM MODIFY \n";
-			}
-			else if (pair.first == eSVN_DELETE)
-			{
-				out << "REM SVN DELETE \n";
-			}
-			else if (pair.first == eSVN_SYNC)
-			{
-				out << "REM  SYNC PWD = " << pair.second << "\n";
-				continue;
-			}
-			else if (pair.first == eSVN_REVERSE)
-			{
-				out << "REM  REVERSE PWD = " << pair.second << "\n";
-				continue;
-			}
-			out << pair.second << "\n\n";
+ 			if (pair.first == e_ADD)
+ 			{
+ 				out << "echo ADD \r\n";
+ 			}
+ 			else if (pair.first == eSVN_ADD)
+ 			{
+ 				out << "echo SVN ADD \r\n";
+ 			}
+ 			else if (pair.first == eSVN_MODIFY)
+ 			{
+ 				out << "echo MODIFY \r\n";
+ 			}
+ 			else if (pair.first == eSVN_DELETE)
+ 			{
+ 				out << "echo SVN DELETE \r\n";
+ 			}
+ 			else if (pair.first == eSVN_SYNC)
+ 			{
+ 				out << "echo  SYNC PWD = " << pair.second << "\r\n";
+ 				continue;
+ 			}
+ 			else if (pair.first == eSVN_REVERSE)
+ 			{
+ 				out << "echo  REVERSE PWD = " << pair.second << "\r\n";
+ 				continue;
+ 			}
+			out << pair.second << "\r\n";
 
 		}
 		out.flush();
