@@ -131,6 +131,11 @@ void reversedelete(const QString& strSource,const QString& strDest)
 {
 	QFileInfo sourceInfo(strSource);
 	QFileInfo destInfo(strDest);
+
+	if (isNoNeedUpdate(destInfo.fileName()))
+	{
+		return;
+	}
 	if (!destInfo.exists())
 	{
 		return;
@@ -269,8 +274,10 @@ bool isSvnDir(const QString& strDir)
 
 bool isNoNeedUpdate(const QString& dirName)
 {
-	if (dirName.toUpper() == "THIRDPARTY" ||
-		dirName.toUpper() == "PROJECT-TOOLS")
+	QFileInfo info(dirName);
+	QString tmp = info.fileName().toUpper();
+	if (tmp  == QString("THIRDPARTY").toUpper() ||
+		tmp == QString("PROJECT-TOOLS").toUpper())
 	{
 		return true;
 	}
