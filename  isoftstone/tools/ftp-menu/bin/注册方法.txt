@@ -1,0 +1,5 @@
+执行 reg.bat 即可实现注册。
+
+注册完后，随便右键点击文件/文件夹，在上下文菜单中会看到 MyContextMenu 一项。
+
+注销则调用 unreg.bat。但此时 MyContextMenu.dll 已经在缓存，所以无法删除（除非重启，或结束 Explorer.exe）
