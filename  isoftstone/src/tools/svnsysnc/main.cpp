@@ -111,7 +111,7 @@ void svnsync(const QString& strSource,const QString& strDest)
 		}
 		else // 不存在则拷贝目录
 		{
-			svnadd(strSource,strDest);
+			svnadd(strSource,strDest,true);
 		}
 	}
 	else if(sourceInfo.isFile())
@@ -122,7 +122,7 @@ void svnsync(const QString& strSource,const QString& strDest)
 		}
 		else
 		{
-			svnadd(strSource,strDest);
+			svnadd(strSource,strDest,false);
 		}
 	}
 }
@@ -212,14 +212,23 @@ QFileInfoList filterDir(const QFileInfoList& allInfo)
 
 void svnadd(const QString& source,const QString& dest,bool bDir)
 {
+	
 	CMDPair pair;
 	pair.first = e_ADD;
-	pair.second = "copy " + source + " " + dest; 
+	if (bDir)
+	{
+		pair.second = "xcopy " + QString(source).replace('/','\\') + " " + QString(dest).replace('/','\\') + " /e /i"; 
+	}
+	else
+	{
+		pair.second = "copy " + QString(source).replace('/','\\') + " " + QString(dest).replace('/','\\') + " /Y"; 
+	}
+	
 	g_CommandList.append(pair);
 	qDebug() << pair.second;
 
 	pair.first = eSVN_ADD;
-	pair.second = "svn add "+ dest;
+	pair.second = "svn add "+ QString(dest).replace('/','\\');
 	g_CommandList.append(pair);
 	qDebug() << pair.second;
 }
@@ -230,9 +239,10 @@ void svndelete(const QString& dest,bool bDir )
 	{
 		return;
 	}
+
 	CMDPair pair;
 	pair.first = eSVN_DELETE;
-	pair.second = "svn rm " + dest;
+	pair.second = "svn rm " + QString(dest).replace('/','\\');
 	g_CommandList.append(pair);
 	qDebug() << pair.second;
 }
@@ -241,7 +251,7 @@ void svnmodify(const QString& source,const QString& dest)
 {
 	CMDPair pair;
 	pair.first = eSVN_MODIFY;
-	pair.second = "copy " + source + " " + dest; 
+	pair.second = "copy " + QString(source).replace('/','\\') + " " + QString(dest).replace('/','\\') + " /Y"; 
 	g_CommandList.append(pair);
 	qDebug() << pair.second;
 }
