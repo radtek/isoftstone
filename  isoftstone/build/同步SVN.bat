@@ -1,5 +1,10 @@
 cd /d d:
+del export_dev /f /s /q
 rmdir export_dev /s /q
+rmdir export_dev /s /q
+rmdir export_dev /s /q
+rmdir export_dev /s /q
+
 mkdir export_dev
 
 svn export d:\vis_dev\backup d:\export_dev\backup
