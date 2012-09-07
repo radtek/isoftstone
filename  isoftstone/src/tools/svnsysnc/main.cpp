@@ -157,7 +157,15 @@ void reversedelete(const QString& strSource,const QString& strDest)
 			QString filename = info.fileName();
 			if (!sourceList.contains(filename))
 			{
-				svndelete(info.absoluteFilePath(),info.isDir());
+				if (isNoNeedUpdate(filename))
+				{
+					return;
+				}
+				else
+				{
+					svndelete(info.absoluteFilePath(),info.isDir());
+				}
+				
 			}
 			else if(info.isDir()) // 如果为目录，递归进行删除
 			{
@@ -275,7 +283,8 @@ bool isSvnDir(const QString& strDir)
 bool isNoNeedUpdate(const QString& dirName)
 {
 	QFileInfo info(dirName);
-	QString tmp = info.fileName().toUpper();
+	QString tmp = dirName;
+	tmp = tmp.toUpper();
 	if (tmp  == QString("THIRDPARTY").toUpper() ||
 		tmp == QString("PROJECT-TOOLS").toUpper())
 	{
