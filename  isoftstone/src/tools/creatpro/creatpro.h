@@ -18,12 +18,10 @@ date:2012-1-11
 class CCreatPro
 {
 public:
-    CCreatPro(const QString& dir);
-    void execute();
+    CCreatPro();
+    void execute(QString dir);
 
 private:
-
-    QString m_mainDir;
 
 };
 

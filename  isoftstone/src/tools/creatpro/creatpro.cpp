@@ -1,23 +1,26 @@
 #include "creatpro.h"
 
-#define WRITELINE(TEXT) \
-	stream << TEXT << "\n";
+#include "common.h"
 
-CCreatPro::CCreatPro(const QString& dir):m_mainDir(dir)
+CCreatPro::CCreatPro()
 {
 }
 
-void CCreatPro::execute()
+// qmake -tp vc -r 
+
+void CCreatPro::execute(QString maindir)
 {
     // 第一步 ： 通过entryList 找到所有本文件夹下的所有子文件夹
-    QDir dir(m_mainDir);
+    QDir dir(maindir);
     QStringList lstDir = dir.entryList(QDir::Dirs | QDir::NoDot | QDir::NoDotDot);
 
 	// 第二步：通过遍历方式进入每个文件夹，通过truncate方式写入qmake_vc.bat,当前文件夹.pro
     foreach(QString strDir,lstDir)
     {
 		//根据文件路径进入文件
-        QString tmpDir = m_mainDir + "/" + strDir;
+        QString tmpDir = maindir + "/" + strDir;
+		
+		execute(tmpDir);
 
 		//创建qmake_vc.bat文件
         QFile file(tmpDir + "/qmake_vc.bat");
@@ -31,43 +34,49 @@ void CCreatPro::execute()
 
             stream.flush();
             file.close();
+			std::cout << file.fileName().toLocal8Bit().data() << ENDLINE;
         }
 
 		//创建.pro文件
 		 QFile filepro(tmpDir + "/" + strDir + ".pro");
-		 QDir dirpro(m_mainDir + "/" + strDir);
+		 QDir dirpro(maindir + "/" + strDir);
 
 		//打开文件写入内容
 		if (filepro.open(QFile::WriteOnly | QFile::Truncate))
 		{
 			QTextStream stream(&filepro);
-			WRITELINE( "\n");
-			WRITELINE("include(../osg.pri)");
+			WRITELINE( ENDLINE);
+			//WRITELINE("include(../osg.pri)");
+			WRITELINE("DEPENDPATH += ../../include");
+
+			WRITELINE("INCLUDEPATH += DEPENDPATH");
 	
 			// 第三步: pro中headers 要搜索本文件夹下所有.h 文件，同理写入cpp
 			// 查找所有h文件
-			WRITELINE( "\n");
+			WRITELINE( ENDLINE);
 			WRITELINE( "HEADER +=  \\");
-			QStringList lstFile = dirpro.entryList(QStringList() << QString("*.h"), QDir::Files);
+			QStringList lstFile = dirpro.entryList(QStringList() << QString("*.h") << QString("*.hpp"), QDir::Files);
 			//遍历所有文件并添加
 			foreach(QString strFile, lstFile)
 			{
 				WRITELINE(QString("\t\t") + strFile + " \\");
 			}
-			WRITELINE( "\n\n");
+			WRITELINE( ENDLINE);
 
 			// 查找所有cpp文件
 			WRITELINE( "SOURCES +=  \\");
-			lstFile = dirpro.entryList(QStringList() << QString("*.cpp"), QDir::Files );
+			lstFile = dirpro.entryList(QStringList() << QString("*.cpp") << QString("*.cxx") << QString("*.c") << QString("*.ec") << QString("*.4gl")  << QString("*makefile") , QDir::Files );
 			//遍历所有文件并添加
 			foreach(QString strFile, lstFile)
 			{
 				WRITELINE(QString("\t\t") + strFile + " \\");
 			}
-			WRITELINE( "\n\n");
+			WRITELINE( ENDLINE);
 			
 			stream.flush();
 			filepro.close();
+
+			std::cout << filepro.fileName().toLocal8Bit().data()<< ENDLINE;
 		}
 
 		//第五步：创建qtnmake.bat文件，可直接生成可执行文件
@@ -81,21 +90,22 @@ void CCreatPro::execute()
 		{
 			QTextStream stream(&filenmake);
 			WRITELINE("call \"%VS90COMNTOOLS%\"\\vsvars32.bat");
-			WRITELINE( "\n");					
+			WRITELINE( ENDLINE);					
 			WRITELINE("nmake");
 
 			stream.flush();
 			filenmake.close();
+			std::cout << filenmake.fileName().toLocal8Bit().data();
 		}
     }
 	 // 第四步：退出文件夹，根据传入文件夹最后一个名称，编写 主文件夹.pro，写入SUBDIRS值
 	QString dirName = dir.dirName();
-	QFile file(m_mainDir + "/" + dirName + ".pro");
+	QFile file(maindir + "/" + dirName + ".pro");
 	if (file.open(QFile::WriteOnly | QFile::Truncate))
 	{
 		QTextStream stream(&file);
 
-		WRITELINE( "\n");
+		WRITELINE( ENDLINE);
 		WRITELINE("TEMPLATE = subdirs" );
 
 		WRITELINE( "SUBDIRS +=  \\");
@@ -104,10 +114,11 @@ void CCreatPro::execute()
 		{
 			WRITELINE(QString("\t\t") + strDir + QString(" \\"));
 		}
-		WRITELINE( "\n\n");
+		WRITELINE( ENDLINE);
 		
 		stream.flush();
 		file.close();
+		std::cout << file.fileName().toLocal8Bit().data()<< ENDLINE;
 	}
 		
 }
